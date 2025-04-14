@@ -93,6 +93,11 @@ export default function Footer() {
                   Area Clienti
                 </Link>
               </li>
+              <li>
+                <Link href="/riscatto-voucher-iliad" className="hover:text-secondary transition-colors">
+                  Riscatto Voucher Iliad (Admin)
+                </Link>
+              </li>
             </ul>
           </div>
 
