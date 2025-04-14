@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-// Importiamo jsPDF direttamente all'inizio del file
 import { jsPDF } from "jspdf"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface FAQ {
   question: string
@@ -13,6 +13,15 @@ interface FAQSectionProps {
   title?: string
   description?: string
   faqs: FAQ[]
+}
+
+interface IliadPlan {
+  name: string
+  price: string
+  data: string
+  features: string[]
+  activationPrice: string
+  discountedActivationPrice: string
 }
 
 // Funzione di countdown
@@ -65,6 +74,7 @@ const FAQSection = ({
 }: FAQSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -73,8 +83,44 @@ const FAQSection = ({
   const targetDate = new Date("2025-04-30T19:00:00")
   const timeLeft = useCountdown(targetDate)
 
+  // Definizione delle offerte Iliad
+  const iliadPlans: IliadPlan[] = [
+    {
+      name: "GIGA 120",
+      price: "7,99",
+      data: "120 GB in 4G/4G+",
+      features: ["Minuti e SMS illimitati", "7GB dedicati in Europa", "Minuti illimitati verso 60 destinazioni"],
+      activationPrice: "9,99",
+      discountedActivationPrice: "5,00",
+    },
+    {
+      name: "TOP 250 PLUS",
+      price: "9,99",
+      data: "250 GB in 5G",
+      features: ["Minuti e SMS illimitati", "Roaming in UE incluso", "Minuti illimitati verso 60 destinazioni"],
+      activationPrice: "9,99",
+      discountedActivationPrice: "5,00",
+    },
+    {
+      name: "TOP 300",
+      price: "11,99",
+      data: "300 GB in 5G",
+      features: ["Minuti e SMS illimitati", "11GB dedicati in Europa", "Minuti illimitati verso 60 destinazioni"],
+      activationPrice: "9,99",
+      discountedActivationPrice: "5,00",
+    },
+  ]
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === iliadPlans.length - 1 ? 0 : prev + 1))
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? iliadPlans.length - 1 : prev - 1))
+  }
+
   // Funzione per generare e scaricare il PDF del voucher
-  const handleDownloadVoucher = async () => {
+  const handleDownloadVoucher = async (plan: IliadPlan) => {
     setIsDownloading(true)
 
     try {
@@ -88,10 +134,6 @@ const FAQSection = ({
         unit: "mm",
         format: "a5",
       })
-
-      // Colori Iliad
-      const iliadRed = "#ff0032"
-      const iliadGray = "#f5f5f7"
 
       // Sfondo
       doc.setFillColor(255, 255, 255)
@@ -117,7 +159,7 @@ const FAQSection = ({
       doc.setTextColor(0, 0, 0)
       doc.setFontSize(12)
       doc.setFont("helvetica", "bold")
-      doc.text("OFFERTA ILIAD TOP 250 PLUS", 74, 50, { align: "center" })
+      doc.text(`OFFERTA ILIAD ${plan.name}`, 74, 50, { align: "center" })
 
       // Codice voucher
       doc.setFillColor(245, 245, 247) // Iliad gray in RGB
@@ -145,33 +187,36 @@ const FAQSection = ({
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
-      doc.text("• 250 GB in 5G", 24, 110)
-      doc.text("• Minuti e SMS illimitati", 24, 115)
-      doc.text("• Roaming in UE incluso", 24, 120)
+      doc.text(`• ${plan.data}`, 24, 110)
+
+      // Aggiungi le features specifiche del piano
+      plan.features.forEach((feature, index) => {
+        doc.text(`• ${feature}`, 24, 115 + index * 5)
+      })
 
       // Prezzo
       doc.setFontSize(11)
       doc.setFont("helvetica", "bold")
-      doc.text("Prezzo mensile:", 24, 130)
+      doc.text("Prezzo mensile:", 24, 135)
       doc.setTextColor(255, 0, 50) // Iliad red in RGB
-      doc.text("€9,99/mese per sempre", 80, 130)
+      doc.text(`€${plan.price}/mese per sempre`, 80, 135)
 
       // Costo di attivazione
       doc.setTextColor(0, 0, 0)
-      doc.text("Costo di attivazione:", 24, 140)
+      doc.text("Costo di attivazione:", 24, 145)
       doc.setTextColor(255, 0, 50) // Iliad red in RGB
-      doc.text("€5,00", 80, 140)
+      doc.text(`€${plan.discountedActivationPrice}`, 80, 145)
       doc.setTextColor(150, 150, 150)
       doc.setFont("helvetica", "normal")
-      doc.text("(invece di €9,99)", 95, 140)
+      doc.text(`(invece di €${plan.activationPrice})`, 95, 145)
 
       // Istruzioni
       doc.setTextColor(0, 0, 0)
       doc.setFontSize(10)
       doc.setFont("helvetica", "bold")
-      doc.text("Presentare questo voucher presso:", 74, 155, { align: "center" })
+      doc.text("Presentare questo voucher presso:", 74, 160, { align: "center" })
       doc.setFontSize(12)
-      doc.text("AG SERVIZI VIA PLINIO 72", 74, 162, { align: "center" })
+      doc.text("AG SERVIZI VIA PLINIO 72", 74, 167, { align: "center" })
 
       // Footer con termini e condizioni
       doc.setFillColor(245, 245, 247) // Iliad gray in RGB
@@ -182,10 +227,10 @@ const FAQSection = ({
       doc.text("Termini e condizioni:", 24, 185)
       doc.text("• Il voucher è valido solo per nuove attivazioni", 24, 190)
       doc.text("• Non cumulabile con altre promozioni", 24, 195)
-      doc.text("• Verificare la copertura 5G nella propria zona", 24, 200)
+      doc.text("• Verificare la copertura nella propria zona", 24, 200)
 
       // Salva il PDF con il nome del voucher
-      doc.save(`Voucher_Iliad_${voucherCode}.pdf`)
+      doc.save(`Voucher_Iliad_${plan.name}_${voucherCode}.pdf`)
     } catch (error) {
       console.error("Errore nella generazione del PDF:", error)
       alert("Si è verificato un errore nella generazione del voucher. Riprova più tardi.")
@@ -201,7 +246,41 @@ const FAQSection = ({
   return (
     <section className="py-16 bg-[#f5f5f7]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden relative">
+          {/* Controlli dello slider */}
+          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
+            <button
+              onClick={prevSlide}
+              className="bg-white rounded-full p-2 shadow-md text-[#ff0032] hover:bg-gray-100 -ml-4"
+              aria-label="Offerta precedente"
+            >
+              <ChevronLeft size={24} />
+            </button>
+          </div>
+
+          <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
+            <button
+              onClick={nextSlide}
+              className="bg-white rounded-full p-2 shadow-md text-[#ff0032] hover:bg-gray-100 -mr-4"
+              aria-label="Offerta successiva"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* Indicatori dello slider */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+            {iliadPlans.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-3 h-3 rounded-full ${currentSlide === index ? "bg-[#ff0032]" : "bg-gray-300"}`}
+                aria-label={`Vai all'offerta ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Contenuto dello slider */}
           <div className="flex flex-col md:flex-row">
             {/* Colonna sinistra con logo e immagine */}
             <div className="md:w-1/3 bg-[#ff0032] p-6 flex flex-col items-center justify-center">
@@ -247,67 +326,88 @@ const FAQSection = ({
 
             {/* Colonna destra con dettagli offerta */}
             <div className="md:w-2/3 p-6 md:p-8">
-              <h2 className="text-3xl font-bold text-[#ff0032] mb-4">Offerta Iliad TOP 250 Plus</h2>
+              <h2 className="text-3xl font-bold text-[#ff0032] mb-4">Offerta Iliad {iliadPlans[currentSlide].name}</h2>
 
               <div className="mb-6">
-                <div className="flex items-center mb-2">
-                  <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                {iliadPlans[currentSlide].data.includes("5G") ? (
+                  <div className="flex items-center mb-2">
+                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-lg">{iliadPlans[currentSlide].data}</span>
                   </div>
-                  <span className="text-lg">250 GB in 5G</span>
-                </div>
+                ) : (
+                  <div className="flex items-center mb-2">
+                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-lg">{iliadPlans[currentSlide].data}</span>
+                  </div>
+                )}
 
-                <div className="flex items-center mb-2">
-                  <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                {iliadPlans[currentSlide].features.map((feature, index) => (
+                  <div key={index} className="flex items-center mb-2">
+                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-lg">{feature}</span>
                   </div>
-                  <span className="text-lg">Minuti e SMS illimitati</span>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-lg">Roaming in UE incluso</span>
-                </div>
+                ))}
               </div>
 
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <p className="text-sm text-gray-500">Costo mensile</p>
-                  <p className="text-4xl font-bold text-[#ff0032]">€9,99</p>
+                  <p className="text-4xl font-bold text-[#ff0032]">€{iliadPlans[currentSlide].price}</p>
                   <p className="text-sm text-gray-500">al mese per sempre</p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-500">Attivazione</p>
                   <p className="text-xl">
-                    <span className="line-through text-gray-500 mr-2">€9,99</span>
-                    <span className="font-bold text-[#ff0032]">€5,00</span>
+                    <span className="line-through text-gray-500 mr-2">€{iliadPlans[currentSlide].activationPrice}</span>
+                    <span className="font-bold text-[#ff0032]">
+                      €{iliadPlans[currentSlide].discountedActivationPrice}
+                    </span>
                   </p>
                 </div>
               </div>
 
               <button
-                onClick={handleDownloadVoucher}
+                onClick={() => handleDownloadVoucher(iliadPlans[currentSlide])}
                 disabled={isDownloading}
                 className="w-full py-3 bg-[#ff0032] text-white font-bold rounded-lg hover:bg-[#d60029] transition-colors relative overflow-hidden"
               >
@@ -356,7 +456,8 @@ const FAQSection = ({
                 )}
               </button>
               <p className="text-xs text-gray-500 text-center mt-2">
-                Scarica il voucher in formato PDF con codice sconto per l'attivazione a €5,00
+                Scarica il voucher in formato PDF con codice sconto per l'attivazione a €
+                {iliadPlans[currentSlide].discountedActivationPrice}
               </p>
             </div>
           </div>
