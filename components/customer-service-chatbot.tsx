@@ -224,6 +224,11 @@ const CustomerServiceChatbot = () => {
   const [isSending, setIsSending] = useState(false) // Stato per indicare l'invio del messaggio
   const [openRouterError, setOpenRouterError] = useState<string | null>(null)
 
+  // Aggiungi queste variabili di stato dopo le altre dichiarazioni di stato
+  const [lastInteractionTime, setLastInteractionTime] = useState<number>(Date.now())
+  const inactivityTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const INACTIVITY_TIMEOUT = 60000 // 60 secondi di inattività prima della chiusura automatica
+
   // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
@@ -302,6 +307,7 @@ const CustomerServiceChatbot = () => {
     setIsChatOpen(open)
     if (open && typeof window !== "undefined") {
       localStorage.setItem("lastChatbotOpen", new Date().toISOString())
+      setLastInteractionTime(Date.now()) // Aggiorna il timestamp quando si apre la chat
     }
   }, [])
 
@@ -313,6 +319,11 @@ const CustomerServiceChatbot = () => {
 
   const clearNotification = useCallback(() => {
     setMessages((prev) => prev.map((msg) => (msg.type === "bot" ? { ...msg, read: true } : msg)))
+  }, [])
+
+  // Funzione per aggiornare il timestamp dell'ultima interazione
+  const updateLastInteraction = useCallback(() => {
+    setLastInteractionTime(Date.now())
   }, [])
 
   // Carica le preferenze utente
@@ -376,6 +387,32 @@ const CustomerServiceChatbot = () => {
     }
   }, [isChatOpen])
 
+  // Effetto per controllare l'inattività e chiudere il chatbot
+  useEffect(() => {
+    // Solo se il chatbot è aperto, imposta un timer per controllare l'inattività
+    if (isChatOpen) {
+      // Pulisci eventuali timer esistenti
+      if (inactivityTimeoutRef.current) {
+        clearTimeout(inactivityTimeoutRef.current)
+      }
+
+      // Imposta un nuovo timer
+      inactivityTimeoutRef.current = setTimeout(() => {
+        const now = Date.now()
+        if (now - lastInteractionTime > INACTIVITY_TIMEOUT) {
+          setIsChatOpen(false)
+        }
+      }, INACTIVITY_TIMEOUT + 1000) // Controlla poco dopo il timeout
+
+      // Pulisci il timer quando il componente si smonta o quando il chatbot viene chiuso
+      return () => {
+        if (inactivityTimeoutRef.current) {
+          clearTimeout(inactivityTimeoutRef.current)
+        }
+      }
+    }
+  }, [isChatOpen, lastInteractionTime, INACTIVITY_TIMEOUT])
+
   // Gestione del focus per l'accessibilità
   useEffect(() => {
     if (isChatOpen && typeof window !== "undefined") {
@@ -384,6 +421,8 @@ const CustomerServiceChatbot = () => {
 
       // Focus trap all'interno del chatbot
       const handleKeyDown = (e: KeyboardEvent) => {
+        updateLastInteraction() // Aggiorna il timestamp dell'ultima interazione quando l'utente preme un tasto
+
         if (e.key === "Escape") {
           setIsChatOpen(false)
           return
@@ -416,7 +455,7 @@ const CustomerServiceChatbot = () => {
       // Ripristina il focus quando il chatbot viene chiuso
       previousFocusRef.current.focus()
     }
-  }, [isChatOpen])
+  }, [isChatOpen, updateLastInteraction])
 
   // Load chat history from localStorage on component mount
   useEffect(() => {
@@ -514,8 +553,12 @@ const CustomerServiceChatbot = () => {
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
   }
 
+  // Modifica la funzione handleSendMessage per aggiornare l'interazione
   const handleSendMessage = async (text = inputValue) => {
     if (!text.trim()) return
+
+    // Aggiorna il timestamp dell'ultima interazione
+    updateLastInteraction()
 
     // Se offline, mostra un messaggio di errore
     if (!isOnline) {
@@ -583,13 +626,23 @@ const CustomerServiceChatbot = () => {
     }
   }
 
+  // Modifica la funzione handleKeyPress per aggiornare l'interazione
   const handleKeyPress = (e) => {
+    updateLastInteraction()
     if (e.key === "Enter") {
       handleSendMessage()
     }
   }
 
+  // Modifica la funzione handleQuickReply per aggiornare l'interazione
+  const handleQuickReplyClick = (query) => {
+    updateLastInteraction()
+    handleSendMessage(query)
+  }
+
   const handleFeedback = (messageId, isPositive) => {
+    updateLastInteraction() // Aggiorna il timestamp quando l'utente fornisce feedback
+
     setMessages((prev) =>
       prev.map((msg) => (msg.id === messageId ? { ...msg, feedback: isPositive ? "positive" : "negative" } : msg)),
     )
@@ -613,6 +666,8 @@ const CustomerServiceChatbot = () => {
   }
 
   const handleClearChat = () => {
+    updateLastInteraction() // Aggiorna il timestamp quando l'utente cancella la chat
+
     const confirmClear = window.confirm("Sei sicuro di voler cancellare tutta la conversazione?")
     if (confirmClear) {
       const welcomeMessage = {
@@ -628,6 +683,7 @@ const CustomerServiceChatbot = () => {
   }
 
   const handleQuickReply = (query) => {
+    updateLastInteraction() // Aggiorna il timestamp quando l'utente seleziona una risposta rapida
     handleSendMessage(query)
   }
 
@@ -695,6 +751,7 @@ const CustomerServiceChatbot = () => {
 
   // Funzione per cambiare le preferenze
   const updatePreference = (key, value) => {
+    updateLastInteraction() // Aggiorna il timestamp quando l'utente cambia le preferenze
     setPreferences((prev) => ({
       ...prev,
       [key]: value,
@@ -717,6 +774,7 @@ const CustomerServiceChatbot = () => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="chat-title"
+          onClick={updateLastInteraction} // Aggiorna il timestamp quando l'utente interagisce con il chatbot
         >
           {/* Header */}
           <div className={`bg-blue-600 text-white p-4 flex justify-between items-center`}>
@@ -751,7 +809,10 @@ const CustomerServiceChatbot = () => {
             <div className="flex items-center gap-2">
               <Tooltip text="Impostazioni" position="bottom">
                 <button
-                  onClick={() => setShowSettings(!showSettings)}
+                  onClick={() => {
+                    updateLastInteraction()
+                    setShowSettings(!showSettings)
+                  }}
                   className="text-white hover:text-gray-200 p-1"
                   aria-label="Impostazioni"
                   aria-expanded={showSettings}
@@ -881,6 +942,7 @@ const CustomerServiceChatbot = () => {
               fontSize:
                 preferences.fontSize === "small" ? "0.875rem" : preferences.fontSize === "large" ? "1.125rem" : "1rem",
             }}
+            onScroll={updateLastInteraction}
           >
             {messages.map((message) => (
               <div
@@ -987,7 +1049,10 @@ const CustomerServiceChatbot = () => {
             <input
               type="text"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => {
+                setInputValue(e.target.value)
+                updateLastInteraction() // Aggiorna il timestamp quando l'utente digita
+              }}
               onKeyPress={handleKeyPress}
               placeholder="Scrivi un messaggio..."
               className={`flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-${preferences.theme === "light" ? "white" : "gray-700"} text-${preferences.theme === "light" ? "gray-800" : "white"}`}
@@ -1029,6 +1094,7 @@ const CustomerServiceChatbot = () => {
             ref={buttonRef}
             onClick={() => {
               setIsChatOpen(true)
+              updateLastInteraction() // Aggiorna il timestamp quando si apre il chatbot
               // Tracciamento analitico dell'apertura del chatbot
               if (typeof window !== "undefined" && window.gtag) {
                 window.gtag("event", "open_chatbot", {
@@ -1048,6 +1114,7 @@ const CustomerServiceChatbot = () => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault()
                 setIsChatOpen(true)
+                updateLastInteraction()
               }
             }}
             className={`bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative ${!isChatOpen && hasUnreadMessages() ? "animate-pulse-subtle" : ""}`}

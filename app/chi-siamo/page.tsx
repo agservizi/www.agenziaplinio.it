@@ -95,74 +95,187 @@ export default function ChiSiamo() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20">
+      {/* Partnership Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Il Nostro Team</h2>
+            <h2 className="text-3xl font-bold mb-4">Le Nostre Partnership Ufficiali</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Professionisti qualificati pronti ad assisterti in ogni tua esigenza.
+              Siamo orgogliosi di essere punto di riferimento ufficiale per i principali operatori di telecomunicazioni
+              e servizi digitali.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="h-64 bg-gray-200">
+            {/* Iliad Space */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="h-48 bg-[#f5f5f7] flex items-center justify-center p-0 relative">
                 <Image
-                  src="/placeholder.svg?height=300&width=300"
-                  alt="Team Member"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/iliad-logo-HZLJf3G2JHnbjxkMCmJavMLxrvTPFf.jpg"
+                  alt="Iliad Space"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
+                  priority
                 />
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-1">Mario Rossi</h3>
-                <p className="text-gray-500 mb-4">Direttore</p>
-                <p className="text-gray-600">
-                  Con oltre 15 anni di esperienza nel settore dei servizi, Mario guida il nostro team con passione e
-                  dedizione.
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-[#ff0032]">Iliad Space</h3>
+                <p className="text-gray-600 mb-4">
+                  Punto ufficiale Iliad per attivazioni, assistenza e gestione delle offerte di telefonia mobile e
+                  fibra.
                 </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  Attivazioni immediate
+                </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="h-64 bg-gray-200">
+            {/* Fastweb Point */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="h-48 bg-[#FDC400] flex items-center justify-center p-0 relative">
                 <Image
-                  src="/placeholder.svg?height=300&width=300"
-                  alt="Team Member"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Logo_Fastweb_2020.svg-YbJbbJpyuPYqL0SdN399VwrdPXm8fP.png"
+                  alt="Fastweb Point"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-contain"
+                  priority
                 />
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-1">Laura Bianchi</h3>
-                <p className="text-gray-500 mb-4">Responsabile Servizi</p>
-                <p className="text-gray-600">
-                  Esperta in pratiche amministrative e fiscali, Laura è il punto di riferimento per tutti i servizi CAF
-                  e Patronato.
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-[#FDC400]">Fastweb Point</h3>
+                <p className="text-gray-600 mb-4">
+                  Centro autorizzato per attivazioni e assistenza su servizi di telefonia mobile e connessioni internet
+                  ultraveloci.
                 </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  Consulenza personalizzata
+                </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="h-64 bg-gray-200">
+            {/* Windtre Point */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="h-48 bg-[#f5f5f7] flex items-center justify-center p-0 relative">
                 <Image
-                  src="/placeholder.svg?height=300&width=300"
-                  alt="Team Member"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
+                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/windtre-logo-162SnUsCcvwetp3oqicGHKWyfryUuk.png"
+                  alt="Windtre Point"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
+                  priority
                 />
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-1">Giuseppe Verdi</h3>
-                <p className="text-gray-500 mb-4">Consulente Digitale</p>
-                <p className="text-gray-600">
-                  Specializzato in servizi digitali, Giuseppe si occupa delle attivazioni SPID, PEC e Firma Digitale.
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-[#ff8200]">Windtre Point</h3>
+                <p className="text-gray-600 mb-4">
+                  Punto vendita autorizzato per tutti i servizi WindTre, dalle offerte mobile alle soluzioni per la
+                  casa.
                 </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  Offerte esclusive
+                </div>
               </div>
+            </div>
+
+            {/* Sky Point */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="h-48 bg-[#f0f0f2] flex items-center justify-center p-6 relative">
+                <Image
+                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Sky_Group_logo_2020.svg-wwrrYZOXD15cOZUdKz1Nu6LCwDpeJj.png"
+                  alt="Sky Point"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-contain p-4"
+                  priority
+                  style={{ maxWidth: "80%", maxHeight: "80%", margin: "auto" }}
+                />
+              </div>
+              <div className="p-6">
+                <h3
+                  className="text-xl font-bold mb-2"
+                  style={{
+                    background: "linear-gradient(90deg, #0072BB 0%, #00A0E9 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Sky Point
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Centro autorizzato per abbonamenti, assistenza e consulenza su tutti i servizi Sky, incluso Sky Wifi.
+                </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  Promozioni dedicate
+                </div>
+              </div>
+            </div>
+
+            {/* Pianeta Fibra */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="h-48 bg-[#f0f0f2] flex items-center justify-center p-6 relative">
+                <Image
+                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/pianetafibra-Tiyr7HPDn390ZW1F8esvFf0UwMj06w.png"
+                  alt="Pianeta Fibra"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-contain p-4"
+                  priority
+                  style={{ maxWidth: "80%", maxHeight: "80%", margin: "auto" }}
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-[#0A1F44]">Pianeta Fibra</h3>
+                <p className="text-gray-600 mb-4">
+                  Specialisti in connessioni in fibra ottica, offriamo consulenza e attivazione per la migliore
+                  soluzione per la tua casa o azienda.
+                </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  Verifica copertura gratuita
+                </div>
+              </div>
+            </div>
+
+            {/* Certificazioni */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="h-48 bg-gradient-to-r from-blue-50 to-indigo-50 flex items-center justify-center p-6">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-primary mb-2">100%</div>
+                  <div className="text-lg font-semibold text-gray-700">Personale Certificato</div>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-primary">Assistenza Qualificata</h3>
+                <p className="text-gray-600 mb-4">
+                  Il nostro team è formato da professionisti certificati dai nostri partner, per garantirti un servizio
+                  di qualità superiore.
+                </p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  Formazione continua
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16 text-center">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Visita il nostro negozio per scoprire tutte le offerte disponibili e ricevere una consulenza
+              personalizzata dai nostri esperti.
+            </p>
+            <div className="mt-8">
+              <a
+                href="/contatti"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark transition-colors duration-300"
+              >
+                Contattaci per informazioni
+              </a>
             </div>
           </div>
         </div>
