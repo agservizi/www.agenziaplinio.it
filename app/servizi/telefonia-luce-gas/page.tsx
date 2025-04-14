@@ -1,6 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Smartphone, Zap, Flame, HelpCircle } from "lucide-react"
+import {
+  ArrowLeft,
+  Smartphone,
+  Zap,
+  Flame,
+  HelpCircle,
+  MessageSquare,
+  ArrowRight,
+  Lightbulb,
+  BarChart3,
+  PiggyBank,
+} from "lucide-react"
 import FAQSection from "@/components/faq-section"
 
 const telefoniaLuceGasFAQs = [
@@ -64,6 +75,7 @@ export default function TelefoniaLuceGas() {
 
               <div className="space-y-12">
                 <div className="bg-white p-8 rounded-lg shadow-md">
+                  {/* Sostituisci la sezione della telefonia con questa versione ampliata */}
                   <div className="flex items-start">
                     <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                       <Smartphone className="text-primary" size={24} />
@@ -103,6 +115,114 @@ export default function TelefoniaLuceGas() {
                             Offerte per casa con internet fibra o ADSL e chiamate incluse.
                           </p>
                         </div>
+                      </div>
+
+                      {/* Nuova sezione: Servizi aggiuntivi */}
+                      <h4 className="font-bold text-lg mb-3 text-primary">Servizi Aggiuntivi</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div className="bg-blue-50 p-4 rounded-md border-l-4 border-blue-400">
+                          <h5 className="font-bold mb-2">Verifica Copertura</h5>
+                          <p className="text-gray-600 text-sm">
+                            Analisi gratuita della copertura internet nella tua zona per consigliarti la migliore
+                            tecnologia disponibile (FTTH, FTTC, FWA).
+                          </p>
+                        </div>
+
+                        <div className="bg-blue-50 p-4 rounded-md border-l-4 border-blue-400">
+                          <h5 className="font-bold mb-2">Confronto Tariffe</h5>
+                          <p className="text-gray-600 text-sm">
+                            Analisi personalizzata delle tue bollette attuali per trovare l'offerta più conveniente in
+                            base al tuo profilo di consumo.
+                          </p>
+                        </div>
+
+                        <div className="bg-blue-50 p-4 rounded-md border-l-4 border-blue-400">
+                          <h5 className="font-bold mb-2">Assistenza Tecnica</h5>
+                          <p className="text-gray-600 text-sm">
+                            Supporto per problemi tecnici, configurazione router, ottimizzazione della rete Wi-Fi
+                            domestica e risoluzione guasti.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Nuova sezione: Promozioni speciali */}
+                      <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-5 rounded-lg mb-6">
+                        <h4 className="font-bold text-lg mb-3">Promozioni Speciali</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-start">
+                            <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-white text-xs mr-2 mt-0.5">
+                              1
+                            </span>
+                            <div>
+                              <h5 className="font-bold">Pacchetto Famiglia</h5>
+                              <p className="text-gray-600 text-sm">
+                                Attiva internet a casa + 2 SIM mobili con uno sconto speciale sul canone mensile e
+                                installazione gratuita.
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-start">
+                            <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-white text-xs mr-2 mt-0.5">
+                              2
+                            </span>
+                            <div>
+                              <h5 className="font-bold">Offerta Smart Home</h5>
+                              <p className="text-gray-600 text-sm">
+                                Con l'attivazione di una nuova linea fissa, ricevi un dispositivo smart home (Google
+                                Nest o Amazon Echo) in omaggio.
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-start">
+                            <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-white text-xs mr-2 mt-0.5">
+                              3
+                            </span>
+                            <div>
+                              <h5 className="font-bold">Porta un Amico</h5>
+                              <p className="text-gray-600 text-sm">
+                                Ricevi uno sconto sulla tua bolletta per ogni amico che attiva un nuovo contratto
+                                tramite la nostra agenzia.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Nuova sezione: Servizio di consulenza */}
+                      <div className="bg-primary/5 p-5 rounded-lg mb-6 border border-primary/20">
+                        <h4 className="font-bold text-lg mb-3 flex items-center">
+                          <HelpCircle size={18} className="mr-2 text-primary" />
+                          Consulenza Personalizzata
+                        </h4>
+                        <p className="text-gray-600 mb-3">Prenota una consulenza gratuita con i nostri esperti per:</p>
+                        <ul className="space-y-2 mb-4">
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-2"></span>
+                            <span className="text-gray-600 text-sm">Analisi delle tue esigenze di comunicazione</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-2"></span>
+                            <span className="text-gray-600 text-sm">Ottimizzazione dei costi di telefonia</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="w-2 h-2 bg-primary rounded-full mt-2 mr-2"></span>
+                            <span className="text-gray-600 text-sm">
+                              Soluzioni per famiglie, professionisti e piccole imprese
+                            </span>
+                          </li>
+                        </ul>
+                        <Link
+                          href="https://wa.me/+393773798570?text=Salve,%20vorrei%20prenotare%20una%20consulenza%20gratuita%20per%20i%20servizi%20di%20telefonia.%20Grazie."
+                          className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center relative overflow-hidden group"
+                          target="_blank"
+                        >
+                          <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                          <MessageSquare className="mr-2 h-5 w-5 animate-pulse" style={{ animationDuration: "1.5s" }} />
+                          <span>Prenota consulenza su WhatsApp</span>
+                          <ArrowRight className="ml-2 h-5 w-5 transform transition-transform group-hover:translate-x-1" />
+                        </Link>
                       </div>
 
                       <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
@@ -230,6 +350,117 @@ export default function TelefoniaLuceGas() {
                     </div>
                   </div>
                 </div>
+
+                <div className="bg-white p-8 rounded-lg shadow-md">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <Lightbulb className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-4">Efficienza Energetica</h3>
+                      <p className="text-gray-600 mb-6">
+                        Offriamo consulenza e soluzioni per ottimizzare i consumi energetici della tua casa o azienda,
+                        riducendo i costi in bolletta e l'impatto ambientale attraverso tecnologie innovative e buone
+                        pratiche.
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Analisi Consumi</h4>
+                          <p className="text-gray-600 text-sm">
+                            Analisi dettagliata dei tuoi consumi energetici per identificare sprechi e inefficienze.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Smart Home</h4>
+                          <p className="text-gray-600 text-sm">
+                            Dispositivi intelligenti per il controllo e l'ottimizzazione dei consumi (termostati, prese
+                            e illuminazione smart).
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Consulenza Bonus</h4>
+                          <p className="text-gray-600 text-sm">
+                            Assistenza per l'accesso a incentivi e detrazioni fiscali per efficientamento energetico.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Soluzioni Rinnovabili</h4>
+                          <p className="text-gray-600 text-sm">
+                            Consulenza per l'installazione di impianti fotovoltaici, pompe di calore e sistemi di
+                            accumulo.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Vantaggi dell'efficienza energetica */}
+                      <div className="bg-green-50 p-5 rounded-lg mb-6">
+                        <h4 className="font-bold text-lg mb-3">Vantaggi dell'Efficienza Energetica</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="flex flex-col items-center text-center p-3">
+                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                              <PiggyBank className="text-green-600" size={24} />
+                            </div>
+                            <h5 className="font-bold mb-1">Risparmio Economico</h5>
+                            <p className="text-gray-600 text-sm">
+                              Riduci fino al 30% i costi delle bollette energetiche
+                            </p>
+                          </div>
+
+                          <div className="flex flex-col items-center text-center p-3">
+                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                              <BarChart3 className="text-green-600" size={24} />
+                            </div>
+                            <h5 className="font-bold mb-1">Monitoraggio</h5>
+                            <p className="text-gray-600 text-sm">Controlla e ottimizza i tuoi consumi in tempo reale</p>
+                          </div>
+
+                          <div className="flex flex-col items-center text-center p-3">
+                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                              <Lightbulb className="text-green-600" size={24} />
+                            </div>
+                            <h5 className="font-bold mb-1">Sostenibilità</h5>
+                            <p className="text-gray-600 text-sm">Riduci l'impatto ambientale e le emissioni di CO2</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Call to action */}
+                      <div className="bg-primary/5 p-5 rounded-lg mb-6 border border-primary/20">
+                        <h4 className="font-bold text-lg mb-3">Check-up Energetico Gratuito</h4>
+                        <p className="text-gray-600 mb-4">
+                          Prenota un check-up energetico gratuito della tua abitazione o attività. I nostri esperti
+                          analizzeranno i tuoi consumi e ti suggeriranno le soluzioni più adatte per risparmiare.
+                        </p>
+                        <Link
+                          href="https://wa.me/+393773798570?text=Salve,%20vorrei%20prenotare%20un%20check-up%20energetico%20gratuito%20per%20ottimizzare%20i%20miei%20consumi.%20Grazie."
+                          className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center relative overflow-hidden group"
+                          target="_blank"
+                        >
+                          <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                          <MessageSquare className="mr-2 h-5 w-5 animate-pulse" style={{ animationDuration: "1.5s" }} />
+                          <span>Prenota check-up su WhatsApp</span>
+                          <ArrowRight className="ml-2 h-5 w-5 transform transition-transform group-hover:translate-x-1" />
+                        </Link>
+                      </div>
+
+                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
+                        <h4 className="font-bold mb-2 flex items-center">
+                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
+                          Cosa serve
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Per una consulenza sull'efficienza energetica è utile avere a disposizione le bollette degli
+                          ultimi 12 mesi, informazioni sulla superficie dell'immobile e sugli impianti esistenti
+                          (riscaldamento, raffrescamento, elettrodomestici).
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Gallery */}
@@ -351,4 +582,3 @@ export default function TelefoniaLuceGas() {
     </div>
   )
 }
-

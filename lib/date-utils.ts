@@ -78,4 +78,3 @@ export function formatDateWithDayItalian(date: Date | string): string {
 
   return `${dayName}, ${formattedDate}`
 }
-

@@ -51,4 +51,3 @@ export async function createSchema() {
 
   console.log("Schema created successfully")
 }
-

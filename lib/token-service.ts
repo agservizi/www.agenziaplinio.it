@@ -62,4 +62,3 @@ export async function invalidateToken(token: string): Promise<boolean> {
 
   return result.count > 0
 }
-

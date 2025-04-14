@@ -75,4 +75,3 @@ export default function LocationMap({ address, placeId }: LocationMapProps) {
     </div>
   )
 }
-

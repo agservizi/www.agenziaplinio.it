@@ -258,4 +258,3 @@ export async function sendAdminNotification(booking: {
     // Don't throw here, as this is a notification and shouldn't block the booking process
   }
 }
-

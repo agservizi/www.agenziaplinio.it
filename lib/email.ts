@@ -310,4 +310,3 @@ export async function sendAdminNotification(prenotazione: Prenotazione) {
     return { success: false, error }
   }
 }
-

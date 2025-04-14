@@ -104,4 +104,3 @@ export default function OpenStreetMap({ address, lat, lng }: OpenStreetMapProps)
     </div>
   )
 }
-

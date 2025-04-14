@@ -40,4 +40,3 @@ const ServiceCard = ({ id, title, description, image, icon }: ServiceCardProps) 
 }
 
 export default ServiceCard
-

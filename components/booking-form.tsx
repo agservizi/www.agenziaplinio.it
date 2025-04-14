@@ -737,4 +737,3 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
     </Form>
   )
 }
-

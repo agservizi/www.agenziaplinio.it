@@ -565,4 +565,3 @@ function generateTimesInSlot(startTime: string, endTime: string, intervalMinutes
 
   return result
 }
-

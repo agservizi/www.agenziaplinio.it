@@ -52,4 +52,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...mainRoutes, ...serviceRoutes, ...legalRoutes]
 }
-

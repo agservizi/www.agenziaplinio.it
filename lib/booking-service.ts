@@ -254,4 +254,3 @@ export async function getBookings(
 
   return await query
 }
-
