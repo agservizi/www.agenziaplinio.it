@@ -169,6 +169,23 @@ const FAQSection = ({
       const voucherCode = generateVoucherCode()
       const currentDate = new Date().toLocaleDateString("it-IT")
 
+      // Salva il voucher nel database
+      const saveResponse = await fetch("/api/iliad-vouchers/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          code: voucherCode,
+        }),
+      })
+
+      const saveResult = await saveResponse.json()
+
+      if (!saveResult.success) {
+        throw new Error(`Errore nel salvataggio del voucher: ${saveResult.message}`)
+      }
+
       // Crea un nuovo documento PDF in formato A5
       const doc = new jsPDF({
         orientation: "portrait",

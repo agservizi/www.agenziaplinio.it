@@ -271,10 +271,12 @@ export default function ChiSiamo() {
             </p>
             <div className="mt-8">
               <a
-                href="/contatti"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark transition-colors duration-300"
+                href="https://wa.me/+393773798570?text=Ciao,%20vorrei%20maggiori%20informazioni%20sulla%20vostra%20agenzia%20e%20i%20servizi%20che%20offrite."
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#25D366] hover:bg-[#128C7E] transition-colors duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Contattaci per informazioni
+                Contattaci su WhatsApp
               </a>
             </div>
           </div>
