@@ -172,7 +172,13 @@ export default function RiscattoVoucherPage() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-white p-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <Image src="/iliad-logo.png" alt="Iliad Logo" width={150} height={50} className="mx-auto mb-6" />
+            <Image
+              src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/960px-Logo_Iliad-Qa0Y0bIJ007jsCWeNKeMBR0eBSNYNc.png"
+              alt="Iliad Logo"
+              width={150}
+              height={50}
+              className="mx-auto mb-6"
+            />
             <h1 className="text-2xl font-bold" style={{ color: iliadRed }}>
               Pannello Riscatto Voucher
             </h1>
@@ -234,7 +240,12 @@ export default function RiscattoVoucherPage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center">
-              <Image src="/iliad-logo.png" alt="Iliad Logo" width={120} height={40} />
+              <Image
+                src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/960px-Logo_Iliad-Qa0Y0bIJ007jsCWeNKeMBR0eBSNYNc.png"
+                alt="Iliad Logo"
+                width={120}
+                height={40}
+              />
               <h1 className="text-2xl font-bold ml-4" style={{ color: iliadRed }}>
                 Debug Voucher Iliad
               </h1>
@@ -273,7 +284,12 @@ export default function RiscattoVoucherPage() {
       <div className="max-w-4xl mx-auto p-4">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center">
-            <Image src="/iliad-logo.png" alt="Iliad Logo" width={120} height={40} />
+            <Image
+              src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/960px-Logo_Iliad-Qa0Y0bIJ007jsCWeNKeMBR0eBSNYNc.png"
+              alt="Iliad Logo"
+              width={120}
+              height={40}
+            />
             <h1 className="text-2xl font-bold ml-4" style={{ color: iliadRed }}>
               Pannello Riscatto Voucher
             </h1>
