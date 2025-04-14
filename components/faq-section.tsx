@@ -1,8 +1,8 @@
 "use client"
 
-// Modifica la funzione di rendering per mostrare una promozione Iliad invece delle FAQ
-
 import { useState, useEffect } from "react"
+// Importiamo jsPDF direttamente all'inizio del file
+import { jsPDF } from "jspdf"
 
 interface FAQ {
   question: string
@@ -15,7 +15,7 @@ interface FAQSectionProps {
   faqs: FAQ[]
 }
 
-// Aggiungi la funzione di countdown dopo la definizione delle interfacce e prima del componente FAQSection
+// Funzione di countdown
 function useCountdown(targetDate: Date) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate))
 
@@ -45,19 +45,157 @@ function useCountdown(targetDate: Date) {
   return timeLeft
 }
 
+// Funzione per generare un codice voucher univoco
+function generateVoucherCode() {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  let result = "ILIAD-"
+  const length = 8
+
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length))
+  }
+
+  return result
+}
+
 const FAQSection = ({
   title = "Biglietteria",
   description = "Trova le risposte alle domande più comuni sui nostri servizi di biglietteria.",
   faqs,
 }: FAQSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [isDownloading, setIsDownloading] = useState(false)
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
-  const targetDate = new Date("2025-04-30T19:00:00") // Nota: ho usato 2025 perché 2024 potrebbe essere già passato
+  const targetDate = new Date("2025-04-30T19:00:00")
   const timeLeft = useCountdown(targetDate)
+
+  // Funzione per generare e scaricare il PDF del voucher
+  const handleDownloadVoucher = async () => {
+    setIsDownloading(true)
+
+    try {
+      // Genera un codice voucher univoco
+      const voucherCode = generateVoucherCode()
+      const currentDate = new Date().toLocaleDateString("it-IT")
+
+      // Crea un nuovo documento PDF in formato A5
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a5",
+      })
+
+      // Colori Iliad
+      const iliadRed = "#ff0032"
+      const iliadGray = "#f5f5f7"
+
+      // Sfondo
+      doc.setFillColor(255, 255, 255)
+      doc.rect(0, 0, 148, 210, "F")
+
+      // Header con sfondo rosso
+      doc.setFillColor(255, 0, 50) // Iliad red in RGB
+      doc.rect(0, 0, 148, 40, "F")
+
+      // Aggiungi il logo Iliad (come testo, dato che non possiamo caricare immagini esterne)
+      doc.setTextColor(255, 255, 255)
+      doc.setFontSize(24)
+      doc.setFont("helvetica", "bold")
+      doc.text("iliad", 74, 20, { align: "center" })
+
+      // Titolo del voucher
+      doc.setTextColor(255, 255, 255)
+      doc.setFontSize(14)
+      doc.setFont("helvetica", "bold")
+      doc.text("VOUCHER PROMOZIONALE", 74, 30, { align: "center" })
+
+      // Informazioni sul voucher
+      doc.setTextColor(0, 0, 0)
+      doc.setFontSize(12)
+      doc.setFont("helvetica", "bold")
+      doc.text("OFFERTA ILIAD TOP 250 PLUS", 74, 50, { align: "center" })
+
+      // Codice voucher
+      doc.setFillColor(245, 245, 247) // Iliad gray in RGB
+      doc.roundedRect(24, 55, 100, 20, 3, 3, "F")
+      doc.setTextColor(255, 0, 50) // Iliad red in RGB
+      doc.setFontSize(16)
+      doc.setFont("helvetica", "bold")
+      doc.text(voucherCode, 74, 67, { align: "center" })
+
+      // Dettagli dell'offerta
+      doc.setTextColor(0, 0, 0)
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
+      doc.text("Data di emissione: " + currentDate, 74, 80, { align: "center" })
+      doc.text("Valido fino al: 30 aprile 2025, ore 19:00", 74, 85, { align: "center" })
+
+      // Linea divisoria
+      doc.setDrawColor(220, 220, 220)
+      doc.line(24, 90, 124, 90)
+
+      // Dettagli dell'offerta
+      doc.setFontSize(11)
+      doc.setFont("helvetica", "bold")
+      doc.text("Dettagli dell'offerta:", 24, 100)
+
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
+      doc.text("• 250 GB in 5G", 24, 110)
+      doc.text("• Minuti e SMS illimitati", 24, 115)
+      doc.text("• Roaming in UE incluso", 24, 120)
+
+      // Prezzo
+      doc.setFontSize(11)
+      doc.setFont("helvetica", "bold")
+      doc.text("Prezzo mensile:", 24, 130)
+      doc.setTextColor(255, 0, 50) // Iliad red in RGB
+      doc.text("€9,99/mese per sempre", 80, 130)
+
+      // Costo di attivazione
+      doc.setTextColor(0, 0, 0)
+      doc.text("Costo di attivazione:", 24, 140)
+      doc.setTextColor(255, 0, 50) // Iliad red in RGB
+      doc.text("€5,00", 80, 140)
+      doc.setTextColor(150, 150, 150)
+      doc.setFont("helvetica", "normal")
+      doc.text("(invece di €9,99)", 95, 140)
+
+      // Istruzioni
+      doc.setTextColor(0, 0, 0)
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "bold")
+      doc.text("Presentare questo voucher presso:", 74, 155, { align: "center" })
+      doc.setFontSize(12)
+      doc.text("AG SERVIZI VIA PLINIO 72", 74, 162, { align: "center" })
+
+      // Footer con termini e condizioni
+      doc.setFillColor(245, 245, 247) // Iliad gray in RGB
+      doc.rect(0, 175, 148, 35, "F")
+      doc.setTextColor(100, 100, 100)
+      doc.setFontSize(8)
+      doc.setFont("helvetica", "normal")
+      doc.text("Termini e condizioni:", 24, 185)
+      doc.text("• Il voucher è valido solo per nuove attivazioni", 24, 190)
+      doc.text("• Non cumulabile con altre promozioni", 24, 195)
+      doc.text("• Verificare la copertura 5G nella propria zona", 24, 200)
+
+      // Salva il PDF con il nome del voucher
+      doc.save(`Voucher_Iliad_${voucherCode}.pdf`)
+    } catch (error) {
+      console.error("Errore nella generazione del PDF:", error)
+      alert("Si è verificato un errore nella generazione del voucher. Riprova più tardi.")
+    } finally {
+      // Reimposta lo stato dopo un breve ritardo
+      setTimeout(() => {
+        setIsDownloading(false)
+      }, 1500)
+    }
+  }
 
   // Modifica il return statement per sostituire la sezione FAQ con la promozione Iliad
   return (
@@ -168,9 +306,58 @@ const FAQSection = ({
                 </div>
               </div>
 
-              <button className="w-full py-3 bg-[#ff0032] text-white font-bold rounded-lg hover:bg-[#d60029] transition-colors">
-                ATTIVA SUBITO
+              <button
+                onClick={handleDownloadVoucher}
+                disabled={isDownloading}
+                className="w-full py-3 bg-[#ff0032] text-white font-bold rounded-lg hover:bg-[#d60029] transition-colors relative overflow-hidden"
+              >
+                {isDownloading ? (
+                  <span className="flex items-center justify-center">
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    GENERAZIONE PDF...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                      ></path>
+                    </svg>
+                    SCARICA IL TUO VOUCHER PDF
+                  </span>
+                )}
               </button>
+              <p className="text-xs text-gray-500 text-center mt-2">
+                Scarica il voucher in formato PDF con codice sconto per l'attivazione a €5,00
+              </p>
             </div>
           </div>
         </div>

@@ -60,7 +60,8 @@
     "zod": "latest",
     "resend": "latest",
     "crypto": "latest",
-    "@neondatabase/serverless": "latest"
+    "@neondatabase/serverless": "latest",
+    "jspdf": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
