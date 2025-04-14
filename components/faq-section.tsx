@@ -184,11 +184,50 @@ const FAQSection = ({
       doc.setFillColor(255, 0, 50) // Iliad red in RGB
       doc.rect(0, 0, 148, 40, "F")
 
-      // Aggiungi il logo Iliad (come testo, dato che non possiamo caricare immagini esterne)
-      doc.setTextColor(255, 255, 255)
-      doc.setFontSize(24)
-      doc.setFont("helvetica", "bold")
-      doc.text("iliad", 74, 20, { align: "center" })
+      // Aggiungi il logo Iliad come immagine
+      const addLogoToDocument = async () => {
+        try {
+          // Crea un elemento immagine
+          const img = new Image()
+          img.crossOrigin = "anonymous" // Importante per evitare problemi CORS
+
+          // Imposta l'URL dell'immagine
+          img.src =
+            "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Iliad_logo-emmzu7gUgFwdyAdgiVCNUtInfD3i2S.png"
+
+          // Attendi che l'immagine sia caricata
+          await new Promise((resolve, reject) => {
+            img.onload = resolve
+            img.onerror = reject
+          })
+
+          // Converti l'immagine in formato base64 per jsPDF
+          const canvas = document.createElement("canvas")
+          canvas.width = img.width
+          canvas.height = img.height
+          const ctx = canvas.getContext("2d")
+          ctx.drawImage(img, 0, 0)
+          const imageData = canvas.toDataURL("image/png")
+
+          // Calcola le dimensioni per mantenere l'aspetto originale ma con altezza di circa 15mm
+          const imgHeight = 15
+          const imgWidth = (img.width / img.height) * imgHeight
+
+          // Aggiungi l'immagine al PDF, centrata orizzontalmente
+          const xPosition = (148 - imgWidth) / 2 // Centra l'immagine (148mm è la larghezza del PDF A5)
+          doc.addImage(imageData, "PNG", xPosition, 10, imgWidth, imgHeight)
+        } catch (error) {
+          console.error("Errore nel caricamento del logo:", error)
+          // Fallback al testo in caso di errore
+          doc.setTextColor(255, 255, 255)
+          doc.setFontSize(24)
+          doc.setFont("helvetica", "bold")
+          doc.text("iliad", 74, 20, { align: "center" })
+        }
+      }
+
+      // Esegui la funzione asincrona per aggiungere il logo
+      await addLogoToDocument()
 
       // Titolo del voucher
       doc.setTextColor(255, 255, 255)
