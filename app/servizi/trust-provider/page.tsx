@@ -77,7 +77,7 @@ export default function TrustProviderPage() {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/spid1-01-fzPQLLZlrgpyL1dxSKikphRDUs6hPd.png"
                 alt="SPID Attivazione"
                 width={800}
                 height={600}
@@ -90,7 +90,7 @@ export default function TrustProviderPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div className="order-2 lg:order-1 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/namirialpec-ZR1arSPTwCx7FLuQI3qCR2vYvomvBR.png"
                 alt="PEC - Posta Elettronica Certificata"
                 width={800}
                 height={600}
@@ -192,11 +192,11 @@ export default function TrustProviderPage() {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/logo_tondo_bicolor-dztFp5rMuvUWcPgTJCBIV30GOKDBH8.png"
                 alt="Firma Digitale"
                 width={800}
                 height={600}
-                className="w-full h-auto"
+                className="w-auto h-auto max-w-[80%] mx-auto p-4"
                 loading="lazy"
               />
             </div>

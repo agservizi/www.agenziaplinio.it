@@ -37,7 +37,7 @@ export default function ChiSiamo() {
 
             <div className="lg:w-1/2">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/team-image-1743602203331-AwX9JqAXe5LfABL29GZ034KwSvyQTn.jpg"
                 alt="La nostra agenzia"
                 width={800}
                 height={600}
