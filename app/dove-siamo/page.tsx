@@ -1,7 +1,12 @@
 import Image from "next/image"
-import { MapPin, Phone, Mail, Clock, Car, Train, Bus } from "lucide-react"
+import Link from "next/link"
+import { MapPin, Phone, Mail, Clock, Car, Train, Bus, ExternalLink, Calendar, Navigation } from "lucide-react"
 
 export default function DoveSiamo() {
+  // Coordinate esatte dell'agenzia
+  const latitude = 40.700629319318956
+  const longitude = 14.485392263659271
+
   return (
     <div className="pt-0 page-transition">
       {/* Hero Section */}
@@ -22,11 +27,48 @@ export default function DoveSiamo() {
             <div className="lg:w-2/3">
               <h2 className="text-3xl font-bold mb-6">La Nostra Sede</h2>
 
-              <div className="h-96 bg-gray-200 rounded-lg overflow-hidden mb-8">
-                {/* Replace with actual Google Maps embed */}
-                <div className="w-full h-full flex items-center justify-center bg-gray-300">
-                  <p className="text-gray-600">Mappa Google non disponibile in anteprima</p>
-                </div>
+              <div className="h-96 bg-gray-200 rounded-lg overflow-hidden mb-4">
+                <iframe
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=14.483392%2C40.698629%2C14.487392%2C40.702629&amp;layer=mapnik&amp;marker=40.700629%2C14.485392"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="Mappa AG Servizi Via Plinio il Vecchio 72"
+                  className="w-full h-full"
+                ></iframe>
+              </div>
+
+              {/* Pulsanti per le indicazioni stradali */}
+              <div className="flex flex-wrap gap-3 mb-8">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  <Navigation className="w-4 h-4 mr-2" />
+                  Indicazioni su Google Maps
+                  <ExternalLink className="w-3 h-3 ml-1" />
+                </a>
+                <a
+                  href={`https://waze.com/ul?ll=${latitude},${longitude}&navigate=yes`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                >
+                  <Navigation className="w-4 h-4 mr-2" />
+                  Indicazioni su Waze
+                  <ExternalLink className="w-3 h-3 ml-1" />
+                </a>
+                <Link
+                  href="/prenota-appuntamento"
+                  className="flex items-center bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors ml-auto"
+                >
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Prenota un appuntamento
+                </Link>
               </div>
 
               <div className="mb-8">
@@ -74,7 +116,7 @@ export default function DoveSiamo() {
                 </div>
               </div>
 
-              <div>
+              <div className="mb-8">
                 <h3 className="text-xl font-bold mb-4">Parcheggio</h3>
                 <p className="text-gray-600 mb-4">
                   Nelle vicinanze della nostra sede sono disponibili diverse opzioni di parcheggio:
@@ -83,6 +125,20 @@ export default function DoveSiamo() {
                   <li>Parcheggio pubblico in Piazza Umberto I (a 3 minuti a piedi)</li>
                   <li>Parcheggio a pagamento in Via Roma (a 5 minuti a piedi)</li>
                   <li>Parcheggio gratuito in Via Napoli (a 7 minuti a piedi)</li>
+                </ul>
+              </div>
+
+              {/* Nuova sezione: Punti di riferimento */}
+              <div>
+                <h3 className="text-xl font-bold mb-4">Punti di Riferimento</h3>
+                <p className="text-gray-600 mb-4">
+                  La nostra agenzia è facilmente riconoscibile e si trova vicino a questi punti di riferimento:
+                </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-2">
+                  <li>A 50 metri dalla farmacia comunale</li>
+                  <li>Di fronte al bar "Il Caffè di Plinio"</li>
+                  <li>A 200 metri dalla Piazza Principale</li>
+                  <li>Vicino all'ufficio postale di Via Roma</li>
                 </ul>
               </div>
             </div>
@@ -111,9 +167,13 @@ export default function DoveSiamo() {
                     <div>
                       <h4 className="font-bold mb-1">Telefono</h4>
                       <p className="text-gray-600">
-                        +39 081 0584542
+                        <a href="tel:+390810584542" className="hover:underline">
+                          +39 081 0584542
+                        </a>
                         <br />
-                        +39 377 3798570
+                        <a href="tel:+393773798570" className="hover:underline">
+                          +39 377 3798570
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -122,7 +182,11 @@ export default function DoveSiamo() {
                     <Mail size={24} className="text-primary mr-4 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="font-bold mb-1">Email</h4>
-                      <p className="text-gray-600">info@agenziaplinio.it</p>
+                      <p className="text-gray-600">
+                        <a href="mailto:info@agenziaplinio.it" className="hover:underline">
+                          info@agenziaplinio.it
+                        </a>
+                      </p>
                     </div>
                   </div>
 
@@ -152,7 +216,7 @@ export default function DoveSiamo() {
                   <p className="text-sm text-gray-500 text-center">L'ingresso della nostra agenzia</p>
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-8 space-y-3">
                   <a
                     href="https://wa.me/393773798570?text=Buongiorno%2C%20vorrei%20avere%20maggiori%20informazioni%20sui%20vostri%20servizi.%20Grazie!"
                     target="_blank"
@@ -174,6 +238,22 @@ export default function DoveSiamo() {
                     </svg>
                     Contattaci su WhatsApp
                   </a>
+
+                  <a
+                    href="tel:+390810584542"
+                    className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors w-full block text-center flex items-center justify-center"
+                  >
+                    <Phone className="w-5 h-5 mr-2" />
+                    Chiamaci ora
+                  </a>
+
+                  <Link
+                    href="/prenota-appuntamento"
+                    className="bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-6 rounded-md transition-colors w-full block text-center flex items-center justify-center"
+                  >
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Prenota un appuntamento
+                  </Link>
                 </div>
               </div>
             </div>
