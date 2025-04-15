@@ -100,9 +100,9 @@ export default function Contatti() {
                   <div>
                     <h3 className="font-bold mb-1">Telefono</h3>
                     <p className="text-gray-600">
-                      +39 081 1234567
+                      +39 0810584542
                       <br />
-                      +39 333 1234567
+                      +39 3773798570
                     </p>
                   </div>
                 </div>
@@ -124,9 +124,9 @@ export default function Contatti() {
                   <div>
                     <h3 className="font-bold mb-1">Orari di Apertura</h3>
                     <p className="text-gray-600">
-                      Lunedì - Venerdì: 9:00 - 13:00, 15:00 - 19:00
+                      Lun-Ven: 9:00-13:20, 16:00-19:20
                       <br />
-                      Sabato: 9:00 - 13:00
+                      Sab: 9:00-13:00
                       <br />
                       Domenica: Chiuso
                     </p>
