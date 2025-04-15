@@ -135,10 +135,9 @@ export default function DoveSiamo() {
                   La nostra agenzia è facilmente riconoscibile e si trova vicino a questi punti di riferimento:
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-2">
-                  <li>A 50 metri dalla farmacia comunale</li>
-                  <li>Di fronte al bar "Il Caffè di Plinio"</li>
-                  <li>A 200 metri dalla Piazza Principale</li>
-                  <li>Vicino all'ufficio postale di Via Roma</li>
+                  <li>A 20 metri dalla farmacia Plinio</li>
+                  <li>A 200 metri da Piazza Matteotti</li>
+                  <li>Vicino all'ufficio postale di Via Plinio il Vecchio "Centrale"</li>
                 </ul>
               </div>
             </div>
@@ -223,19 +222,13 @@ export default function DoveSiamo() {
                     rel="noopener noreferrer"
                     className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-md transition-colors w-full block text-center flex items-center justify-center"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-5 h-5 mr-2"
-                    >
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                      <path
-                        d="M13.359 20.898c-2.024.132-3.87-.435-5.416-1.565l-.386-.25-4.009 1.05 1.07-3.92-.239-.427a10.947 10.947 0 01-1.658-5.835c0-6.066 4.934-11 11-11s11 4.934 11 11-4.934 11-11 11c-.358 0-.72-.02-1.08-.062zm-5.98-2.921c1.74 1.07 3.775 1.64 5.98 1.511 5.234-.34 9.33-4.794 9.33-10.068 0-5.569-4.53-10.099-10.099-10.099-5.569 0-10.099 4.53-10.099 10.099 0 1.902.54 3.758 1.559 5.36l.31.52-1.151 4.2 4.17-1.523z"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <Image
+                      src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Whatsapp_icon-icons.com_66931%20%281%29-3ge8nOrwR41gROIM2LrKPJOYueyxzj.png"
+                      alt="WhatsApp"
+                      width={20}
+                      height={20}
+                      className="mr-2"
+                    />
                     Contattaci su WhatsApp
                   </a>
 

@@ -94,19 +94,25 @@ export default function Header() {
               </Link>
 
               {/* Mega Menu Trigger */}
-              <div
-                className="relative mega-menu-trigger group"
-                onMouseEnter={() => setIsMegaMenuOpen(true)}
-                onMouseLeave={() => setIsMegaMenuOpen(false)}
-              >
-                <Link
-                  href="/servizi"
-                  className="text-gray-800 hover:text-primary font-medium px-3 py-2 rounded-md transition-colors inline-flex items-center"
-                  onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
-                >
-                  Servizi
-                  <ChevronDown size={16} className="ml-1" />
-                </Link>
+              <div className="relative mega-menu-trigger group">
+                <div className="flex items-center">
+                  <Link
+                    href="/servizi"
+                    className="text-gray-800 hover:text-primary font-medium px-3 py-2 rounded-md transition-colors inline-flex items-center"
+                  >
+                    Servizi
+                  </Link>
+                  <button
+                    onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
+                    className="ml-1 focus:outline-none"
+                    aria-label={isMegaMenuOpen ? "Chiudi menu servizi" : "Apri menu servizi"}
+                  >
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-300 ${isMegaMenuOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                </div>
 
                 {/* Mega Menu */}
                 {isMegaMenuOpen && (
@@ -227,16 +233,6 @@ export default function Header() {
                             >
                               <span className="w-2 h-2 bg-secondary rounded-full mr-2"></span>
                               Telefonia, Luce e Gas
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              href="/servizi/servizio-foto"
-                              className="text-gray-700 hover:text-primary transition-colors flex items-center"
-                              onClick={closeMegaMenu}
-                            >
-                              <span className="w-2 h-2 bg-secondary rounded-full mr-2"></span>
-                              Servizio Foto
                             </Link>
                           </li>
                         </ul>

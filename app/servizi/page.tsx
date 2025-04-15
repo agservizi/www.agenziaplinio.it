@@ -61,13 +61,6 @@ const services = [
       "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/service-image-1743607125482-servizi-postali-KjHfIa5fw0z8o4HnnE5uUXVejJrRwB",
   },
   {
-    id: "servizio-foto",
-    title: "Servizio Foto",
-    description: "Stampa fotografica professionale.",
-    image:
-      "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/service-image-1743607225631-servizio-foto-DUG3uPgLOCwcOkahWcwLkVfrGPnsjsD",
-  },
-  {
     id: "punto-ritiro",
     title: "Punto di Ritiro Pacchi",
     description: "PuntoPoste, BRT-Fermopoint, GLS Shop, Fedex Location.",
@@ -98,14 +91,30 @@ export default function Servizi() {
                 key={service.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden service-card hover:shadow-lg transition-all duration-300"
               >
-                <div className="h-48 bg-primary/10 flex items-center justify-center relative">
+                <div className="h-48 bg-gray-100 flex items-center justify-center relative">
                   <Image
-                    src={service.image || "/placeholder.svg?height=200&width=300"}
+                    src={
+                      service.id === "spedizioni"
+                        ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/brt-XmfBclOgJHjfimzC2bpN17zzIQC5xT.jpg"
+                        : service.id === "biglietteria"
+                          ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/treno-YWoVrIKusxhlIG6eVmhOd0YiNsJ5A6.jpg"
+                          : service.id === "attivazioni-digitali"
+                            ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/namirial-qwWloPu8WTylnGifUpwOWoHEU28Uwb.png"
+                            : service.id === "caf-patronato"
+                              ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/cafpatronato-IYvk759MyjLrJWvwVmoWlFfqzKUFOB.jpg"
+                              : service.id === "visure"
+                                ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/esempio-visura-camerale-YPfUuu8a7dXkH38cd4UcSSJNNvDPMX.jpg"
+                                : service.id === "telefonia-luce-gas"
+                                  ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/consulenza-utenze-mnvuZsScuMyQ7x7vzXJWfeVAj0Ju8l.jpg"
+                                  : service.id === "servizi-postali"
+                                    ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/il-logo-di-poste-italiane_880x495-VqPqFWCcWYUwHbCGF1haVMT9ubKCWH.jpg"
+                                    : service.image || "/placeholder.svg?height=200&width=300"
+                    }
                     alt={service.title}
                     width={300}
                     height={200}
                     className="w-full h-full object-cover absolute inset-0"
-                    unoptimized={service.image?.includes("blob.vercel-storage.com")}
+                    unoptimized={true}
                   />
                 </div>
                 <div className="p-6">
