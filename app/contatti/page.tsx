@@ -29,19 +29,33 @@ export default function Contatti() {
     setSubmitSuccess(false)
     setSubmitError(false)
 
-    // Simulate form submission
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      setSubmitSuccess(true)
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setSubmitSuccess(true)
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        })
+      } else {
+        setSubmitError(true)
+        console.error("Errore nell'invio dell'email:", data.error)
+      }
     } catch (error) {
       setSubmitError(true)
+      console.error("Errore nella richiesta:", error)
     } finally {
       setIsSubmitting(false)
     }
