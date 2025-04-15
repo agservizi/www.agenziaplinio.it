@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Instagram, Mail, MapPin, Phone, Clock, Twitter } from "lucide-react"
+import { Facebook, Instagram, MapPin, Phone, Clock } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -14,17 +14,19 @@ export default function Footer() {
               tutte le tue esigenze.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" className="hover:text-secondary transition-colors" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/agserviziplinio.it"
+                className="hover:text-secondary transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="https://instagram.com" className="hover:text-secondary transition-colors" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/agenziaplinio"
+                className="hover:text-secondary transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram size={20} />
-              </a>
-              <a href="https://twitter.com" className="hover:text-secondary transition-colors" aria-label="Twitter">
-                <Twitter size={20} />
-              </a>
-              <a href="mailto:info@agservizi.it" className="hover:text-secondary transition-colors" aria-label="Email">
-                <Mail size={20} />
               </a>
             </div>
           </div>
@@ -111,10 +113,6 @@ export default function Footer() {
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 flex-shrink-0" />
                 <span>+39 081 0584542</span>
-              </li>
-              <li className="flex items-center">
-                <Mail size={20} className="mr-2 flex-shrink-0" />
-                <span>info@agenziaplinio.it</span>
               </li>
               <li className="flex items-start">
                 <Clock size={20} className="mr-2 mt-1 flex-shrink-0" />

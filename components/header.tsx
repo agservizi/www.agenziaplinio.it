@@ -235,16 +235,6 @@ export default function Header() {
                               Telefonia, Luce e Gas
                             </Link>
                           </li>
-                          <li>
-                            <Link
-                              href="/servizi/servizio-foto"
-                              className="text-gray-700 hover:text-primary transition-colors flex items-center"
-                              onClick={closeMegaMenu}
-                            >
-                              <span className="w-2 h-2 bg-secondary rounded-full mr-2"></span>
-                              Servizio Foto
-                            </Link>
-                          </li>
                         </ul>
                       </div>
                     </div>
@@ -387,13 +377,6 @@ export default function Header() {
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Servizi Postali
-                    </Link>
-                    <Link
-                      href="/servizi/servizio-foto"
-                      className="text-gray-700 hover:text-primary text-sm transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Servizio Foto
                     </Link>
                     <Link
                       href="/servizi/punto-ritiro"

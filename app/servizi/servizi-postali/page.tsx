@@ -40,10 +40,10 @@ export default function ServiziPostali() {
           </div>
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-2/3">
-              <h1 className="text-4xl font-bold mb-6">Servizi Postali</h1>
+              <h1 className="text-4xl font-bold mb-6">Invii Posta Telematica</h1>
               <p className="text-xl max-w-3xl">
-                Offriamo una gamma completa di servizi postali digitali, dall'invio di email e PEC all'invio di fax, per
-                soddisfare tutte le tue esigenze di comunicazione.
+                Offriamo una gamma completa di servizi postali digitali, dall'invio di email e PEC, per soddisfare tutte
+                le tue esigenze di comunicazione.
               </p>
             </div>
             <div className="md:w-1/3 flex justify-center">

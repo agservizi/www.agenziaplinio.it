@@ -107,8 +107,10 @@ export default function Servizi() {
                                 : service.id === "telefonia-luce-gas"
                                   ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/consulenza-utenze-mnvuZsScuMyQ7x7vzXJWfeVAj0Ju8l.jpg"
                                   : service.id === "servizi-postali"
-                                    ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/il-logo-di-poste-italiane_880x495-VqPqFWCcWYUwHbCGF1haVMT9ubKCWH.jpg"
-                                    : service.image || "/placeholder.svg?height=200&width=300"
+                                    ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/invio-email-Bazxi14trtbK0Gpfy6B0imQrhGgAY1.png"
+                                    : service.id === "punto-ritiro"
+                                      ? "https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/pudo-rOeNRrX3wtTc7XDpsj8AILJk9SKzZ3.png"
+                                      : service.image || "/placeholder.svg?height=200&width=300"
                     }
                     alt={service.title}
                     width={300}
@@ -119,9 +121,15 @@ export default function Servizi() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">
-                    {service.id === "trust-provider" ? "Trust Provider" : service.title}
+                    {service.id === "trust-provider"
+                      ? "Trust Provider"
+                      : service.id === "servizi-postali"
+                        ? "Invii Posta Telematica"
+                        : service.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-gray-600 mb-4">
+                    {service.id === "servizi-postali" ? "Invio Email e PEC" : service.description}
+                  </p>
                   <Link
                     href={`/servizi/${service.id}`}
                     className="text-primary hover:text-primary/80 font-medium inline-flex items-center transition-colors"
