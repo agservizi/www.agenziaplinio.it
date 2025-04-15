@@ -6,7 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, CreditCard, Truck, FileText, Shield, Smartphone, Users, ImageIcon } from "lucide-react"
 import Testimonials from "@/components/testimonials"
-import FAQSection from "@/components/faq-section"
+import PromoIliadSection from "@/components/promo-iliad-section"
 import Breadcrumbs from "@/components/breadcrumbs"
 
 const featuredServices = [
@@ -318,12 +318,8 @@ export default function Home() {
       {/* Testimonials */}
       <Testimonials />
 
-      {/* FAQ Section */}
-      <FAQSection
-        title="Domande Frequenti"
-        description="Trova le risposte alle domande più comuni sui nostri servizi."
-        faqs={homeFAQs}
-      />
+      {/* Promozione Iliad invece delle FAQ nella home */}
+      <PromoIliadSection />
 
       {/* CTA Section */}
       <section className="py-16 bg-primary text-white">
