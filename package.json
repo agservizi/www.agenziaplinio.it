@@ -70,7 +70,6 @@
     "jspdf-autotable": "latest",
     "uuid": "latest",
     "https": "latest",
-    "@vercel/postgres": "latest",
     "@vercel/analytics": "latest"
   },
   "devDependencies": {

@@ -247,39 +247,43 @@ export default function CafPatronato() {
                 </div>
               </div>
 
-              {/* Gallery */}
-              {/* Loghi dei Partner */}
+              {/* Calendario Fiscale Interattivo */}
               <div className="mt-16">
-                <h3 className="text-2xl font-bold mb-6">I Nostri Partner</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <Image
-                    src="/loghi/caf-patronato/caf.png"
-                    alt="CAF"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
-                  <Image
-                    src="/loghi/caf-patronato/patronato.png"
-                    alt="Patronato"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
-                  <Image
-                    src="/loghi/caf-patronato/inps.png"
-                    alt="INPS"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
-                  <Image
-                    src="/loghi/caf-patronato/agenzia-entrate.png"
-                    alt="Agenzia delle Entrate"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
+                <h3 className="text-2xl font-bold mb-6">Calendario Fiscale</h3>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <p className="text-gray-600 mb-4">Ecco le principali scadenze fiscali da ricordare durante l'anno:</p>
+                  <div className="space-y-4">
+                    <div className="border-l-4 border-primary pl-4 py-2">
+                      <h4 className="font-bold text-primary">Gennaio - Febbraio</h4>
+                      <p className="text-gray-600">Canone RAI, Imposta di bollo e-fatture</p>
+                    </div>
+                    <div className="border-l-4 border-secondary pl-4 py-2">
+                      <h4 className="font-bold text-secondary">Marzo - Aprile</h4>
+                      <p className="text-gray-600">Certificazione Unica (CU), Dichiarazione IVA</p>
+                    </div>
+                    <div className="border-l-4 border-primary pl-4 py-2">
+                      <h4 className="font-bold text-primary">Maggio - Giugno</h4>
+                      <p className="text-gray-600">Modello 730, IMU (acconto)</p>
+                    </div>
+                    <div className="border-l-4 border-secondary pl-4 py-2">
+                      <h4 className="font-bold text-secondary">Luglio - Settembre</h4>
+                      <p className="text-gray-600">Modello Redditi, Dichiarazioni correttive</p>
+                    </div>
+                    <div className="border-l-4 border-primary pl-4 py-2">
+                      <h4 className="font-bold text-primary">Ottobre - Dicembre</h4>
+                      <p className="text-gray-600">IMU (saldo), Acconti IRPEF, IRAP e cedolare secca</p>
+                    </div>
+                  </div>
+                  <div className="mt-6 bg-yellow-50 p-4 rounded-md">
+                    <h4 className="font-bold mb-2 flex items-center">
+                      <HelpCircle size={16} className="mr-2 text-yellow-500" />
+                      Lo sapevi?
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      Presentare la dichiarazione dei redditi in anticipo può accelerare i tempi di rimborso fiscale.
+                      Contattaci per pianificare al meglio le tue scadenze fiscali!
+                    </p>
+                  </div>
                 </div>
               </div>
 

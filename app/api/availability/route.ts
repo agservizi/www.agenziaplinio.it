@@ -5,11 +5,18 @@ import {
   getSimplifiedAvailabilityForDateRange,
   getAvailabilityForCurrentWeek,
 } from "@/lib/availability-service"
-import sql from "@/lib/db"
+import sql, { testConnection } from "@/lib/db"
 
 // Helper function to check if tables exist
 async function checkTablesExist() {
   try {
+    // Prima verifica la connessione al database
+    const isConnected = await testConnection()
+    if (!isConnected) {
+      console.error("Impossibile connettersi al database")
+      return false
+    }
+
     // Check if the blocked_dates table exists
     const result = await sql`
       SELECT EXISTS (
@@ -18,7 +25,7 @@ async function checkTablesExist() {
         AND table_name = 'blocked_dates'
       );
     `
-    return result[0].exists
+    return result[0]?.exists || false
   } catch (error) {
     console.error("Error checking tables:", error)
     return false
@@ -69,16 +76,16 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Check if database connection is available
-    if (!sql) {
-      console.error("Database connection not initialized")
+    // Verifica la connessione al database
+    const isConnected = await testConnection()
+    if (!isConnected) {
       return NextResponse.json(
         {
           error: "Database connection error",
           message: "Unable to connect to the database. Please try again later.",
           timeSlots: [],
         },
-        { status: 500 },
+        { status: 503 },
       )
     }
 

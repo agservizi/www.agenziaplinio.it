@@ -2,19 +2,19 @@ import { type NextRequest, NextResponse } from "next/server"
 import { createBooking, getBookings } from "@/lib/booking-service"
 import { sendAdminNotification } from "@/lib/email-service"
 import { formatDateItalian, formatTimeItalian } from "@/lib/date-utils"
-import { sql } from "@vercel/postgres"
+import { testConnection } from "@/lib/db"
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if database connection is available
-    if (!sql) {
-      console.error("Database connection not initialized")
+    // Verifica la connessione al database
+    const isConnected = await testConnection()
+    if (!isConnected) {
       return NextResponse.json(
         {
           error: "Database connection error",
           message: "Unable to connect to the database. Please try again later.",
         },
-        { status: 500 },
+        { status: 503 },
       )
     }
 
@@ -40,14 +40,19 @@ export async function POST(request: NextRequest) {
     })
 
     // Send admin notification
-    await sendAdminNotification({
-      id: booking.id,
-      customerName: booking.customerName,
-      email: booking.email,
-      bookingDate: formatDateItalian(booking.bookingDate),
-      bookingTime: formatTimeItalian(booking.bookingTime),
-      service: booking.service,
-    })
+    try {
+      await sendAdminNotification({
+        id: booking.id,
+        customerName: booking.customerName,
+        email: booking.email,
+        bookingDate: formatDateItalian(booking.bookingDate),
+        bookingTime: formatTimeItalian(booking.bookingTime),
+        service: booking.service,
+      })
+    } catch (emailError) {
+      console.error("Error sending admin notification:", emailError)
+      // Continue execution even if email fails
+    }
 
     return NextResponse.json(booking, { status: 201 })
   } catch (error) {
@@ -66,6 +71,18 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    // Verifica la connessione al database
+    const isConnected = await testConnection()
+    if (!isConnected) {
+      return NextResponse.json(
+        {
+          error: "Database connection error",
+          message: "Unable to connect to the database. Please try again later.",
+        },
+        { status: 503 },
+      )
+    }
+
     const searchParams = request.nextUrl.searchParams
 
     // Extract filter parameters

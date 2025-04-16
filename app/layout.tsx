@@ -142,7 +142,12 @@ export default function RootLayout({
           `}
         </Script>
         <Header />
-        <main className="pt-24 md:pt-32">{children}</main>
+        <main className="pt-24 md:pt-32">
+          {/* Wrap children in error boundary */}
+          <ErrorBoundary fallback={<p className="p-4 text-center">Si è verificato un errore. Ricarica la pagina.</p>}>
+            {children}
+          </ErrorBoundary>
+        </main>
         <Footer />
         <CustomerServiceChatbot />
         <ScrollToTop />
@@ -154,6 +159,22 @@ export default function RootLayout({
       </body>
     </html>
   )
+}
+
+// Componente ErrorBoundary per gestire gli errori lato client
+function ErrorBoundary({ children, fallback }: { children: React.ReactNode; fallback: React.ReactNode }) {
+  if (typeof window === "undefined") {
+    // Lato server, restituisci direttamente i children
+    return <>{children}</>
+  }
+
+  // Lato client, usa un try-catch per gestire gli errori
+  try {
+    return <>{children}</>
+  } catch (error) {
+    console.error("Errore nel rendering:", error)
+    return <>{fallback}</>
+  }
 }
 
 
