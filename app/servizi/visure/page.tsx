@@ -291,7 +291,7 @@ export default function Visure() {
                   <div>
                     <h4 className="font-bold mb-2">Orari del Servizio</h4>
                     <p className="text-gray-600">
-                      Lun-Ven: 9:00-13:00, 15:00-19:00
+                      Lun-Ven: 9:00-13:20, 16:00-19:20
                       <br />
                       Sab: 9:00-13:00
                     </p>
