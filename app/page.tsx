@@ -4,7 +4,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, CreditCard, Truck, FileText, Shield, Smartphone, Users, ImageIcon } from "lucide-react"
+import { ArrowRight, CreditCard, Truck, FileText, Shield, Smartphone, Users } from "lucide-react"
 import Testimonials from "@/components/testimonials"
 import PromoIliadSection from "@/components/promo-iliad-section"
 import Breadcrumbs from "@/components/breadcrumbs"
@@ -111,7 +111,7 @@ export default function Home() {
       {/* Services Box Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
             <div className="relative group">
               <Link
                 href="/servizi/pagamenti"
@@ -188,22 +188,6 @@ export default function Home() {
               </Link>
               <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
                 <p>Assistenza per dichiarazioni dei redditi, ISEE, pratiche pensionistiche e altri servizi fiscali.</p>
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
-
-            <div className="relative group">
-              <Link
-                href="/servizi/servizio-foto"
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors text-center"
-              >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  <ImageIcon className="text-primary" size={28} />
-                </div>
-                <span className="font-medium">Servizio Foto</span>
-              </Link>
-              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
-                <p>Foto per documenti, passaporti e visti conformi alle normative ufficiali.</p>
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>

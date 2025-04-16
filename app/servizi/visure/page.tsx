@@ -332,12 +332,15 @@ export default function Visure() {
                       Contattaci per maggiori informazioni sui nostri servizi di visure.
                     </p>
                     <div className="space-y-2">
-                      <Link
-                        href="/contatti"
-                        className="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
+                      <a
+                        href="https://wa.me/+390811234567?text=Salve%2C%20vorrei%20informazioni%20sui%20servizi%20di%20visure%20catastali%20e%20camerali.%20Grazie."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#25D366] hover:bg-[#20BA5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full"
                       >
-                        Contattaci
-                      </Link>
+                        <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
+                        Contattaci su WhatsApp
+                      </a>
                       <a
                         href="tel:+390811234567"
                         className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"

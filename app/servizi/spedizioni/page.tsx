@@ -269,14 +269,17 @@ export default function Spedizioni() {
                       Contattaci per maggiori informazioni sui nostri servizi di spedizione.
                     </p>
                     <div className="space-y-2">
-                      <Link
-                        href="/contatti"
-                        className="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
-                      >
-                        Contattaci
-                      </Link>
                       <a
-                        href="tel:+390811234567"
+                        href="https://wa.me/+390811234567?text=Buongiorno%2C%20vorrei%20informazioni%20sui%20servizi%20di%20spedizione."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center flex items-center justify-center"
+                      >
+                        <Image src="/images/whatsapp-logo.png" alt="WhatsApp" width={24} height={24} className="mr-2" />
+                        Contattaci su WhatsApp
+                      </a>
+                      <a
+                        href="tel:+390810584542"
                         className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
                       >
                         Chiamaci

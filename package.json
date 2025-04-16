@@ -64,7 +64,8 @@
     "@neondatabase/serverless": "latest",
     "jspdf-autotable": "latest",
     "uuid": "latest",
-    "https": "latest"
+    "https": "latest",
+    "@vercel/postgres": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",

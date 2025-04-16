@@ -55,6 +55,12 @@ function clearExpiredCache() {
  */
 export async function getAllTimeSlots(): Promise<Record<number, TimeSlot[]>> {
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return {}
+    }
+
     const result = await sql`
       SELECT 
         id, 
@@ -97,6 +103,12 @@ export async function getAllTimeSlots(): Promise<Record<number, TimeSlot[]>> {
  */
 export async function getBlockedDatesInRange(startDate: string, endDate: string): Promise<string[]> {
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return []
+    }
+
     const result = await sql`
       SELECT blocked_date 
       FROM blocked_dates 
@@ -126,6 +138,12 @@ export async function getBookingsInRange(
   endDate: string,
 ): Promise<Record<string, Record<string, number>>> {
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return {}
+    }
+
     const result = await sql`
       SELECT 
         booking_date, 
@@ -175,6 +193,12 @@ export async function isDateBlocked(date: string): Promise<boolean> {
   }
 
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return false
+    }
+
     const result = await sql`
       SELECT * FROM blocked_dates WHERE blocked_date = ${date}
     `
@@ -200,6 +224,12 @@ export async function getTimeSlotsForDay(dayOfWeek: number): Promise<TimeSlot[]>
   }
 
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return []
+    }
+
     const result = await sql`
       SELECT 
         id, 
@@ -236,6 +266,12 @@ export async function countBookings(date: string, time: string): Promise<number>
   }
 
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return 0
+    }
+
     const result = await sql`
       SELECT COUNT(*) 
       FROM bookings 
@@ -320,6 +356,17 @@ export async function getAvailabilityForDate(date: string): Promise<Availability
   }
 
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return {
+        date,
+        available: false,
+        timeSlots: [],
+        error: "Database connection not initialized",
+      }
+    }
+
     // Check if date is blocked
     const blocked = await isDateBlocked(date)
 
@@ -404,6 +451,12 @@ export async function getSimplifiedAvailabilityForDateRange(
   }
 
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return []
+    }
+
     // Get all time slots for all days of the week
     const allTimeSlots = await getAllTimeSlots()
 
@@ -503,6 +556,12 @@ export async function getSimplifiedAvailabilityForDateRange(
  */
 export async function getAvailabilityForDateRange(startDate: string, endDate: string): Promise<AvailabilityResponse[]> {
   try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return []
+    }
+
     const start = new Date(startDate)
     const end = new Date(endDate)
     const result: AvailabilityResponse[] = []
@@ -530,14 +589,25 @@ export async function getAvailabilityForDateRange(startDate: string, endDate: st
  * Get availability for the current week
  */
 export async function getAvailabilityForCurrentWeek(): Promise<SimplifiedAvailability[]> {
-  const today = new Date()
-  const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 }) // Start from Monday
-  const endOfCurrentWeek = endOfWeek(today, { weekStartsOn: 1 })
+  try {
+    // Check if sql is properly initialized
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return []
+    }
 
-  const startDate = format(startOfCurrentWeek, "yyyy-MM-dd")
-  const endDate = format(endOfCurrentWeek, "yyyy-MM-dd")
+    const today = new Date()
+    const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 }) // Start from Monday
+    const endOfCurrentWeek = endOfWeek(today, { weekStartsOn: 1 })
 
-  return getSimplifiedAvailabilityForDateRange(startDate, endDate)
+    const startDate = format(startOfCurrentWeek, "yyyy-MM-dd")
+    const endDate = format(endOfCurrentWeek, "yyyy-MM-dd")
+
+    return getSimplifiedAvailabilityForDateRange(startDate, endDate)
+  } catch (error) {
+    console.error("Error getting availability for current week:", error)
+    return []
+  }
 }
 
 /**

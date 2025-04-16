@@ -2,9 +2,22 @@ import { type NextRequest, NextResponse } from "next/server"
 import { createBooking, getBookings } from "@/lib/booking-service"
 import { sendAdminNotification } from "@/lib/email-service"
 import { formatDateItalian, formatTimeItalian } from "@/lib/date-utils"
+import { sql } from "@vercel/postgres"
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if database connection is available
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return NextResponse.json(
+        {
+          error: "Database connection error",
+          message: "Unable to connect to the database. Please try again later.",
+        },
+        { status: 500 },
+      )
+    }
+
     const body = await request.json()
 
     // Validate required fields

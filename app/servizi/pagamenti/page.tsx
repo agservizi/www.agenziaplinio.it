@@ -12,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import Image from "next/image"
 
 // Sostituisco il componente VerificaDropPoint con una versione che reindirizza al sito ufficiale
 
@@ -427,18 +428,17 @@ export default function Pagamenti() {
                         rel="noopener noreferrer"
                         className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center flex items-center justify-center"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="w-5 h-5 mr-2"
-                        >
-                          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2M12 3.8C16.53 3.8 20.2 7.47 20.2 12C20.2 16.53 16.53 20.2 12 20.2C10.34 20.2 8.77 19.71 7.4 18.82L4.18 19.82L5.2 16.66C4.26 15.26 3.8 13.65 3.8 12C3.8 7.47 7.47 3.8 12 3.8M8.9 7.5C8.73 7.5 8.5 7.5 8.27 7.61C8.04 7.72 7.77 7.95 7.5 8.27C7.23 8.59 7 9.07 7 9.54C7 10.05 7.14 10.53 7.38 10.97C7.87 11.85 8.67 12.8 9.67 13.71C9.96 14 10.22 14.29 10.5 14.57C11.41 15.41 12.45 16.05 13.54 16.5C14.25 16.84 14.79 17 15.22 17C15.5 17 15.75 16.93 15.95 16.86C16.15 16.79 16.32 16.75 16.5 16.61L17.14 16.07C17.35 15.86 17.47 15.61 17.5 15.36C17.5 15.11 17.41 14.86 17.22 14.65L16.18 13.61C15.93 13.36 15.63 13.24 15.34 13.24C15.05 13.24 14.8 13.36 14.64 13.5L14.29 13.89C14.25 13.93 14.11 14 14 14C13.86 14 13.75 13.96 13.61 13.89C13.46 13.82 13.3 13.75 13.14 13.63C12.87 13.43 12.5 13.18 12.09 12.77C11.68 12.36 11.35 11.93 11.11 11.63C10.96 11.44 10.86 11.29 10.8 11.13C10.75 10.97 10.75 10.83 10.82 10.72L11.43 10.11C11.61 9.93 11.69 9.73 11.69 9.5C11.69 9.27 11.61 9.07 11.46 8.89L10.04 7.39C9.92 7.25 9.77 7.14 9.61 7.07C9.5 7 9.18 7 8.93 7H8.9Z" />
-                        </svg>
+                        <Image
+                          src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Whatsapp_icon-icons.com_66931%20%281%29-3ge8nOrwR41gROIM2LrKPJOYueyxzj.png"
+                          alt="WhatsApp"
+                          width={20}
+                          height={20}
+                          className="mr-2"
+                        />
                         Chiedi info su WhatsApp
                       </a>
                       <a
-                        href="tel:+390811234567"
+                        href="tel:+390810584542"
                         className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
                       >
                         Chiamaci

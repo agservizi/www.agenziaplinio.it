@@ -183,11 +183,18 @@ export default function TrustProviderPage() {
                 </div>
               </div>
               <Link
-                href="/contatti"
-                className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors inline-flex items-center"
+                href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sulla%20Firma%20Digitale%20(costi,%20documenti%20necessari,%20tempistiche).%20Grazie."
+                className="group bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-3 px-6 rounded-md transition-colors inline-flex items-center relative overflow-hidden"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Richiedi la Firma Digitale
-                <ArrowRight size={18} className="ml-2" />
+                <span className="absolute inset-0 bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></span>
+                <MessageSquare size={20} className="mr-2 animate-[pulse_1.5s_ease-in-out_infinite] relative" />
+                <span className="relative">Richiedi la Firma Digitale</span>
+                <ArrowRight
+                  size={18}
+                  className="ml-2 group-hover:translate-x-1 transition-transform duration-300 relative"
+                />
               </Link>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">

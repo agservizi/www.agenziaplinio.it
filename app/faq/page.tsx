@@ -143,7 +143,7 @@ export default function FAQ() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href="tel:+390811234567"
+              href="tel:+390810584542"
               className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors inline-flex items-center justify-center"
             >
               <Phone size={18} className="mr-2" />

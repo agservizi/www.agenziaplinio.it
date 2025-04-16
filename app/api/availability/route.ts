@@ -69,6 +69,19 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    // Check if database connection is available
+    if (!sql) {
+      console.error("Database connection not initialized")
+      return NextResponse.json(
+        {
+          error: "Database connection error",
+          message: "Unable to connect to the database. Please try again later.",
+          timeSlots: [],
+        },
+        { status: 500 },
+      )
+    }
+
     const searchParams = request.nextUrl.searchParams
     const date = searchParams.get("date")
     const startDate = searchParams.get("startDate")

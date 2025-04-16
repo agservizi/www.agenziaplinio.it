@@ -123,13 +123,7 @@ export default function Contatti() {
                   <Clock size={24} className="text-primary mr-4 mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Orari di Apertura</h3>
-                    <p className="text-gray-600">
-                      Lun-Ven: 9:00-13:20, 16:00-19:20
-                      <br />
-                      Sab: 9:00-13:00
-                      <br />
-                      Domenica: Chiuso
-                    </p>
+                    <p className="text-gray-600">Lun-Ven: 9:00-13:20, 16:00-19:20 Sab: 9:00-13:00 Domenica: Chiuso</p>
                   </div>
                 </div>
               </div>
@@ -258,10 +252,16 @@ export default function Contatti() {
           <h2 className="text-3xl font-bold mb-8 text-center">Dove Siamo</h2>
 
           <div className="h-96 bg-gray-200 rounded-lg overflow-hidden">
-            {/* Replace with actual Google Maps embed */}
-            <div className="w-full h-full flex items-center justify-center bg-gray-300">
-              <p className="text-gray-600">Mappa Google non disponibile in anteprima</p>
-            </div>
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=14.483392%2C40.698629%2C14.487392%2C40.702629&amp;layer=mapnik&amp;marker=40.700629%2C14.485392"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              title="Mappa AG Servizi Via Plinio il Vecchio 72"
+              className="w-full h-full"
+            ></iframe>
           </div>
 
           <div className="mt-8 text-center">

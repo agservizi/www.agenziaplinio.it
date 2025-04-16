@@ -559,12 +559,16 @@ export default function TelefoniaLuceGas() {
                       Contattaci per maggiori informazioni sui nostri servizi di telefonia, energia elettrica e gas.
                     </p>
                     <div className="space-y-2">
-                      <Link
-                        href="/contatti"
-                        className="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
+                      <a
+                        href="https://wa.me/+393773798570?text=Salve%2C%20vorrei%20informazioni%20sui%20servizi%20di%20telefonia%2C%20luce%20e%20gas.%20Grazie."
+                        className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                        target="_blank"
+                        rel="noreferrer"
                       >
-                        Contattaci
-                      </Link>
+                        <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                        <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
+                        <span>Contattaci su WhatsApp</span>
+                      </a>
                       <a
                         href="tel:+390811234567"
                         className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
