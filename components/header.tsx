@@ -201,7 +201,7 @@ export default function Header() {
                               onClick={closeMegaMenu}
                             >
                               <span className="w-2 h-2 bg-secondary rounded-full mr-2"></span>
-                              Trust Provider
+                              Trust Provider (Spid, Pec, Firma Digitale)
                             </Link>
                           </li>
                           <li>

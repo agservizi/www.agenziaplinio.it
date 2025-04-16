@@ -253,7 +253,7 @@ export function BookingDialog({ open, onOpenChange }: BookingDialogProps) {
                 <option value="Pagamenti">Pagamenti (Bollettini, F24, PagoPA)</option>
                 <option value="Biglietteria">Biglietteria</option>
                 <option value="Spedizioni">Spedizioni</option>
-                <option value="Trust Provider">Trust Provider</option>
+                <option value="Trust Provider">Trust Provider (Spid, Pec, Firma Digitale)</option>
                 <option value="CAF e Patronato">CAF e Patronato</option>
                 <option value="Visure">Visure</option>
                 <option value="Telefonia, Luce e Gas">Telefonia, Luce e Gas</option>
