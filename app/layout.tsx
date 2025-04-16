@@ -10,6 +10,7 @@ import DynamicLinkPrefetcher from "@/components/dynamic-link-prefetcher"
 import CookieBanner from "@/components/cookie-banner"
 import CustomerServiceChatbot from "@/components/customer-service-chatbot"
 import Script from "next/script"
+import ScrollToTop from "@/components/scroll-to-top"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -141,6 +142,7 @@ export default function RootLayout({
         <main className="pt-24 md:pt-32">{children}</main>
         <Footer />
         <CustomerServiceChatbot />
+        <ScrollToTop />
         <CookieBanner />
         <Toaster />
         <ImageOptimizer />
