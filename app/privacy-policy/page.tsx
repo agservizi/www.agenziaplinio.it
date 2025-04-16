@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="pt-24 page-transition">
+    <div className="page-transition">
       {/* Hero Section */}
       <section className="bg-primary text-white py-16">
         <div className="container mx-auto px-4">

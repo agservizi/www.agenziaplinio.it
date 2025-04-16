@@ -4,19 +4,17 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { format, addMonths, startOfMonth, endOfMonth, isSameDay, parseISO } from "date-fns"
+import { format, startOfMonth, endOfMonth, isSameDay, parseISO } from "date-fns"
 import { it } from "date-fns/locale"
 import { CalendarIcon, Clock, AlertTriangle, Loader2 } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { cn } from "@/lib/utils"
 
 // Define the form schema with Zod
 const formSchema = z.object({
@@ -521,114 +519,46 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
               name="bookingDate"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex flex-col space-y-2">
-                    <FormLabel>Data</FormLabel>
-                    <div className="grid gap-2 relative">
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full justify-start text-left font-normal bg-white",
-                          !field.value && "text-muted-foreground",
-                        )}
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          const calendarElement = document.getElementById("booking-calendar")
-                          if (calendarElement) {
-                            calendarElement.style.display = calendarElement.style.display === "none" ? "block" : "none"
-                          }
-                        }}
-                      >
-                        {field.value ? (
-                          format(field.value, "dd/MM/yyyy", { locale: it })
-                        ) : (
-                          <span>Seleziona una data</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-
-                      <div
-                        id="booking-calendar"
-                        className="border rounded-md p-3 bg-white shadow-md absolute top-full left-0 right-0 z-50"
-                        style={{ display: "none" }}
-                      >
-                        {isLoadingCalendar && (
-                          <div className="absolute inset-0 bg-white/80 z-10 flex items-center justify-center">
-                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                          </div>
-                        )}
-                        <div className="p-2 border-b border-gray-200 flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">Seleziona una data</span>
-                          {isLoadingCalendar && (
-                            <span className="text-xs text-gray-500 flex items-center">
-                              <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                              Caricamento...
-                            </span>
-                          )}
+                  <FormLabel>Data</FormLabel>
+                  <Select
+                    onValueChange={(value) => {
+                      const date = new Date(value)
+                      field.onChange(date)
+                      // Reset booking time when date changes
+                      form.setValue("bookingTime", "")
+                    }}
+                    value={field.value ? format(field.value, "yyyy-MM-dd") : undefined}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder="Seleziona una data disponibile" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white max-h-[300px]">
+                      {isLoadingCalendar ? (
+                        <div className="flex items-center justify-center p-4">
+                          <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                          <span>Caricamento date...</span>
                         </div>
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={(date) => {
-                            if (date) {
-                              field.onChange(date)
-                              // Nascondi il calendario dopo la selezione
-                              const calendarElement = document.getElementById("booking-calendar")
-                              if (calendarElement) {
-                                calendarElement.style.display = "none"
-                              }
-                            }
-                          }}
-                          disabled={(date) => {
-                            // Disable dates in the past
-                            const today = new Date()
-                            today.setHours(0, 0, 0, 0)
-
-                            // Check if the date is in unavailableDates
-                            const isUnavailable = unavailableDates.some((d) => isSameDay(d, date))
-
-                            return date < today || isUnavailable
-                          }}
-                          locale={it}
-                          weekStartsOn={1} // Monday
-                          className="w-full"
-                          onMonthChange={handleMonthChange}
-                          modifiers={{
-                            available: availableDates,
-                          }}
-                          modifiersStyles={{
-                            available: {
-                              color: "#fff",
-                              backgroundColor: "#4CAF50",
-                            },
-                          }}
-                          fromMonth={new Date()}
-                          toMonth={addMonths(new Date(), 3)}
-                        />
-                        <div className="p-2 border-t border-gray-200 mt-2">
-                          <div className="flex items-center space-x-2 text-xs">
-                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span>Date disponibili</span>
-                          </div>
-                          <div className="mt-2 flex justify-end">
-                            <Button
-                              size="sm"
-                              onClick={() => {
-                                const calendarElement = document.getElementById("booking-calendar")
-                                if (calendarElement) {
-                                  calendarElement.style.display = "none"
-                                }
-                              }}
-                              className="text-xs"
-                            >
-                              Chiudi
-                            </Button>
-                          </div>
+                      ) : (
+                        availableDates.map((date) => (
+                          <SelectItem
+                            key={format(date, "yyyy-MM-dd")}
+                            value={format(date, "yyyy-MM-dd")}
+                            className="capitalize"
+                          >
+                            {format(date, "EEEE d MMMM yyyy", { locale: it })}
+                          </SelectItem>
+                        ))
+                      )}
+                      {!isLoadingCalendar && availableDates.length === 0 && (
+                        <div className="p-4 text-center text-sm text-gray-500">
+                          Nessuna data disponibile nei prossimi giorni
                         </div>
-                      </div>
-                    </div>
-                    <FormMessage />
-                  </div>
+                      )}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -638,64 +568,61 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
               name="bookingTime"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex flex-col space-y-2">
-                    <FormLabel>Orario</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      disabled={!selectedDate || isCheckingAvailability}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="bg-white">
-                          <SelectValue
-                            placeholder={
-                              isCheckingAvailability
-                                ? "Caricamento orari..."
-                                : selectedDate
-                                  ? "Seleziona un orario"
-                                  : "Seleziona prima una data"
-                            }
-                          />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="bg-white">
-                        {isCheckingAvailability ? (
-                          <div className="flex items-center justify-center py-2">
-                            <Clock className="h-4 w-4 animate-spin mr-2" />
-                            <span>Caricamento orari...</span>
-                          </div>
-                        ) : selectedDate && availableTimes.length > 0 ? (
-                          // Usa un Set per rimuovere i duplicati
-                          [...new Set(availableTimes.filter((slot) => slot.available).map((slot) => slot.time))].map(
-                            (time) => (
-                              <SelectItem key={time} value={time}>
-                                {time}
-                              </SelectItem>
-                            ),
-                          )
-                        ) : selectedDate ? (
-                          <div className="p-2 text-center text-sm text-red-500">
-                            Nessun orario disponibile per questa data
-                          </div>
-                        ) : (
-                          <div className="p-2 text-center text-sm text-gray-500">Seleziona prima una data</div>
-                        )}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                    {!isCheckingAvailability &&
-                      selectedDate &&
-                      availableTimes.length > 0 &&
-                      !availableTimes.some((slot) => slot.available) && (
-                        <Alert variant="destructive" className="mt-2">
-                          <AlertTriangle className="h-4 w-4" />
-                          <AlertTitle>Nessun orario disponibile</AlertTitle>
-                          <AlertDescription>
-                            Non ci sono orari disponibili per la data selezionata. Si prega di scegliere un'altra data.
-                          </AlertDescription>
-                        </Alert>
+                  <FormLabel>Orario</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    disabled={!selectedDate || isCheckingAvailability}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="bg-white">
+                        <SelectValue
+                          placeholder={
+                            isCheckingAvailability
+                              ? "Caricamento orari..."
+                              : selectedDate
+                                ? "Seleziona un orario"
+                                : "Seleziona prima una data"
+                          }
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white">
+                      {isCheckingAvailability ? (
+                        <div className="flex items-center justify-center py-2">
+                          <Clock className="h-4 w-4 animate-spin mr-2" />
+                          <span>Caricamento orari...</span>
+                        </div>
+                      ) : selectedDate && availableTimes.length > 0 ? (
+                        [...new Set(availableTimes.filter((slot) => slot.available).map((slot) => slot.time))].map(
+                          (time) => (
+                            <SelectItem key={time} value={time}>
+                              {time}
+                            </SelectItem>
+                          ),
+                        )
+                      ) : selectedDate ? (
+                        <div className="p-2 text-center text-sm text-red-500">
+                          Nessun orario disponibile per questa data
+                        </div>
+                      ) : (
+                        <div className="p-2 text-center text-sm text-gray-500">Seleziona prima una data</div>
                       )}
-                  </div>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                  {!isCheckingAvailability &&
+                    selectedDate &&
+                    availableTimes.length > 0 &&
+                    !availableTimes.some((slot) => slot.available) && (
+                      <Alert variant="destructive" className="mt-2">
+                        <AlertTriangle className="h-4 w-4" />
+                        <AlertTitle>Nessun orario disponibile</AlertTitle>
+                        <AlertDescription>
+                          Non ci sono orari disponibili per la data selezionata. Si prega di scegliere un'altra data.
+                        </AlertDescription>
+                      </Alert>
+                    )}
                 </FormItem>
               )}
             />
