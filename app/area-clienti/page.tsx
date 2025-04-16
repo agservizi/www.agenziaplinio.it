@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Package, FileText, Calendar, LogOut } from "lucide-react"
@@ -65,11 +65,40 @@ export default function CustomerPortal() {
     email: "",
     password: "",
   })
+  const [userAppointments, setUserAppointments] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  // Funzione per recuperare le prenotazioni dell'utente
+  const fetchUserAppointments = async (email) => {
+    setIsLoading(true)
+    try {
+      const response = await fetch(`/api/bookings?email=${encodeURIComponent(email)}`)
+      if (response.ok) {
+        const data = await response.json()
+        setUserAppointments(data)
+      } else {
+        console.error("Errore nel recupero delle prenotazioni")
+      }
+    } catch (error) {
+      console.error("Errore nella richiesta:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Effetto per caricare le prenotazioni quando l'utente effettua il login
+  useEffect(() => {
+    if (isLoggedIn && userData.email) {
+      fetchUserAppointments(userData.email)
+    }
+  }, [isLoggedIn])
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     // In a real application, this would validate credentials against a database
     setIsLoggedIn(true)
+    // Simuliamo il recupero delle prenotazioni per l'email inserita
+    fetchUserAppointments(loginData.email)
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,28 +169,40 @@ export default function CustomerPortal() {
                       <h3 className="text-lg font-bold flex items-center">
                         <Calendar size={18} className="mr-2 text-primary" />I tuoi appuntamenti
                       </h3>
-                      <Link href="/booking" className="text-primary hover:text-primary/80 text-sm font-medium">
+                      <Link
+                        href="/prenota-appuntamento"
+                        className="text-primary hover:text-primary/80 text-sm font-medium"
+                      >
                         Prenota
                       </Link>
                     </div>
 
-                    {userData.appointments.length > 0 ? (
+                    {isLoading ? (
+                      <div className="text-center py-6">
+                        <p>Caricamento appuntamenti...</p>
+                      </div>
+                    ) : userAppointments.length > 0 ? (
                       <div className="space-y-4">
-                        {userData.appointments.map((appointment) => (
+                        {userAppointments.map((appointment) => (
                           <div key={appointment.id} className="border-b pb-4 last:border-0 last:pb-0">
-                            <div className="font-medium">{appointment.service}</div>
+                            <div className="font-medium">{appointment.service || "Appuntamento generico"}</div>
                             <div className="text-sm text-gray-600">
-                              {new Date(appointment.date).toLocaleDateString("it-IT", {
+                              {new Date(appointment.bookingDate).toLocaleDateString("it-IT", {
                                 day: "numeric",
                                 month: "long",
                                 year: "numeric",
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })}
+                              })}{" "}
+                              - {appointment.bookingTime}
                             </div>
                             <div className="mt-1">
-                              <span className="inline-block px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                                {appointment.status}
+                              <span
+                                className={`inline-block px-2 py-1 text-xs rounded-full ${
+                                  appointment.status === "cancelled"
+                                    ? "bg-red-100 text-red-800"
+                                    : "bg-green-100 text-green-800"
+                                }`}
+                              >
+                                {appointment.status === "cancelled" ? "cancellato" : "confermato"}
                               </span>
                             </div>
                           </div>
@@ -171,7 +212,7 @@ export default function CustomerPortal() {
                       <div className="text-center py-6 text-gray-500">
                         <p>Non hai appuntamenti programmati</p>
                         <Link
-                          href="/booking"
+                          href="/prenota-appuntamento"
                           className="mt-2 inline-block text-primary hover:text-primary/80 font-medium"
                         >
                           Prenota un appuntamento
