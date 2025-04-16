@@ -70,12 +70,18 @@ export default function CookieBanner() {
     localStorage.setItem("cookie-preferences", JSON.stringify(allAccepted))
     setCookiePreferences(allAccepted)
     setIsVisible(false)
+
+    // Ricarica la pagina per applicare le impostazioni di analytics
+    window.location.reload()
   }
 
   const saveCustomPreferences = () => {
     localStorage.setItem("cookie-consent", "custom")
     localStorage.setItem("cookie-preferences", JSON.stringify(cookiePreferences))
     setIsVisible(false)
+
+    // Ricarica la pagina per applicare le impostazioni di analytics
+    window.location.reload()
   }
 
   const handleToggleChange = (categoryId: string, value: boolean) => {

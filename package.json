@@ -59,13 +59,19 @@
     "vaul": "^0.9.6",
     "zod": "latest",
     "jspdf": "latest",
+    "@remix-run/react": "latest",
+    "@sveltejs/kit": "latest",
+    "svelte": "latest",
+    "vue": "latest",
+    "vue-router": "latest",
     "resend": "latest",
     "crypto": "latest",
     "@neondatabase/serverless": "latest",
     "jspdf-autotable": "latest",
     "uuid": "latest",
     "https": "latest",
-    "@vercel/postgres": "latest"
+    "@vercel/postgres": "latest",
+    "@vercel/analytics": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",

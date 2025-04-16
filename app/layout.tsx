@@ -11,6 +11,9 @@ import CookieBanner from "@/components/cookie-banner"
 import CustomerServiceChatbot from "@/components/customer-service-chatbot"
 import Script from "next/script"
 import ScrollToTop from "@/components/scroll-to-top"
+import { Analytics } from "@vercel/analytics/react"
+// Remove SpeedInsights for now as it might be causing the issue
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -147,6 +150,7 @@ export default function RootLayout({
         <Toaster />
         <ImageOptimizer />
         <DynamicLinkPrefetcher />
+        <Analytics />
       </body>
     </html>
   )
