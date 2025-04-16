@@ -5,8 +5,7 @@ import Link from "next/link"
 import { Menu, X, ChevronDown, Phone, Mail, Clock, MapPin } from "lucide-react"
 import Image from "next/image"
 import ServiceSearch from "@/components/service-search"
-import BookingForm from "@/components/booking-form"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { BookingDialog } from "@/components/booking-dialog"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -426,16 +425,7 @@ export default function Header() {
         </div>
       </div>
       {/* Booking Modal */}
-      <Dialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen}>
-        <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-center">Prenota un Appuntamento</DialogTitle>
-          </DialogHeader>
-          <div className="mt-4">
-            <BookingForm onSuccess={() => setIsBookingModalOpen(false)} />
-          </div>
-        </DialogContent>
-      </Dialog>
+      <BookingDialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen} />
     </header>
   )
 }

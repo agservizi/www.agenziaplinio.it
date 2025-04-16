@@ -3,6 +3,8 @@ import { checkAvailability } from "@/lib/availability-service"
 import { sendConfirmationEmail } from "@/lib/email-service"
 import { formatDateItalian, formatTimeItalian, formatDateWithDayItalian } from "@/lib/date-utils"
 import { generateCancellationToken } from "@/lib/token-service"
+// Importa il servizio WhatsApp aggiornato
+import { sendWhatsAppMessage, scheduleReminderMessage } from "@/lib/whatsapp-callmebot-service"
 
 export interface BookingData {
   customerName: string
@@ -93,6 +95,32 @@ export async function createBooking(data: BookingData): Promise<Booking> {
     service: result.service,
     cancellationToken,
   })
+
+  // Invia messaggio WhatsApp all'agenzia (sempre, indipendentemente dal numero del cliente)
+  try {
+    await sendWhatsAppMessage({
+      phoneNumber: "393773798570", // Numero dell'agenzia
+      bookingCode: result.id.toString(),
+      customerName: result.customerName,
+      bookingDate: formattedDate,
+      bookingTime: formattedTime,
+      service: result.service,
+    })
+    console.log(`Messaggio WhatsApp inviato con successo per la prenotazione ${result.id}`)
+
+    // Pianifica il promemoria 1 ora prima dell'appuntamento
+    await scheduleReminderMessage(
+      result.id,
+      result.bookingDate,
+      result.bookingTime,
+      result.customerName,
+      result.service,
+    )
+    console.log(`Promemoria pianificato per la prenotazione ${result.id}`)
+  } catch (error) {
+    // Log dell'errore ma continua con la prenotazione
+    console.error(`Errore nell'invio del messaggio WhatsApp per la prenotazione ${result.id}:`, error)
+  }
 
   return result
 }
