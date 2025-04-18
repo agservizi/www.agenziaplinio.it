@@ -14,6 +14,8 @@ import ScrollToTop from "@/components/scroll-to-top"
 import { Analytics } from "@vercel/analytics/react"
 // Remove SpeedInsights for now as it might be causing the issue
 // import { SpeedInsights } from "@vercel/speed-insights/next"
+// Import Suspense
+import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -141,7 +143,13 @@ export default function RootLayout({
             }
           `}
         </Script>
-        <Header />
+        <Suspense
+          fallback={
+            <div className="h-24 md:h-32 bg-white shadow-sm fixed top-0 left-0 right-0 z-50">Loading header...</div>
+          }
+        >
+          <Header />
+        </Suspense>
         <main className="pt-24 md:pt-32">
           {/* Wrap children in error boundary */}
           <ErrorBoundary fallback={<p className="p-4 text-center">Si è verificato un errore. Ricarica la pagina.</p>}>
@@ -149,9 +157,13 @@ export default function RootLayout({
           </ErrorBoundary>
         </main>
         <Footer />
-        <CustomerServiceChatbot />
+        <Suspense fallback={<div className="hidden">Loading chat...</div>}>
+          <CustomerServiceChatbot />
+        </Suspense>
         <ScrollToTop />
-        <CookieBanner />
+        <Suspense fallback={<div className="hidden">Loading cookie banner...</div>}>
+          <CookieBanner />
+        </Suspense>
         <Toaster />
         <ImageOptimizer />
         <DynamicLinkPrefetcher />
@@ -176,6 +188,3 @@ function ErrorBoundary({ children, fallback }: { children: React.ReactNode; fall
     return <>{fallback}</>
   }
 }
-
-
-import './globals.css'
