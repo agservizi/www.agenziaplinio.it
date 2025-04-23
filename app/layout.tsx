@@ -14,10 +14,14 @@ import ScrollToTop from "@/components/scroll-to-top"
 import { Analytics } from "@vercel/analytics/react"
 // Remove SpeedInsights for now as it might be causing the issue
 // import { SpeedInsights } from "@vercel/speed-insights/next"
-// Import Suspense
 import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
+
+const title = "AG SERVIZI - Agenzia Multiservizi a Castellammare di Stabia"
+const description =
+  "AG Servizi è un'agenzia multiservizi a Castellammare di Stabia. Offriamo servizi di pagamento bollettini, spedizioni, visure, attivazioni digitali e molto altro."
+const url = "https://www.agservizi.it"
 
 export const metadata: Metadata = {
   title: "AG Servizi Via Plinio 72 - Agenzia Multiservizi a Castellammare di Stabia",
@@ -143,11 +147,7 @@ export default function RootLayout({
             }
           `}
         </Script>
-        <Suspense
-          fallback={
-            <div className="h-24 md:h-32 bg-white shadow-sm fixed top-0 left-0 right-0 z-50">Loading header...</div>
-          }
-        >
+        <Suspense fallback={<div className="h-16 bg-white shadow-sm"></div>}>
           <Header />
         </Suspense>
         <main className="pt-24 md:pt-32">
@@ -156,12 +156,14 @@ export default function RootLayout({
             {children}
           </ErrorBoundary>
         </main>
-        <Footer />
-        <Suspense fallback={<div className="hidden">Loading chat...</div>}>
+        <Suspense fallback={<div className="h-64 bg-gray-100"></div>}>
+          <Footer />
+        </Suspense>
+        <Suspense fallback={null}>
           <CustomerServiceChatbot />
         </Suspense>
         <ScrollToTop />
-        <Suspense fallback={<div className="hidden">Loading cookie banner...</div>}>
+        <Suspense fallback={null}>
           <CookieBanner />
         </Suspense>
         <Toaster />
