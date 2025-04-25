@@ -228,47 +228,66 @@ const PromoIliadSection = () => {
       doc.text("Data di emissione: " + currentDate, 74, 80, { align: "center" })
       doc.text("Valido fino al: 31 maggio 2025, ore 19:00", 74, 85, { align: "center" })
 
-      // Linea divisoria
-      doc.setDrawColor(220, 220, 220)
-      doc.line(24, 90, 124, 90)
+      // Aggiungi nota specifica per TOP 250 PLUS e TOP 300
+      if (plan.name === "TOP 250 PLUS" || plan.name === "TOP 300") {
+        // Aggiungi un rettangolo di sfondo giallo chiaro
+        doc.setFillColor(255, 250, 230)
+        doc.roundedRect(24, 90, 100, 10, 2, 2, "F")
+
+        doc.setTextColor(100, 100, 100)
+        doc.setFontSize(8)
+        doc.setFont("helvetica", "bold")
+        doc.text("Nota: Questa offerta termina il 6 maggio ore 15:00 salvo proroga.", 74, 96, { align: "center" })
+
+        // Sposta la linea divisoria più in basso
+        doc.setDrawColor(220, 220, 220)
+        doc.line(24, 105, 124, 105)
+      } else {
+        // Linea divisoria nella posizione originale
+        doc.setDrawColor(220, 220, 220)
+        doc.line(24, 90, 124, 90)
+      }
+
+      // Calcola l'offset per gli elementi successivi
+      const yOffset = plan.name === "TOP 250 PLUS" || plan.name === "TOP 300" ? 15 : 0
 
       // Dettagli dell'offerta
       doc.setFontSize(11)
       doc.setFont("helvetica", "bold")
-      doc.text("Dettagli dell'offerta:", 24, 100)
+      doc.text("Dettagli dell'offerta:", 24, 100 + yOffset)
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
-      doc.text(`• ${plan.data}`, 24, 110)
+      doc.text(`• ${plan.data}`, 24, 110 + yOffset)
 
       // Aggiungi le features specifiche del piano
       plan.features.forEach((feature, index) => {
-        doc.text(`• ${feature}`, 24, 115 + index * 5)
+        doc.text(`• ${feature}`, 24, 115 + yOffset + index * 5)
       })
 
       // Prezzo
       doc.setFontSize(11)
       doc.setFont("helvetica", "bold")
-      doc.text("Prezzo mensile:", 24, 135)
+      doc.text("Prezzo mensile:", 24, 135 + yOffset)
       doc.setTextColor(255, 0, 50) // Iliad red in RGB
-      doc.text(`€${plan.price}/mese per sempre`, 80, 135)
+      doc.text(`€${plan.price}/mese per sempre`, 80, 135 + yOffset)
 
       // Costo di attivazione
       doc.setTextColor(0, 0, 0)
-      doc.text("Costo di attivazione:", 24, 145)
+      doc.text("Costo di attivazione:", 24, 145 + yOffset)
       doc.setTextColor(255, 0, 50) // Iliad red in RGB
-      doc.text(`€${plan.discountedActivationPrice}`, 80, 145)
+      doc.text(`€${plan.discountedActivationPrice}`, 80, 145 + yOffset)
       doc.setTextColor(150, 150, 150)
       doc.setFont("helvetica", "normal")
-      doc.text(`(invece di €${plan.activationPrice})`, 95, 145)
+      doc.text(`(invece di €${plan.activationPrice})`, 95, 145 + yOffset)
 
       // Istruzioni
       doc.setTextColor(0, 0, 0)
       doc.setFontSize(10)
       doc.setFont("helvetica", "bold")
-      doc.text("Presentare questo voucher presso:", 74, 160, { align: "center" })
+      doc.text("Presentare questo voucher presso:", 74, 160 + yOffset, { align: "center" })
       doc.setFontSize(12)
-      doc.text("AG SERVIZI VIA PLINIO 72", 74, 167, { align: "center" })
+      doc.text("AG SERVIZI VIA PLINIO 72", 74, 167 + yOffset, { align: "center" })
 
       // Footer con termini e condizioni
       doc.setFillColor(245, 245, 247) // Iliad gray in RGB
