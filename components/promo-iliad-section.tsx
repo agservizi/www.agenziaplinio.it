@@ -387,7 +387,14 @@ const PromoIliadSection = () => {
 
             {/* Colonna destra con dettagli offerta */}
             <div className="md:w-2/3 p-6 md:p-8">
-              <h2 className="text-3xl font-bold text-[#ff0032] mb-4">Offerta Iliad {iliadPlans[currentSlide].name}</h2>
+              <h2 className="text-3xl font-bold text-[#ff0032] mb-2">Offerta Iliad {iliadPlans[currentSlide].name}</h2>
+
+              {(iliadPlans[currentSlide].name === "TOP 250 PLUS" || iliadPlans[currentSlide].name === "TOP 300") && (
+                <p className="text-sm text-gray-600 italic mb-4 bg-yellow-50 p-2 rounded-md border border-yellow-200">
+                  <span className="font-semibold">Nota:</span> Questa offerta termina il 6 maggio ore 15:00 salvo
+                  proroga.
+                </p>
+              )}
 
               <div className="mb-6">
                 {iliadPlans[currentSlide].data.includes("5G") ? (
