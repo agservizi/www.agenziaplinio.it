@@ -9,7 +9,6 @@ import {
   MessageSquare,
   ArrowRight,
   Lightbulb,
-  BarChart3,
   PiggyBank,
 } from "lucide-react"
 import FAQSection from "@/components/faq-section"
@@ -265,38 +264,36 @@ export default function TelefoniaLuceGas() {
                         </div>
 
                         {/* Offerta combinata Casa + Mobile */}
-                        <div className="mt-4 relative group overflow-hidden rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#FDC400] bg-gradient-to-r from-yellow-50 to-transparent">
+                        <div className="mt-4 relative group overflow-hidden rounded-lg border border-[#FDC400]/20 bg-white transition-all duration-300 hover:shadow-lg hover:scale-[1.01] hover:border-[#FDC400]">
                           <div className="absolute top-0 right-0 bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
-                            RISPARMIO
+                            FASTWEB
                           </div>
                           <div className="p-4">
                             <h5 className="font-bold text-lg mb-2 flex items-center">
                               <div className="w-8 h-8 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-2">
                                 <PiggyBank className="text-[#FDC400] h-4 w-4" />
                               </div>
-                              Casa + Mobile: Offerta combinata
+                              Fastweb Casa + Mobile
                             </h5>
-                            <p className="text-gray-600 mb-3">
-                              Attiva entrambi i servizi e risparmia sul canone mensile!
-                            </p>
+                            <p className="text-gray-600 mb-3">Fibra ultraveloce e mobile 5G con minuti illimitati</p>
 
-                            <div className="flex flex-col md:flex-row md:items-center md:justify-between bg-white p-3 rounded-lg mb-3 shadow-sm">
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between bg-yellow-50 p-3 rounded-lg mb-3 shadow-sm">
                               <div className="flex items-center mb-2 md:mb-0">
                                 <div className="w-10 h-10 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-3">
                                   <Zap className="text-[#FDC400] h-5 w-5" />
                                 </div>
                                 <div>
-                                  <h6 className="font-bold">Casa + Mobile</h6>
-                                  <p className="text-sm text-gray-500">Internet illimitato + 150GB in 5G</p>
+                                  <h6 className="font-bold">Fastweb Casa + Mobile</h6>
+                                  <p className="text-sm text-gray-500">FastwebUP Plus, WOW Space incluso</p>
                                 </div>
                               </div>
                               <div className="flex items-center">
                                 <div className="text-right mr-4">
-                                  <p className="text-sm text-gray-500 line-through">37,90€/mese</p>
-                                  <p className="font-bold text-lg text-[#ff6b00]">32,90€/mese</p>
+                                  <p className="text-sm text-gray-500 line-through">55,85€/mese</p>
+                                  <p className="font-bold text-lg text-[#ff6b00]">34,95€/mese</p>
                                 </div>
-                                <div className="bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded">
-                                  -5€/mese
+                                <div className="bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded animate-pulse">
+                                  -20€/mese
                                 </div>
                               </div>
                             </div>
@@ -531,34 +528,193 @@ export default function TelefoniaLuceGas() {
                       </div>
 
                       {/* Vantaggi dell'efficienza energetica */}
-                      <div className="bg-green-50 p-5 rounded-lg mb-6">
-                        <h4 className="font-bold text-lg mb-3">Vantaggi dell'Efficienza Energetica</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="flex flex-col items-center text-center p-3">
-                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                              <PiggyBank className="text-green-600" size={24} />
+                      {/* Promozioni Fastweb e A2A Energia */}
+                      <div className="bg-gradient-to-r from-blue-50 to-green-50 p-5 rounded-lg mb-6 border border-blue-100">
+                        <h4 className="font-bold text-lg mb-3 text-blue-700">Offerte Energia e Gas in Evidenza</h4>
+
+                        {/* Slider di offerte */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {/* Offerta Fastweb Energia */}
+                          <div className="relative group overflow-hidden rounded-lg border border-[#FDC400]/20 bg-white transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#FDC400]">
+                            <div className="absolute top-0 right-0 bg-[#FDC400] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
+                              NOVITÀ
                             </div>
-                            <h5 className="font-bold mb-1">Risparmio Economico</h5>
-                            <p className="text-gray-600 text-sm">
-                              Riduci fino al 30% i costi delle bollette energetiche
-                            </p>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#FDC400]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="p-4">
+                              <div className="flex items-center mb-3">
+                                <Image
+                                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Logo_Fastweb_2020.svg-7FVD78wUiYxgDCEqdxnIzUhEOtIl8w.png"
+                                  alt="Fastweb"
+                                  width={100}
+                                  height={20}
+                                  className="mr-2"
+                                />
+                              </div>
+                              <h5 className="font-bold text-lg mb-2 flex items-center">
+                                <div className="w-8 h-8 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-2">
+                                  <Zap className="text-[#FDC400] h-4 w-4" />
+                                </div>
+                                Fastweb Energia Flex
+                              </h5>
+                              <div className="flex items-baseline mb-3">
+                                <span className="text-3xl font-bold text-gray-800">0,158€</span>
+                                <span className="text-sm text-gray-500 ml-1">/kWh</span>
+                              </div>
+                              <ul className="space-y-2 mb-4">
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Prezzo indicizzato al PUN con sconto</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Energia 100% verde certificata</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Zero costi di attivazione</span>
+                                </li>
+                              </ul>
+                              <div className="relative overflow-hidden">
+                                <a
+                                  href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sull'offerta%20Fastweb%20Energia%20Flex.%20Grazie."
+                                  className="bg-[#FDC400] hover:bg-[#e5b100] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                                  <MessageSquare className="mr-2 h-4 w-4" />
+                                  <span>Richiedi info</span>
+                                </a>
+                              </div>
+                            </div>
                           </div>
 
-                          <div className="flex flex-col items-center text-center p-3">
-                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                              <BarChart3 className="text-green-600" size={24} />
+                          {/* Offerta A2A Energia */}
+                          <div className="relative group overflow-hidden rounded-lg border border-[#009FE3]/20 bg-white transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#009FE3]">
+                            <div className="absolute top-0 right-0 bg-[#009FE3] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
+                              A2A
                             </div>
-                            <h5 className="font-bold mb-1">Monitoraggio</h5>
-                            <p className="text-gray-600 text-sm">Controlla e ottimizza i tuoi consumi in tempo reale</p>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#009FE3]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="p-4">
+                              <div className="flex items-center mb-3">
+                                <Image
+                                  src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/a2alogo-wHvgkm0ecSPUXdG4CCsFg9FrzqSLkl.png"
+                                  alt="A2A Energia"
+                                  width={100}
+                                  height={40}
+                                  className="object-contain"
+                                />
+                              </div>
+                              <h5 className="font-bold text-lg mb-2 flex items-center">
+                                <div className="w-8 h-8 bg-[#009FE3]/10 rounded-full flex items-center justify-center mr-2">
+                                  <Flame className="text-[#009FE3] h-4 w-4" />
+                                </div>
+                                A2A Full Luce e Gas
+                              </h5>
+                              <div className="flex items-baseline mb-3">
+                                <span className="text-3xl font-bold text-gray-800">0,14900€</span>
+                                <span className="text-sm text-gray-500 ml-1">/kWh</span>
+                                <span className="text-3xl font-bold text-gray-800 ml-2">0,5600€</span>
+                                <span className="text-sm text-gray-500 ml-1">/Smc</span>
+                              </div>
+                              <ul className="space-y-2 mb-4">
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#009FE3]/10 rounded-full flex items-center justify-center text-[#009FE3] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Prezzo fisso bloccato 24 mesi</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#009FE3]/10 rounded-full flex items-center justify-center text-[#009FE3] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Energia 100% verde certificata</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#009FE3]/10 rounded-full flex items-center justify-center text-[#009FE3] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Sconto 5% per domiciliazione</span>
+                                </li>
+                              </ul>
+                              <div className="relative overflow-hidden">
+                                <a
+                                  href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sull'offerta%20A2A%20Full.%20Grazie."
+                                  className="bg-[#009FE3] hover:bg-[#0084bd] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                                  <MessageSquare className="mr-2 h-4 w-4" />
+                                  <span>Richiedi info</span>
+                                </a>
+                              </div>
+                            </div>
                           </div>
+                        </div>
 
-                          <div className="flex flex-col items-center text-center p-3">
-                            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                              <Lightbulb className="text-green-600" size={24} />
-                            </div>
-                            <h5 className="font-bold mb-1">Sostenibilità</h5>
-                            <p className="text-gray-600 text-sm">Riduci l'impatto ambientale e le emissioni di CO2</p>
+                        {/* Offerta combinata */}
+                        <div className="mt-4 relative group overflow-hidden rounded-lg border border-[#FDC400]/20 bg-white transition-all duration-300 hover:shadow-lg hover:scale-[1.01] hover:border-[#FDC400]">
+                          <div className="absolute top-0 right-0 bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
+                            FASTWEB
                           </div>
+                          <div className="p-4">
+                            <h5 className="font-bold text-lg mb-2 flex items-center">
+                              <div className="w-8 h-8 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-2">
+                                <PiggyBank className="text-[#FDC400] h-4 w-4" />
+                              </div>
+                              Fastweb Casa + Mobile
+                            </h5>
+                            <p className="text-gray-600 mb-3">Fibra ultraveloce e mobile 5G con minuti illimitati</p>
+
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between bg-yellow-50 p-3 rounded-lg mb-3 shadow-sm">
+                              <div className="flex items-center mb-2 md:mb-0">
+                                <div className="w-10 h-10 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-3">
+                                  <Zap className="text-[#FDC400] h-5 w-5" />
+                                </div>
+                                <div>
+                                  <h6 className="font-bold">Fastweb Casa + Mobile</h6>
+                                  <p className="text-sm text-gray-500">FastwebUP Plus, WOW Space incluso</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center">
+                                <div className="text-right mr-4">
+                                  <p className="text-sm text-gray-500 line-through">55,85€/mese</p>
+                                  <p className="font-bold text-lg text-[#ff6b00]">34,95€/mese</p>
+                                </div>
+                                <div className="bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded animate-pulse">
+                                  -20€/mese
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="relative overflow-hidden">
+                              <a
+                                href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sull'offerta%20combinata%20Fastweb%20Casa%20+%20Mobile.%20Grazie."
+                                className="bg-gradient-to-r from-[#FDC400] to-[#ff6b00] hover:from-[#e5b100] hover:to-[#e56100] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                                <MessageSquare className="mr-2 h-4 w-4" />
+                                <span>Scopri l'offerta combinata</span>
+                                <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-4 text-center">
+                          <p className="text-sm text-gray-500">
+                            Prezzi indicativi IVA inclusa. Verifica copertura e dettagli completi delle offerte in
+                            agenzia.
+                          </p>
                         </div>
                       </div>
 
