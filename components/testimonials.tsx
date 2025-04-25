@@ -37,7 +37,7 @@ const staticTestimonials = [
     name: "Assunta D'Auria",
     image: "/placeholder.svg?height=100&width=100",
     rating: 5,
-    text: "Grazie al team di AG SERVIZI ho potuto completare tutte le pratiche per il CAF senza stress. Professionali e disponibili.",
+    text: "Grazie al team di AG SERVIZI ho attivato un contratto Fastweb in modo semplice e veloce. Professionali e disponibili.",
     date: "03/06/2023",
   },
   {
@@ -69,7 +69,7 @@ const staticTestimonials = [
     name: "Nunzia Staiano",
     image: "/placeholder.svg?height=100&width=100",
     rating: 5,
-    text: "Ho acquistato i biglietti per il concerto direttamente in agenzia, evitando code e sovraprezzi online. Servizio impeccabile!",
+    text: "Ho acquistato i biglietti del treno Italo direttamente in agenzia, evitando code e sovraprezzi online. Servizio impeccabile!",
     date: "05/10/2023",
   },
 ]

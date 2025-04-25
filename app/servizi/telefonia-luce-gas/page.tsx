@@ -145,48 +145,182 @@ export default function TelefoniaLuceGas() {
                         </div>
                       </div>
 
-                      {/* Nuova sezione: Promozioni speciali */}
-                      <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-5 rounded-lg mb-6">
-                        <h4 className="font-bold text-lg mb-3">Promozioni Speciali</h4>
-                        <div className="space-y-3">
-                          <div className="flex items-start">
-                            <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-white text-xs mr-2 mt-0.5">
-                              1
-                            </span>
-                            <div>
-                              <h5 className="font-bold">Pacchetto Famiglia</h5>
-                              <p className="text-gray-600 text-sm">
-                                Attiva internet a casa + 2 SIM mobili con uno sconto speciale sul canone mensile e
-                                installazione gratuita.
-                              </p>
+                      {/* Nuova sezione: Promozioni Fastweb */}
+                      <div className="bg-white p-5 rounded-lg mb-6 shadow-md border border-yellow-100 overflow-hidden">
+                        <h4 className="font-bold text-lg mb-3 text-[#FDC400] flex items-center">
+                          <Image
+                            src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Logo_Fastweb_2020.svg-7FVD78wUiYxgDCEqdxnIzUhEOtIl8w.png"
+                            alt="Fastweb"
+                            width={120}
+                            height={24}
+                            className="mr-2"
+                          />
+                          Promozioni Fastweb
+                        </h4>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {/* Offerta Fastweb Casa */}
+                          <div className="relative group overflow-hidden rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#FDC400]">
+                            <div className="absolute top-0 right-0 bg-[#FDC400] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
+                              ESCLUSIVA
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#FDC400]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="p-4">
+                              <h5 className="font-bold text-lg mb-2 flex items-center">
+                                <div className="w-8 h-8 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-2">
+                                  <Lightbulb className="text-[#FDC400] h-4 w-4" />
+                                </div>
+                                Fastweb Casa Light
+                              </h5>
+                              <div className="flex items-baseline mb-3">
+                                <span className="text-3xl font-bold text-gray-800">27,95€</span>
+                                <span className="text-sm text-gray-500 ml-1">/mese</span>
+                              </div>
+                              <ul className="space-y-2 mb-4">
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Internet illimitato fino a 2.5 Gbps</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Attivazione inclusa</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Internet Box NeXXt con Wi-Fi 6</span>
+                                </li>
+                              </ul>
+                              <div className="relative overflow-hidden">
+                                <a
+                                  href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sull'offerta%20Fastweb%20Casa%20Light.%20Grazie."
+                                  className="bg-[#FDC400] hover:bg-[#e5b100] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                                  <MessageSquare className="mr-2 h-4 w-4" />
+                                  <span>Richiedi info</span>
+                                </a>
+                              </div>
                             </div>
                           </div>
 
-                          <div className="flex items-start">
-                            <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-white text-xs mr-2 mt-0.5">
-                              2
-                            </span>
-                            <div>
-                              <h5 className="font-bold">Offerta Smart Home</h5>
-                              <p className="text-gray-600 text-sm">
-                                Con l'attivazione di una nuova linea fissa, ricevi un dispositivo smart home (Google
-                                Nest o Amazon Echo) in omaggio.
-                              </p>
+                          {/* Offerta Fastweb Mobile */}
+                          <div className="relative group overflow-hidden rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#FDC400]">
+                            <div className="absolute top-0 right-0 bg-[#FDC400] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
+                              BEST SELLER
+                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#FDC400]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="p-4">
+                              <h5 className="font-bold text-lg mb-2 flex items-center">
+                                <div className="w-8 h-8 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-2">
+                                  <Smartphone className="text-[#FDC400] h-4 w-4" />
+                                </div>
+                                Fastweb Mobile
+                              </h5>
+                              <div className="flex items-baseline mb-3">
+                                <span className="text-3xl font-bold text-gray-800">8,95€</span>
+                                <span className="text-sm text-gray-500 ml-1">/mese</span>
+                              </div>
+                              <ul className="space-y-2 mb-4">
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">150 GB in 5G</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">Minuti illimitati</span>
+                                </li>
+                                <li className="flex items-start">
+                                  <span className="w-5 h-5 bg-[#FDC400]/10 rounded-full flex items-center justify-center text-[#FDC400] mr-2 mt-0.5">
+                                    ✓
+                                  </span>
+                                  <span className="text-gray-600 text-sm">100 SMS inclusi</span>
+                                </li>
+                              </ul>
+                              <div className="relative overflow-hidden">
+                                <a
+                                  href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sull'offerta%20Fastweb%20Mobile.%20Grazie."
+                                  className="bg-[#FDC400] hover:bg-[#e5b100] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                                  <MessageSquare className="mr-2 h-4 w-4" />
+                                  <span>Richiedi info</span>
+                                </a>
+                              </div>
                             </div>
                           </div>
+                        </div>
 
-                          <div className="flex items-start">
-                            <span className="w-5 h-5 bg-secondary rounded-full flex items-center justify-center text-white text-xs mr-2 mt-0.5">
-                              3
-                            </span>
-                            <div>
-                              <h5 className="font-bold">Porta un Amico</h5>
-                              <p className="text-gray-600 text-sm">
-                                Ricevi uno sconto sulla tua bolletta per ogni amico che attiva un nuovo contratto
-                                tramite la nostra agenzia.
-                              </p>
+                        {/* Offerta combinata Casa + Mobile */}
+                        <div className="mt-4 relative group overflow-hidden rounded-lg border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-[#FDC400] bg-gradient-to-r from-yellow-50 to-transparent">
+                          <div className="absolute top-0 right-0 bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded-bl-lg z-10">
+                            RISPARMIO
+                          </div>
+                          <div className="p-4">
+                            <h5 className="font-bold text-lg mb-2 flex items-center">
+                              <div className="w-8 h-8 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-2">
+                                <PiggyBank className="text-[#FDC400] h-4 w-4" />
+                              </div>
+                              Casa + Mobile: Offerta combinata
+                            </h5>
+                            <p className="text-gray-600 mb-3">
+                              Attiva entrambi i servizi e risparmia sul canone mensile!
+                            </p>
+
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between bg-white p-3 rounded-lg mb-3 shadow-sm">
+                              <div className="flex items-center mb-2 md:mb-0">
+                                <div className="w-10 h-10 bg-[#FDC400]/10 rounded-full flex items-center justify-center mr-3">
+                                  <Zap className="text-[#FDC400] h-5 w-5" />
+                                </div>
+                                <div>
+                                  <h6 className="font-bold">Casa + Mobile</h6>
+                                  <p className="text-sm text-gray-500">Internet illimitato + 150GB in 5G</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center">
+                                <div className="text-right mr-4">
+                                  <p className="text-sm text-gray-500 line-through">37,90€/mese</p>
+                                  <p className="font-bold text-lg text-[#ff6b00]">32,90€/mese</p>
+                                </div>
+                                <div className="bg-[#ff6b00] text-white text-xs font-bold py-1 px-2 rounded">
+                                  -5€/mese
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="relative overflow-hidden">
+                              <a
+                                href="https://wa.me/+393773798570?text=Salve,%20vorrei%20informazioni%20sull'offerta%20combinata%20Fastweb%20Casa%20+%20Mobile.%20Grazie."
+                                className="bg-gradient-to-r from-[#FDC400] to-[#ff6b00] hover:from-[#e5b100] hover:to-[#e56100] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
+                                <MessageSquare className="mr-2 h-4 w-4" />
+                                <span>Scopri l'offerta combinata</span>
+                                <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
+                              </a>
                             </div>
                           </div>
+                        </div>
+
+                        <div className="mt-4 text-center">
+                          <p className="text-sm text-gray-500">
+                            Prezzi IVA inclusa. Verifica copertura e dettagli completi delle offerte in agenzia.
+                          </p>
                         </div>
                       </div>
 
@@ -561,11 +695,10 @@ export default function TelefoniaLuceGas() {
                     <div className="space-y-2">
                       <a
                         href="https://wa.me/+393773798570?text=Salve%2C%20vorrei%20informazioni%20sui%20servizi%20di%20telefonia%2C%20luce%20e%20gas.%20Grazie."
-                        className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
                         target="_blank"
                         rel="noreferrer"
+                        className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full relative overflow-hidden group"
                       >
-                        <span className="absolute inset-0 w-0 bg-white bg-opacity-20 transition-all duration-300 ease-out group-hover:w-full"></span>
                         <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
                         <span>Contattaci su WhatsApp</span>
                       </a>
