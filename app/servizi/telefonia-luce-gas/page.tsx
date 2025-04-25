@@ -617,11 +617,17 @@ export default function TelefoniaLuceGas() {
                                 </div>
                                 A2A Full Luce e Gas
                               </h5>
-                              <div className="flex items-baseline mb-3">
-                                <span className="text-3xl font-bold text-gray-800">0,14900€</span>
-                                <span className="text-sm text-gray-500 ml-1">/kWh</span>
-                                <span className="text-3xl font-bold text-gray-800 ml-2">0,5600€</span>
-                                <span className="text-sm text-gray-500 ml-1">/Smc</span>
+                              <div className="flex flex-col mb-3">
+                                <div className="flex items-baseline mb-1">
+                                  <span className="text-2xl font-bold text-gray-800">0,14900€</span>
+                                  <span className="text-sm text-gray-500 ml-1">/kWh</span>
+                                  <span className="text-xs text-gray-500 ml-2">(Luce)</span>
+                                </div>
+                                <div className="flex items-baseline">
+                                  <span className="text-2xl font-bold text-gray-800">0,5600€</span>
+                                  <span className="text-sm text-gray-500 ml-1">/Smc</span>
+                                  <span className="text-xs text-gray-500 ml-2">(Gas)</span>
+                                </div>
                               </div>
                               <ul className="space-y-2 mb-4">
                                 <li className="flex items-start">
