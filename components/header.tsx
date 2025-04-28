@@ -115,7 +115,7 @@ export default function Header() {
 
                 {/* Mega Menu */}
                 {isMegaMenuOpen && (
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-screen max-w-4xl bg-white shadow-xl rounded-md overflow-hidden z-20 p-6">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-screen max-w-4xl bg-white shadow-xl rounded-md overflow-hidden z-20 p-6 border-t-4 border-primary border border-primary/20">
                     <div className="grid grid-cols-3 gap-8">
                       <div>
                         <h3 className="text-lg font-bold mb-4 text-primary border-b pb-2">Servizi Finanziari</h3>
