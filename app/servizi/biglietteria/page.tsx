@@ -2,7 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Ticket, HelpCircle } from "lucide-react"
+import { useState, useEffect } from "react"
+import { ArrowLeft, Ticket, HelpCircle, ChevronDown, Check, Info } from "lucide-react"
 import FAQSection from "@/components/faq-section"
 
 const biglietterieFAQs = [
@@ -39,6 +40,37 @@ const biglietterieFAQs = [
 ]
 
 export default function Biglietteria() {
+  const [activeTab, setActiveTab] = useState("trenitalia")
+  const [expandedInfo, setExpandedInfo] = useState<string | null>(null)
+  const [animatedElements, setAnimatedElements] = useState<string[]>([])
+
+  useEffect(() => {
+    // Animazione di entrata per gli elementi
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id) {
+            setAnimatedElements((prev) => [...prev, entry.target.id])
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const elements = document.querySelectorAll(".animate-on-scroll")
+    elements.forEach((el) => observer.observe(el))
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el))
+    }
+  }, [])
+
+  const toggleInfo = (id: string) => {
+    setExpandedInfo(expandedInfo === id ? null : id)
+  }
+
+  const isAnimated = (id: string) => animatedElements.includes(id)
+
   return (
     <div className="page-transition">
       {/* Hero Section */}
@@ -73,64 +105,436 @@ export default function Biglietteria() {
             <div className="lg:w-2/3">
               <h2 className="text-3xl font-bold mb-8">I Nostri Servizi</h2>
 
-              <div className="space-y-12">
-                <div className="bg-white p-8 rounded-lg shadow-md">
-                  <div className="flex items-start">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Ticket className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4">Biglietteria Ferroviaria</h3>
-                      <p className="text-gray-600 mb-6">
-                        Vendiamo biglietti ferroviari per Italo e Trenitalia per tutte le destinazioni nazionali.
-                      </p>
+              {/* Tabs di navigazione */}
+              <div className="mb-8 border-b">
+                <div className="flex flex-wrap -mb-px">
+                  <button
+                    onClick={() => setActiveTab("trenitalia")}
+                    className={`inline-flex items-center py-4 px-6 text-sm font-medium text-center border-b-2 ${
+                      activeTab === "trenitalia"
+                        ? "text-primary border-primary"
+                        : "border-transparent hover:text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    <Image
+                      src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/frecciarossa_500x500-x4CIi5s1zJghDPKWz6zh7JMQGgwr5E.jpg"
+                      alt="Trenitalia"
+                      width={24}
+                      height={24}
+                      className="mr-2 rounded-full"
+                      unoptimized
+                    />
+                    Trenitalia
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("italo")}
+                    className={`inline-flex items-center py-4 px-6 text-sm font-medium text-center border-b-2 ${
+                      activeTab === "italo"
+                        ? "text-primary border-primary"
+                        : "border-transparent hover:text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    <Image
+                      src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/italo-Re7gKJRIQmzuklz6ZFtHFphwcC5lA7.png"
+                      alt="Italo"
+                      width={24}
+                      height={24}
+                      className="mr-2 rounded-full"
+                      unoptimized
+                    />
+                    Italo
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("flixbus")}
+                    className={`inline-flex items-center py-4 px-6 text-sm font-medium text-center border-b-2 ${
+                      activeTab === "flixbus"
+                        ? "text-primary border-primary"
+                        : "border-transparent hover:text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    <Image
+                      src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/flix-3ggBvXxQ1W92xIb8IK0WBCC6E14ro6.png"
+                      alt="Flixbus"
+                      width={24}
+                      height={24}
+                      className="mr-2 rounded-full"
+                      unoptimized
+                    />
+                    Flixbus
+                  </button>
+                </div>
+              </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Trenitalia</h4>
-                          <p className="text-gray-600 text-sm">Biglietti per Frecce, Intercity e Regionali.</p>
+              {/* Contenuto dei tab */}
+              <div className="space-y-8">
+                {/* Trenitalia Tab */}
+                <div
+                  className={`${
+                    activeTab === "trenitalia" ? "block" : "hidden"
+                  } animate-on-scroll transition-all duration-500 ${
+                    isAnimated("trenitalia-content") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  id="trenitalia-content"
+                >
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/frecciarossa_500x500-x4CIi5s1zJghDPKWz6zh7JMQGgwr5E.jpg"
+                        alt="Trenitalia"
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                        <div className="p-6">
+                          <h3 className="text-2xl font-bold text-white mb-2">Biglietti Trenitalia</h3>
+                          <p className="text-white/90">Frecce, Intercity e Regionali</p>
                         </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Italo</h4>
-                          <p className="text-gray-600 text-sm">Biglietti per tutte le tratte servite da Italo.</p>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-3">Servizi disponibili</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Frecce (Frecciarossa, Frecciargento)</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Intercity</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Regionali</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Carte Sconto e Abbonamenti</span>
+                          </div>
                         </div>
                       </div>
 
-                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
-                        <h4 className="font-bold mb-2 flex items-center">
-                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
-                          Cosa serve
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          Per acquistare un biglietto ferroviario è necessario comunicare la data del viaggio, la tratta
-                          desiderata e i dati del passeggero.
-                        </p>
+                      <div className="mb-6">
+                        <button
+                          onClick={() => toggleInfo("trenitalia-info")}
+                          className="w-full flex items-center justify-between p-4 bg-yellow-50 rounded-md border border-yellow-200 hover:bg-yellow-100 transition-colors"
+                        >
+                          <div className="flex items-center">
+                            <Info size={18} className="text-yellow-500 mr-2" />
+                            <span className="font-medium">Cosa serve per acquistare</span>
+                          </div>
+                          <ChevronDown
+                            size={18}
+                            className={`text-yellow-500 transition-transform duration-300 ${
+                              expandedInfo === "trenitalia-info" ? "transform rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ${
+                            expandedInfo === "trenitalia-info" ? "max-h-96 mt-3" : "max-h-0"
+                          }`}
+                        >
+                          <div className="p-4 bg-yellow-50 rounded-md">
+                            <ul className="space-y-2 text-sm">
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Data e orario di partenza desiderati</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Stazione di partenza e arrivo</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Numero di passeggeri</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>
+                                  Dati anagrafici dei viaggiatori (nome, cognome e data di nascita) per alcuni tipi di
+                                  biglietti
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center mt-6">
+                        <a
+                          href={`https://wa.me/393773798570?text=${encodeURIComponent(
+                            `${
+                              new Date().getHours() < 12
+                                ? "Buongiorno"
+                                : new Date().getHours() < 18
+                                  ? "Buon pomeriggio"
+                                  : "Buonasera"
+                            }, vorrei informazioni sui biglietti Trenitalia.`,
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+                        >
+                          <Image
+                            src="/images/whatsapp-icon.png"
+                            alt="WhatsApp"
+                            width={20}
+                            height={20}
+                            className="mr-2"
+                          />
+                          Richiedi informazioni
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white p-8 rounded-lg shadow-md">
-                  <div className="flex items-start">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Ticket className="text-primary" size={24} />
+                {/* Italo Tab */}
+                <div
+                  className={`${activeTab === "italo" ? "block" : "hidden"} animate-on-scroll transition-all duration-500 ${
+                    isAnimated("italo-content") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  id="italo-content"
+                >
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/italo-Re7gKJRIQmzuklz6ZFtHFphwcC5lA7.png"
+                        alt="Italo"
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                        <div className="p-6">
+                          <h3 className="text-2xl font-bold text-white mb-2">Biglietti Italo</h3>
+                          <p className="text-white/90">Alta velocità in tutta Italia</p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4">Biglietteria Flixbus</h3>
-                      <p className="text-gray-600 mb-6">
-                        Vendiamo biglietti per Flixbus per tutte le destinazioni nazionali e internazionali.
-                      </p>
+                    <div className="p-6">
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-3">Servizi disponibili</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Biglietti standard</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Biglietti Economy e Low Cost</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Prima e Club Executive</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Carnet e abbonamenti</span>
+                          </div>
+                        </div>
+                      </div>
 
-                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
-                        <h4 className="font-bold mb-2 flex items-center">
-                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
-                          Cosa serve
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          Per acquistare un biglietto Flixbus è necessario comunicare la data del viaggio, la tratta
-                          desiderata e i dati del passeggero.
-                        </p>
+                      <div className="mb-6">
+                        <button
+                          onClick={() => toggleInfo("italo-info")}
+                          className="w-full flex items-center justify-between p-4 bg-yellow-50 rounded-md border border-yellow-200 hover:bg-yellow-100 transition-colors"
+                        >
+                          <div className="flex items-center">
+                            <Info size={18} className="text-yellow-500 mr-2" />
+                            <span className="font-medium">Cosa serve per acquistare</span>
+                          </div>
+                          <ChevronDown
+                            size={18}
+                            className={`text-yellow-500 transition-transform duration-300 ${
+                              expandedInfo === "italo-info" ? "transform rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ${
+                            expandedInfo === "italo-info" ? "max-h-96 mt-3" : "max-h-0"
+                          }`}
+                        >
+                          <div className="p-4 bg-yellow-50 rounded-md">
+                            <ul className="space-y-2 text-sm">
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Data e orario di partenza desiderati</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Stazione di partenza e arrivo</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Numero di passeggeri</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>
+                                  Dati anagrafici dei viaggiatori (nome, cognome e data di nascita) per tutti i
+                                  biglietti
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center mt-6">
+                        <a
+                          href={`https://wa.me/393773798570?text=${encodeURIComponent(
+                            `${
+                              new Date().getHours() < 12
+                                ? "Buongiorno"
+                                : new Date().getHours() < 18
+                                  ? "Buon pomeriggio"
+                                  : "Buonasera"
+                            }, vorrei informazioni sui biglietti Italo.`,
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+                        >
+                          <Image
+                            src="/images/whatsapp-icon.png"
+                            alt="WhatsApp"
+                            width={20}
+                            height={20}
+                            className="mr-2"
+                          />
+                          Richiedi informazioni
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Flixbus Tab */}
+                <div
+                  className={`${
+                    activeTab === "flixbus" ? "block" : "hidden"
+                  } animate-on-scroll transition-all duration-500 ${
+                    isAnimated("flixbus-content") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  id="flixbus-content"
+                >
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/flix-3ggBvXxQ1W92xIb8IK0WBCC6E14ro6.png"
+                        alt="Flixbus"
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                        <div className="p-6">
+                          <h3 className="text-2xl font-bold text-white mb-2">Biglietti Flixbus</h3>
+                          <p className="text-white/90">Viaggi nazionali e internazionali in autobus</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-3">Servizi disponibili</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Tratte nazionali</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Tratte internazionali</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Biglietti andata e ritorno</span>
+                          </div>
+                          <div className="flex items-center p-3 bg-gray-50 rounded-md">
+                            <Check size={18} className="text-green-500 mr-2" />
+                            <span>Servizi aggiuntivi (bagagli, etc.)</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mb-6">
+                        <button
+                          onClick={() => toggleInfo("flixbus-info")}
+                          className="w-full flex items-center justify-between p-4 bg-yellow-50 rounded-md border border-yellow-200 hover:bg-yellow-100 transition-colors"
+                        >
+                          <div className="flex items-center">
+                            <Info size={18} className="text-yellow-500 mr-2" />
+                            <span className="font-medium">Cosa serve per acquistare</span>
+                          </div>
+                          <ChevronDown
+                            size={18}
+                            className={`text-yellow-500 transition-transform duration-300 ${
+                              expandedInfo === "flixbus-info" ? "transform rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ${
+                            expandedInfo === "flixbus-info" ? "max-h-96 mt-3" : "max-h-0"
+                          }`}
+                        >
+                          <div className="p-4 bg-yellow-50 rounded-md">
+                            <ul className="space-y-2 text-sm">
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Data e orario di partenza desiderati</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Città di partenza e arrivo</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Numero di passeggeri</span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>
+                                  Dati anagrafici dei viaggiatori (nome, cognome e data di nascita) e indirizzo email
+                                </span>
+                              </li>
+                              <li className="flex items-start">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2"></span>
+                                <span>Informazioni su bagagli extra (se necessario)</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center mt-6">
+                        <a
+                          href={`https://wa.me/393773798570?text=${encodeURIComponent(
+                            `${
+                              new Date().getHours() < 12
+                                ? "Buongiorno"
+                                : new Date().getHours() < 18
+                                  ? "Buon pomeriggio"
+                                  : "Buonasera"
+                            }, vorrei informazioni sui biglietti Flixbus.`,
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+                        >
+                          <Image
+                            src="/images/whatsapp-icon.png"
+                            alt="WhatsApp"
+                            width={20}
+                            height={20}
+                            className="mr-2"
+                          />
+                          Richiedi informazioni
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -138,14 +542,21 @@ export default function Biglietteria() {
               </div>
 
               {/* Vantaggi per i Clienti */}
-              <div className="mt-12 mb-16 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg shadow-md">
+              <div
+                className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg shadow-md animate-on-scroll transition-all duration-500"
+                id="vantaggi-section"
+                style={{
+                  opacity: isAnimated("vantaggi-section") ? 1 : 0,
+                  transform: isAnimated("vantaggi-section") ? "translateY(0)" : "translateY(20px)",
+                }}
+              >
                 <h3 className="text-2xl font-bold mb-6 text-center">Vantaggi per i Nostri Clienti</h3>
                 <p className="text-gray-600 text-center mb-8">
                   Scegliere di acquistare i tuoi biglietti presso la nostra agenzia ti offre numerosi vantaggi
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white p-6 rounded-lg shadow-sm text-center">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white p-6 rounded-lg shadow-sm text-center transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +581,7 @@ export default function Biglietteria() {
                     </p>
                   </div>
 
-                  <div className="bg-white p-6 rounded-lg shadow-sm text-center">
+                  <div className="bg-white p-6 rounded-lg shadow-sm text-center transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -194,6 +605,29 @@ export default function Biglietteria() {
                       qualità-prezzo.
                     </p>
                   </div>
+
+                  <div className="bg-white p-6 rounded-lg shadow-sm text-center transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-primary"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
+                    <h4 className="font-bold mb-2">Sicurezza e Affidabilità</h4>
+                    <p className="text-gray-600 text-sm">
+                      Acquisti sicuri e garantiti. In caso di problemi, siamo sempre a tua disposizione per assisterti.
+                    </p>
+                  </div>
                 </div>
 
                 <div className="mt-8 bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
@@ -210,11 +644,18 @@ export default function Biglietteria() {
                 </div>
               </div>
 
-              {/* Loghi dei Partner */}
-              <div className="mt-16">
+              {/* Loghi dei Partner con animazione */}
+              <div
+                className="mt-16 animate-on-scroll transition-all duration-500"
+                id="partner-section"
+                style={{
+                  opacity: isAnimated("partner-section") ? 1 : 0,
+                  transform: isAnimated("partner-section") ? "translateY(0)" : "translateY(20px)",
+                }}
+              >
                 <h3 className="text-2xl font-bold mb-6">I Nostri Partner</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <div className="bg-white rounded-lg shadow-md aspect-square overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105">
                     <Image
                       src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/frecciarossa_500x500-x4CIi5s1zJghDPKWz6zh7JMQGgwr5E.jpg"
                       alt="Trenitalia"
@@ -225,7 +666,7 @@ export default function Biglietteria() {
                     />
                   </div>
 
-                  <div className="bg-white rounded-lg shadow-md aspect-square overflow-hidden">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105">
                     <Image
                       src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/italo-Re7gKJRIQmzuklz6ZFtHFphwcC5lA7.png"
                       alt="Italo"
@@ -235,7 +676,7 @@ export default function Biglietteria() {
                       unoptimized
                     />
                   </div>
-                  <div className="bg-white rounded-lg shadow-md aspect-square overflow-hidden">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105">
                     <Image
                       src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/flix-3ggBvXxQ1W92xIb8IK0WBCC6E14ro6.png"
                       alt="Flixbus"
@@ -249,7 +690,14 @@ export default function Biglietteria() {
               </div>
 
               {/* FAQ */}
-              <div className="mt-16">
+              <div
+                className="mt-16 animate-on-scroll transition-all duration-500"
+                id="faq-section"
+                style={{
+                  opacity: isAnimated("faq-section") ? 1 : 0,
+                  transform: isAnimated("faq-section") ? "translateY(0)" : "translateY(20px)",
+                }}
+              >
                 <FAQSection
                   title="Domande Frequenti sulla Biglietteria"
                   description="Trova le risposte alle domande più comuni sui nostri servizi di biglietteria."
@@ -263,7 +711,7 @@ export default function Biglietteria() {
                 <h3 className="text-xl font-bold mb-4">Informazioni Utili</h3>
 
                 <div className="space-y-6">
-                  <div>
+                  <div className="transform transition-all duration-300 hover:translate-x-1">
                     <h4 className="font-bold mb-2">Orari del Servizio</h4>
                     <p className="text-gray-600">
                       Lun-Ven: 9:00-13:20, 16:00-19:20
@@ -272,12 +720,12 @@ export default function Biglietteria() {
                     </p>
                   </div>
 
-                  <div>
+                  <div className="transform transition-all duration-300 hover:translate-x-1">
                     <h4 className="font-bold mb-2">Metodi di Pagamento Accettati</h4>
                     <p className="text-gray-600">Contanti, Bancomat, Carte di Credito, Carte Prepagate.</p>
                   </div>
 
-                  <div className="bg-white p-4 rounded-md shadow-sm">
+                  <div className="bg-white p-4 rounded-md shadow-sm transform transition-all duration-300 hover:shadow-md hover:-translate-y-1">
                     <h4 className="font-bold mb-2 text-primary">Vantaggi del Servizio</h4>
                     <ul className="text-gray-600 space-y-2">
                       <li className="flex items-start">
@@ -302,17 +750,25 @@ export default function Biglietteria() {
                     </p>
                     <div className="space-y-2">
                       <a
-                        href={`https://wa.me/393773798570?text=${encodeURIComponent(`${new Date().getHours() < 12 ? "Buongiorno" : new Date().getHours() < 18 ? "Buon pomeriggio" : "Buonasera"}, vorrei informazioni sui servizi di biglietteria.`)}`}
+                        href={`https://wa.me/393773798570?text=${encodeURIComponent(
+                          `${
+                            new Date().getHours() < 12
+                              ? "Buongiorno"
+                              : new Date().getHours() < 18
+                                ? "Buon pomeriggio"
+                                : "Buonasera"
+                          }, vorrei informazioni sui servizi di biglietteria.`,
+                        )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full"
+                        className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full transform hover:scale-105 duration-300"
                       >
                         <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
                         Contattaci su WhatsApp
                       </a>
                       <a
                         href="tel:+390810584542"
-                        className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
+                        className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center transform hover:scale-105 duration-300"
                       >
                         Chiamaci
                       </a>
