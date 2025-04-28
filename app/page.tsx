@@ -1,7 +1,7 @@
 // Modifichiamo i container nella home page per garantire padding simmetrici
 
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, CreditCard, Truck, FileText, Shield, Smartphone, Users } from "lucide-react"
@@ -61,10 +61,95 @@ const homeFAQs = [
   },
 ]
 
+// Funzione per animare i contatori
+function animateCounter(element: HTMLElement, target: number) {
+  let current = 0
+  const increment = Math.ceil(target / 100)
+  const timer = setInterval(() => {
+    current += increment
+    if (current >= target) {
+      element.textContent = target.toString()
+      clearInterval(timer)
+    } else {
+      element.textContent = current.toString()
+    }
+  }, 20)
+}
+
 export default function Home() {
   const [isClient, setIsClient] = useState(false)
   // Aggiungi gli stili per l'animazione
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  // Riferimento per verificare se l'animazione dei contatori è già stata eseguita
+  const countersAnimated = useRef(false)
+
+  // Effetto per inizializzare AOS (Animate On Scroll)
+  useEffect(() => {
+    // Importa e inizializza AOS
+    const loadAOS = async () => {
+      const AOS = (await import("aos")).default
+      await import("aos/dist/aos.css")
+      AOS.init({
+        duration: 1000,
+        once: true,
+        easing: "ease-in-out",
+      })
+    }
+
+    loadAOS()
+
+    // Aggiungi lo script AOS al documento
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    document.head.appendChild(link)
+
+    const script = document.createElement("script")
+    script.src = "https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      // @ts-ignore
+      if (window.AOS) {
+        // @ts-ignore
+        window.AOS.init()
+      }
+    }
+
+    return () => {
+      document.head.removeChild(link)
+      document.body.removeChild(script)
+    }
+  }, [])
+
+  // Effetto per animare i contatori quando sono visibili
+  useEffect(() => {
+    if (countersAnimated.current) return
+
+    const handleScroll = () => {
+      const counters = document.querySelectorAll(".counter")
+      if (counters.length === 0) return
+
+      const triggerPosition = window.innerHeight * 0.8
+
+      const firstCounter = counters[0]
+      const position = firstCounter.getBoundingClientRect().top
+
+      if (position < triggerPosition) {
+        countersAnimated.current = true
+        counters.forEach((counter) => {
+          const target = Number.parseInt(counter.getAttribute("data-target") || "0", 10)
+          animateCounter(counter as HTMLElement, target)
+        })
+        window.removeEventListener("scroll", handleScroll)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Effetto per tracciare la posizione del mouse e creare l'effetto parallasse
   useEffect(() => {
@@ -162,6 +247,14 @@ export default function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    const counters = document.querySelectorAll(".counter")
+    counters.forEach((counter) => {
+      const target = Number.parseInt(counter.getAttribute("data-target") || "0", 10)
+      animateCounter(counter as HTMLElement, target)
+    })
+  }, [])
+
   return (
     <div className="page-transition">
       <Breadcrumbs />
@@ -177,7 +270,32 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/70 animate-gradient-x">
             <div className="absolute inset-0 opacity-70">
-              <div className="particles-container h-full w-full" id="particles-js"></div>
+              {/* Particelle animate interattive */}
+              <div className="particles-container absolute inset-0 overflow-hidden" id="particles-container">
+                {Array.from({ length: 40 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="particle absolute rounded-full cursor-pointer transition-all duration-300"
+                    style={{
+                      width: `${Math.random() * 15 + 5}px`,
+                      height: `${Math.random() * 15 + 5}px`,
+                      backgroundColor: `hsla(${Math.random() * 60 + 190}, 100%, 70%, ${Math.random() * 0.3 + 0.2})`,
+                      top: `${Math.random() * 100}%`,
+                      left: `${Math.random() * 100}%`,
+                      transform: `scale(${Math.random() * 0.5 + 0.5})`,
+                      animation: `
+                        float-random ${Math.random() * 15 + 10}s infinite ease-in-out,
+                        pulse-opacity ${Math.random() * 4 + 3}s infinite ease-in-out
+                      `,
+                      animationDelay: `${Math.random() * 5}s`,
+                      zIndex: Math.floor(Math.random() * 10),
+                      boxShadow: `0 0 ${Math.random() * 10 + 5}px ${Math.random() * 5 + 2}px hsla(${Math.random() * 60 + 190}, 100%, 70%, 0.3)`,
+                    }}
+                    data-speed={Math.random() * 0.8 + 0.2}
+                    data-direction={Math.random() > 0.5 ? 1 : -1}
+                  ></div>
+                ))}
+              </div>
             </div>
             <div
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-70"
@@ -305,21 +423,42 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-gray-50 relative overflow-hidden">
+        {/* Elementi decorativi di sfondo */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2">
-              <Image
-                src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/team-image-1743602203331-AwX9JqAXe5LfABL29GZ034KwSvyQTn.jpg"
-                alt="AG Servizi Team"
-                width={800}
-                height={600}
-                className="rounded-lg shadow-lg"
-              />
+            <div className="lg:w-1/2 perspective-1000">
+              <div
+                className="relative group transition-all duration-500 transform hover:scale-[1.02]"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <div className="relative">
+                  <Image
+                    src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/team-image-1743602203331-AwX9JqAXe5LfABL29GZ034KwSvyQTn.jpg"
+                    alt="AG Servizi Team"
+                    width={800}
+                    height={600}
+                    className="rounded-lg shadow-lg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <div className="p-4 text-white">
+                      <p className="font-medium text-sm">Il nostro team di professionisti è pronto ad assisterti</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="lg:w-1/2">
-              <h2 className="text-3xl font-bold mb-6">Chi Siamo</h2>
+            <div className="lg:w-1/2" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+              <h2 className="text-3xl font-bold mb-6 relative">
+                Chi Siamo
+                <span className="absolute -bottom-2 left-0 w-20 h-1 bg-primary"></span>
+              </h2>
               <p className="text-gray-600 mb-4">
                 AG SERVIZI è un'agenzia multiservizi situata nel cuore di Castellammare di Stabia, in Via Plinio il
                 Vecchio 72. Da anni offriamo ai nostri clienti una vasta gamma di servizi, dalle pratiche burocratiche
@@ -329,15 +468,44 @@ export default function Home() {
                 La nostra missione è semplificare la vita quotidiana dei nostri clienti, offrendo soluzioni rapide ed
                 efficienti per tutte le loro esigenze in un unico punto di riferimento.
               </p>
+
+              {/* Statistiche con contatori animati */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm transform hover:-translate-y-1 transition-transform duration-300">
+                  <div className="text-primary text-2xl font-bold mb-1 counter" data-target="1500">
+                    0
+                  </div>
+                  <div className="text-gray-500 text-sm">Clienti Soddisfatti</div>
+                </div>
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm transform hover:-translate-y-1 transition-transform duration-300">
+                  <div className="text-primary text-2xl font-bold mb-1 counter" data-target="9">
+                    0
+                  </div>
+                  <div className="text-gray-500 text-sm">Anni di Esperienza</div>
+                </div>
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm transform hover:-translate-y-1 transition-transform duration-300">
+                  <div className="text-primary text-2xl font-bold mb-1 counter" data-target="20">
+                    0
+                  </div>
+                  <div className="text-gray-500 text-sm">Servizi Offerti</div>
+                </div>
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm transform hover:-translate-y-1 transition-transform duration-300">
+                  <div className="text-primary text-2xl font-bold mb-1 counter" data-target="5000">
+                    0
+                  </div>
+                  <div className="text-gray-500 text-sm">Pratiche Gestite</div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-white p-4 rounded-md shadow-sm">
+                <div className="bg-white p-4 rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-primary">
                   <h3 className="font-bold mb-2 text-primary">Professionalità</h3>
                   <p className="text-gray-600 text-sm">
                     Il nostro team è formato da professionisti qualificati, costantemente aggiornati sulle normative e
                     le procedure.
                   </p>
                 </div>
-                <div className="bg-white p-4 rounded-md shadow-sm">
+                <div className="bg-white p-4 rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-secondary">
                   <h3 className="font-bold mb-2 text-primary">Affidabilità</h3>
                   <p className="text-gray-600 text-sm">
                     Manteniamo le promesse e rispettiamo gli impegni presi con i nostri clienti, garantendo un servizio
@@ -347,10 +515,11 @@ export default function Home() {
               </div>
               <Link
                 href="/chi-siamo"
-                className="text-primary hover:text-primary/80 font-medium inline-flex items-center transition-colors"
+                className="group text-primary hover:text-primary/80 font-medium inline-flex items-center transition-colors relative overflow-hidden"
               >
-                Scopri di più su di noi
-                <ArrowRight size={16} className="ml-1" />
+                <span className="relative z-10">Scopri di più su di noi</span>
+                <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
               </Link>
             </div>
           </div>
@@ -415,31 +584,398 @@ export default function Home() {
       <PromoIliadSection />
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Hai bisogno di assistenza?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Vieni a trovarci nella nostra sede di Castellammare di Stabia o contattaci per maggiori informazioni sui
-            nostri servizi.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/contatti"
-              className="bg-white hover:bg-gray-100 text-primary font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
+      <section className="py-20 bg-gradient-to-br from-primary via-primary to-primary/90 text-white relative overflow-hidden">
+        {/* Elementi decorativi animati */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute top-1/2 left-3/4 w-40 h-40 bg-white/5 rounded-full blur-xl animate-spin-very-slow"></div>
+
+          {/* Particelle animate interattive */}
+          <div className="absolute inset-0 opacity-70">
+            <div className="particles-container absolute inset-0 overflow-hidden" id="particles-js">
+              {Array.from({ length: 40 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="particle absolute rounded-full cursor-pointer transition-all duration-300"
+                  style={{
+                    width: `${Math.random() * 15 + 5}px`,
+                    height: `${Math.random() * 15 + 5}px`,
+                    backgroundColor: `hsla(${Math.random() * 60 + 190}, 100%, 70%, ${Math.random() * 0.3 + 0.2})`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    transform: `scale(${Math.random() * 0.5 + 0.5})`,
+                    animation: `
+                      float-random ${Math.random() * 15 + 10}s infinite ease-in-out,
+                      pulse-opacity ${Math.random() * 4 + 3}s infinite ease-in-out
+                    `,
+                    animationDelay: `${Math.random() * 5}s`,
+                    zIndex: Math.floor(Math.random() * 10),
+                    boxShadow: `0 0 ${Math.random() * 10 + 5}px ${Math.random() * 5 + 2}px hsla(${Math.random() * 60 + 190}, 100%, 70%, 0.3)`,
+                  }}
+                  data-speed={Math.random() * 0.8 + 0.2}
+                  data-direction={Math.random() > 0.5 ? 1 : -1}
+                ></div>
+              ))}
+            </div>
+          </div>
+          <div
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-70"
+            style={{
+              transform: "translateY(0px)",
+              animation: "pulse 8s infinite ease-in-out",
+            }}
+          ></div>
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <h2
+                className="text-4xl md:text-5xl font-bold mb-6 relative inline-block"
+                data-aos="fade-up"
+                data-aos-duration="800"
+              >
+                Hai bisogno di assistenza?
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+              </h2>
+              <p
+                className="text-xl mb-10 max-w-2xl mx-auto"
+                data-aos="fade-up"
+                data-aos-duration="800"
+                data-aos-delay="100"
+              >
+                Vieni a trovarci nella nostra sede di Castellammare di Stabia o contattaci per maggiori informazioni sui
+                nostri servizi.
+              </p>
+            </div>
+
+            {/* Card interattive */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              <div
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-white/20 group"
+                data-aos="fade-right"
+                data-aos-duration="800"
+                data-aos-delay="200"
+              >
+                <div className="bg-secondary/20 w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:bg-secondary/40 transition-colors duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-center">Contattaci</h3>
+                <p className="text-white/80 mb-4 text-center">
+                  Hai domande sui nostri servizi? Contattaci per ricevere assistenza personalizzata.
+                </p>
+                <div className="text-center">
+                  <Link
+                    href="/contatti"
+                    className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-primary font-medium py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg group"
+                  >
+                    <span>Scrivici ora</span>
+                    <ArrowRight size={18} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+
+              <div
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-white/20 group"
+                data-aos="fade-left"
+                data-aos-duration="800"
+                data-aos-delay="300"
+              >
+                <div className="bg-secondary/20 w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:bg-secondary/40 transition-colors duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-center">Vieni a trovarci</h3>
+                <p className="text-white/80 mb-4 text-center">
+                  Siamo in Via Plinio il Vecchio 72, Castellammare di Stabia. Vieni a trovarci!
+                </p>
+                <div className="text-center">
+                  <Link
+                    href="/dove-siamo"
+                    className="inline-flex items-center justify-center bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg group"
+                  >
+                    <span>Come raggiungerci</span>
+                    <ArrowRight size={18} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Orari e contatto rapido */}
+            <div
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="400"
             >
-              Contattaci
-              <ArrowRight size={18} className="ml-2" />
-            </Link>
-            <Link
-              href="/dove-siamo"
-              className="bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-8 rounded-md transition-colors inline-flex items-center justify-center"
-            >
-              Come raggiungerci
-              <ArrowRight size={18} className="ml-2" />
-            </Link>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="text-center md:text-left">
+                  <h3 className="text-xl font-bold mb-2">Orari di apertura</h3>
+                  <p className="text-white/80 mb-1">Lun-Ven: 9:00-13:20 / 16:00-19:20</p>
+                  <p className="text-white/80">Sabato: 9:00-13:00</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="tel:+390810584542"
+                    className="inline-flex items-center justify-center bg-white/20 hover:bg-white/30 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
+                    </svg>
+                    Chiama ora
+                  </a>
+                  <a
+                    href="https://wa.me/+393773798570"
+                    className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20BD5A] text-white font-medium py-3 px-6 rounded-md transition-all duration-300 hover:shadow-lg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                    </svg>
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Aggiungi stili CSS per le animazioni */}
+        <style jsx>{`
+          @keyframes float-slow {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-20px);
+            }
+          }
+
+          @keyframes pulse-slow {
+            0%,
+            100% {
+              opacity: 0.3;
+            }
+            50% {
+              opacity: 0.6;
+            }
+          }
+
+          @keyframes spin-very-slow {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+          @keyframes float-random {
+            0%,
+            100% {
+              transform: translateY(0) translateX(0);
+            }
+            25% {
+              transform: translateY(-30px) translateX(15px);
+            }
+            50% {
+              transform: translateY(-15px) translateX(-15px);
+            }
+            75% {
+              transform: translateY(30px) translateX(15px);
+            }
+          }
+
+          .animate-pulse-slow {
+            animation: pulse-slow 8s infinite ease-in-out;
+          }
+
+          .animate-float-slow {
+            animation: float-slow 12s infinite ease-in-out;
+          }
+
+          .animate-spin-very-slow {
+            animation: spin-very-slow 30s infinite linear;
+          }
+
+          @keyframes pulse-opacity {
+            0%, 100% {
+              opacity: 0.3;
+              transform: scale(1);
+            }
+            50% {
+              opacity: 0.7;
+              transform: scale(1.2);
+            }
+          }
+
+          .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple 1s ease-out;
+            pointer-events: none;
+          }
+
+          @keyframes ripple {
+            to {
+              transform: scale(15);
+              opacity: 0;
+            }
+          }
+
+          .particle {
+            will-change: transform;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+          }
+
+          .particle:hover {
+            z-index: 20;
+          }
+        `}</style>
+
+        {/* Script per l'interattività delle particelle */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('DOMContentLoaded', function() {
+                const container = document.getElementById('particles-container');
+                if (!container) return;
+                
+                const particles = container.querySelectorAll('.particle');
+                
+                // Effetto parallasse al movimento del mouse
+                container.addEventListener('mousemove', function(e) {
+                  const x = e.clientX / window.innerWidth;
+                  const y = e.clientY / window.innerHeight;
+                  
+                  particles.forEach(particle => {
+                    const speed = parseFloat(particle.getAttribute('data-speed'));
+                    const direction = parseFloat(particle.getAttribute('data-direction'));
+                    const moveX = (x - 0.5) * speed * 50 * direction;
+                    const moveY = (y - 0.5) * speed * 50 * direction;
+                    
+                    particle.style.transform = 'translate3d(' + moveX + 'px, ' + moveY + 'px, 0) scale(' + (speed + 0.5) + ')';
+                  });
+                });
+                
+                // Effetto pulsazione al click
+                container.addEventListener('click', function(e) {
+                  const rect = container.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  
+                  // Crea un elemento di onda
+                  const ripple = document.createElement('div');
+                  ripple.className = 'ripple-effect';
+                  ripple.style.left = x + 'px';
+                  ripple.style.top = y + 'px';
+                  container.appendChild(ripple);
+                  
+                  // Effetto sulle particelle
+                  particles.forEach(particle => {
+                    const particleRect = particle.getBoundingClientRect();
+                    const particleX = particleRect.left + particleRect.width/2 - rect.left;
+                    const particleY = particleRect.top + particleRect.height/2 - rect.top;
+                    
+                    const dx = particleX - x;
+                    const dy = particleY - y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const maxDistance = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
+                    
+                    if (distance < 150) {
+                      const scale = 1 + (1 - distance/150) * 1;
+                      const speed = parseFloat(particle.getAttribute('data-speed'));
+                      const direction = dx > 0 ? 1 : -1;
+                      const moveX = direction * (150 - distance) * 0.3;
+                      const moveY = (dy > 0 ? 1 : -1) * (150 - distance) * 0.3;
+                      
+                      particle.style.transform = 'translate3d(' + moveX + 'px, ' + moveY + 'px, 0) scale(' + scale + ')';
+                      particle.style.boxShadow = '0 0 ' + (20 * scale) + 'px ' + (10 * scale) + 'px hsla(' + (Math.random() * 60 + 190) + ', 100%, 70%, 0.5)';
+                      
+                      setTimeout(() => {
+                        particle.style.transform = '';
+                        particle.style.boxShadow = '';
+                      }, 1000);
+                    }
+                  });
+                  
+                  // Rimuovi l'elemento onda dopo l'animazione
+                  setTimeout(() => {
+                    ripple.remove();
+                  }, 1000);
+                });
+                
+                // Effetto hover sulle particelle
+                particles.forEach(particle => {
+                  particle.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(2)';
+                    this.style.zIndex = '20';
+                    this.style.boxShadow = '0 0 20px 10px hsla(' + (Math.random() * 60 + 190) + ', 100%, 70%, 0.6)';
+                  });
+                  
+                  particle.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.zIndex = '';
+                    this.style.boxShadow = '';
+                  });
+                });
+              });
+            `,
+          }}
+        />
       </section>
+
+      {/* Fine della sezione CTA */}
     </div>
   )
 }
