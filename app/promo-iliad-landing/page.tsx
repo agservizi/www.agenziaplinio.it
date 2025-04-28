@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import IliadVoucherGenerator from "@/components/iliad-voucher-generator"
+import VintageCountdown from "@/components/vintage-countdown"
 
 export const metadata: Metadata = {
   title: "Promozione Esclusiva Iliad - Risparmia €5 sull'attivazione | AG SERVIZI",
@@ -26,7 +27,12 @@ export default function IliadLandingPage() {
           </div>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">OFFERTA ESCLUSIVA</h1>
           <p className="text-xl md:text-2xl font-semibold mb-2">RISPARMIA €5 SUL COSTO DI ATTIVAZIONE</p>
-          <p className="text-lg mb-6">Offerta valida fino al 31 maggio 2025</p>
+
+          {/* Vintage Countdown Timer */}
+          <div className="my-6">
+            <VintageCountdown targetDate={new Date("2025-05-31T19:00:00")} />
+          </div>
+
           <div className="bg-white text-[#ff0032] font-bold py-2 px-4 rounded-lg inline-block">
             Disponibile solo presso AG SERVIZI
           </div>
