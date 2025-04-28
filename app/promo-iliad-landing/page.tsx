@@ -62,7 +62,9 @@ export default function IliadLandingPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>120 GB in 4G/4G+</span>
+                    <span>
+                      120 GB in 4G/4G+ <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <svg
@@ -118,7 +120,9 @@ export default function IliadLandingPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>250 GB in 5G</span>
+                    <span>
+                      250 GB in 5G <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <svg
@@ -140,7 +144,7 @@ export default function IliadLandingPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Roaming in UE incluso</span>
+                    <span>25GB in Europa</span>
                   </li>
                 </ul>
                 <div className="bg-gray-100 p-3 rounded-lg text-center mb-4">
@@ -173,7 +177,9 @@ export default function IliadLandingPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>300 GB in 5G</span>
+                    <span>
+                      300 GB in 5G <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <svg
