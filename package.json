@@ -70,7 +70,8 @@
     "jspdf-autotable": "latest",
     "uuid": "latest",
     "https": "latest",
-    "@vercel/analytics": "latest"
+    "@vercel/analytics": "latest",
+    "qrcode": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
