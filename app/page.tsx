@@ -1,7 +1,7 @@
 // Modifichiamo i container nella home page per garantire padding simmetrici
 
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, CreditCard, Truck, FileText, Shield, Smartphone, Users } from "lucide-react"
@@ -63,6 +63,104 @@ const homeFAQs = [
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false)
+  // Aggiungi gli stili per l'animazione
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  // Effetto per tracciare la posizione del mouse e creare l'effetto parallasse
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight,
+      })
+    }
+
+    // Inizializza le particelle
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
+      const script = document.createElement("script")
+      script.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"
+      script.async = true
+      document.body.appendChild(script)
+
+      script.onload = () => {
+        // @ts-ignore
+        if (window.particlesJS) {
+          // @ts-ignore
+          window.particlesJS("particles-js", {
+            particles: {
+              number: { value: 80, density: { enable: true, value_area: 800 } },
+              color: { value: "#ffffff" },
+              opacity: { value: 0.3, random: false },
+              size: { value: 3, random: true },
+              line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.2, width: 1 },
+              move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" },
+            },
+            interactivity: {
+              detect_on: "canvas",
+              events: {
+                onhover: { enable: true, mode: "repulse" },
+                onclick: { enable: true, mode: "push" },
+                resize: true,
+              },
+            },
+          })
+        }
+      }
+
+      window.addEventListener("mousemove", handleMouseMove)
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      // Rimuovi lo script quando il componente viene smontato
+      const scriptElement = document.querySelector(
+        'script[src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"]',
+      )
+      if (scriptElement) {
+        document.body.removeChild(scriptElement)
+      }
+    }
+  }, [])
+
+  // Aggiungi stili CSS globali per le animazioni
+  useEffect(() => {
+    const style = document.createElement("style")
+    style.innerHTML = `
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+      
+      .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-x 15s ease infinite;
+      }
+      
+      @keyframes gradient-x {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      .particles-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    `
+    document.head.appendChild(style)
+
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
 
   return (
     <div className="page-transition">
@@ -77,7 +175,18 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-primary/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/70 animate-gradient-x">
+            <div className="absolute inset-0 opacity-70">
+              <div className="particles-container h-full w-full" id="particles-js"></div>
+            </div>
+            <div
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-70"
+              style={{
+                transform: "translateY(0px)",
+                animation: "pulse 8s infinite ease-in-out",
+              }}
+            ></div>
+          </div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 text-white">
