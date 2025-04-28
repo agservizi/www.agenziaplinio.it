@@ -103,7 +103,12 @@ export default function IliadLandingPage() {
             <div className="bg-white rounded-lg shadow-md overflow-hidden border-t-4 border-[#ff0032] transform scale-105 z-10">
               <div className="bg-[#ff0032] text-white text-center py-2 text-sm font-bold">PIÙ POPOLARE</div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-[#ff0032] mb-2">TOP 250 PLUS</h3>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-bold text-[#ff0032]">TOP 250 PLUS</h3>
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#ff0032] text-white">
+                    5G INCLUSO
+                  </span>
+                </div>
                 <div className="text-3xl font-bold mb-4">
                   €9,99<span className="text-sm font-normal text-gray-500">/mese</span>
                 </div>
@@ -160,7 +165,12 @@ export default function IliadLandingPage() {
             {/* Offerta 3 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden border-t-4 border-[#ff0032]">
               <div className="p-6">
-                <h3 className="text-xl font-bold text-[#ff0032] mb-2">TOP 300</h3>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-bold text-[#ff0032]">TOP 300</h3>
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#ff0032] text-white">
+                    5G INCLUSO
+                  </span>
+                </div>
                 <div className="text-3xl font-bold mb-4">
                   €11,99<span className="text-sm font-normal text-gray-500">/mese</span>
                 </div>
@@ -201,7 +211,7 @@ export default function IliadLandingPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>11GB dedicati in Europa</span>
+                    <span>16GB dedicati in Europa</span>
                   </li>
                 </ul>
                 <div className="bg-gray-100 p-3 rounded-lg text-center mb-4">

@@ -101,7 +101,7 @@ const PromoIliadSection = () => {
       name: "TOP 300",
       price: "11,99",
       data: "300 GB in 5G",
-      features: ["Minuti e SMS illimitati", "11GB dedicati in Europa", "Minuti illimitati verso 60 destinazioni"],
+      features: ["Minuti e SMS illimitati", "16GB dedicati in Europa", "Minuti illimitati verso 60 destinazioni"],
       activationPrice: "9,99",
       discountedActivationPrice: "5,00",
     },
@@ -406,7 +406,14 @@ const PromoIliadSection = () => {
 
             {/* Colonna destra con dettagli offerta */}
             <div className="md:w-2/3 p-6 md:p-8">
-              <h2 className="text-3xl font-bold text-[#ff0032] mb-2">Offerta Iliad {iliadPlans[currentSlide].name}</h2>
+              <h2 className="text-3xl font-bold text-[#ff0032] mb-2 flex items-center">
+                Offerta Iliad {iliadPlans[currentSlide].name}
+                {iliadPlans[currentSlide].data.includes("5G") && (
+                  <span className="ml-2 text-xs font-bold bg-[#ff0032] text-white px-2 py-1 rounded-md inline-flex items-center">
+                    5G
+                  </span>
+                )}
+              </h2>
 
               {(iliadPlans[currentSlide].name === "TOP 250 PLUS" || iliadPlans[currentSlide].name === "TOP 300") && (
                 <p className="text-sm text-gray-600 italic mb-4 bg-yellow-50 p-2 rounded-md border border-yellow-200">
