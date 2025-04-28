@@ -1,12 +1,27 @@
 {
-  "name": "AG SERVIZI - Agenzia Multiservizi",
-  "short_name": "AG SERVIZI",
+  "name": "AG Servizi",
+  "short_name": "AG",
   "description": "Agenzia multiservizi a Castellammare di Stabia: pagamenti, spedizioni, attivazioni digitali, CAF e molto altro.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1a4b8c",
   "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
