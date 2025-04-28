@@ -93,7 +93,7 @@ const PromoIliadSection = () => {
       name: "TOP 250 PLUS",
       price: "9,99",
       data: "250 GB in 5G",
-      features: ["Minuti e SMS illimitati", "Roaming in UE incluso", "Minuti illimitati verso 60 destinazioni"],
+      features: ["Minuti e SMS illimitati", "25GB in Europa", "Minuti illimitati verso 60 destinazioni"],
       activationPrice: "9,99",
       discountedActivationPrice: "5,00",
     },
@@ -432,7 +432,9 @@ const PromoIliadSection = () => {
                         />
                       </svg>
                     </div>
-                    <span className="text-lg">{iliadPlans[currentSlide].data}</span>
+                    <span className="text-lg">
+                      {iliadPlans[currentSlide].data} <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                    </span>
                   </div>
                 ) : (
                   <div className="flex items-center mb-2">
@@ -450,7 +452,9 @@ const PromoIliadSection = () => {
                         />
                       </svg>
                     </div>
-                    <span className="text-lg">{iliadPlans[currentSlide].data}</span>
+                    <span className="text-lg">
+                      {iliadPlans[currentSlide].data} <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                    </span>
                   </div>
                 )}
 
