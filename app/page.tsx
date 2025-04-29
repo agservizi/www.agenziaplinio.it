@@ -270,32 +270,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/70 animate-gradient-x">
             <div className="absolute inset-0 opacity-70">
-              {/* Particelle animate interattive */}
-              <div className="particles-container absolute inset-0 overflow-hidden" id="particles-container">
-                {Array.from({ length: 40 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="particle absolute rounded-full cursor-pointer transition-all duration-300"
-                    style={{
-                      width: `${Math.random() * 15 + 5}px`,
-                      height: `${Math.random() * 15 + 5}px`,
-                      backgroundColor: `hsla(${Math.random() * 60 + 190}, 100%, 70%, ${Math.random() * 0.3 + 0.2})`,
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      transform: `scale(${Math.random() * 0.5 + 0.5})`,
-                      animation: `
-                        float-random ${Math.random() * 15 + 10}s infinite ease-in-out,
-                        pulse-opacity ${Math.random() * 4 + 3}s infinite ease-in-out
-                      `,
-                      animationDelay: `${Math.random() * 5}s`,
-                      zIndex: Math.floor(Math.random() * 10),
-                      boxShadow: `0 0 ${Math.random() * 10 + 5}px ${Math.random() * 5 + 2}px hsla(${Math.random() * 60 + 190}, 100%, 70%, 0.3)`,
-                    }}
-                    data-speed={Math.random() * 0.8 + 0.2}
-                    data-direction={Math.random() > 0.5 ? 1 : -1}
-                  ></div>
-                ))}
-              </div>
+              <div className="particles-container h-full w-full" id="particles-js"></div>
             </div>
             <div
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-70"
@@ -336,90 +311,138 @@ export default function Home() {
       </section>
 
       {/* Services Box Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-white relative overflow-hidden">
+        {/* Elementi decorativi di sfondo */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-2">I Nostri Servizi</h2>
+            <p className="text-gray-600">Scopri tutti i servizi che offriamo</p>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            <div className="relative group">
+            <div className="relative group perspective-500">
               <Link
                 href="/servizi/pagamenti"
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors text-center"
+                className="flex flex-col items-center p-4 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md text-center transform hover:-translate-y-1 hover:scale-105"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  <CreditCard className="text-primary" size={28} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:animate-pulse transition-all duration-300 group-hover:bg-primary/20">
+                  <CreditCard
+                    className="text-primary group-hover:scale-110 transition-transform duration-300"
+                    size={28}
+                  />
                 </div>
-                <span className="font-medium">Pagamenti</span>
+                <span className="font-medium group-hover:text-primary transition-colors duration-300">Pagamenti</span>
               </Link>
-              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
+              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm rounded-lg shadow-lg">
                 <p>Paga bollettini, F24, PagoPA, MAV/RAV e effettua bonifici con DropPoint.</p>
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>
 
-            <div className="relative group">
+            <div className="relative group perspective-500">
               <Link
                 href="/servizi/spedizioni"
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors text-center"
+                className="flex flex-col items-center p-4 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md text-center transform hover:-translate-y-1 hover:scale-105"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  <Truck className="text-primary" size={28} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:animate-pulse transition-all duration-300 group-hover:bg-primary/20">
+                  <Truck className="text-primary group-hover:scale-110 transition-transform duration-300" size={28} />
                 </div>
-                <span className="font-medium">Spedizioni</span>
+                <span className="font-medium group-hover:text-primary transition-colors duration-300">Spedizioni</span>
               </Link>
-              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
+              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm rounded-lg shadow-lg">
                 <p>Spedisci pacchi e documenti in Italia e all'estero con BRT, Poste Italiane, TNT/Fedex.</p>
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>
 
-            <div className="relative group">
+            <div className="relative group perspective-500">
               <Link
                 href="/servizi/trust-provider"
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors text-center"
+                className="flex flex-col items-center p-4 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md text-center transform hover:-translate-y-1 hover:scale-105"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  <Shield className="text-primary" size={28} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:animate-pulse transition-all duration-300 group-hover:bg-primary/20">
+                  <Shield className="text-primary group-hover:scale-110 transition-transform duration-300" size={28} />
                 </div>
-                <span className="font-medium">Trust Provider</span>
+                <span className="font-medium group-hover:text-primary transition-colors duration-300">
+                  Trust Provider
+                </span>
               </Link>
-              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
+              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm rounded-lg shadow-lg">
                 <p>Attiva SPID, PEC, Firma Digitale e altri servizi digitali certificati Namirial.</p>
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>
 
-            <div className="relative group">
+            <div className="relative group perspective-500">
               <Link
                 href="/servizi/telefonia-luce-gas"
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors text-center"
+                className="flex flex-col items-center p-4 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md text-center transform hover:-translate-y-1 hover:scale-105"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  <Smartphone className="text-primary" size={28} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:animate-pulse transition-all duration-300 group-hover:bg-primary/20">
+                  <Smartphone
+                    className="text-primary group-hover:scale-110 transition-transform duration-300"
+                    size={28}
+                  />
                 </div>
-                <span className="font-medium">Telefonia e Utenze</span>
+                <span className="font-medium group-hover:text-primary transition-colors duration-300">
+                  Telefonia e Utenze
+                </span>
               </Link>
-              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
+              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm rounded-lg shadow-lg">
                 <p>Attiva contratti per telefonia, internet, luce e gas con i migliori operatori sul mercato.</p>
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>
 
-            <div className="relative group">
+            <div className="relative group perspective-500">
               <Link
                 href="/servizi/caf-patronato"
-                className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors text-center"
+                className="flex flex-col items-center p-4 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md text-center transform hover:-translate-y-1 hover:scale-105"
               >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                  <Users className="text-primary" size={28} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-3 group-hover:animate-pulse transition-all duration-300 group-hover:bg-primary/20">
+                  <Users className="text-primary group-hover:scale-110 transition-transform duration-300" size={28} />
                 </div>
-                <span className="font-medium">CAF e Patronato</span>
+                <span className="font-medium group-hover:text-primary transition-colors duration-300">
+                  CAF e Patronato
+                </span>
               </Link>
-              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg">
+              <div className="absolute z-10 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm rounded-lg shadow-lg">
                 <p>Assistenza per dichiarazioni dei redditi, ISEE, pratiche pensionistiche e altri servizi fiscali.</p>
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900"></div>
               </div>
             </div>
           </div>
+
+          {/* Aggiungi un pulsante "Vedi tutti i servizi" */}
+          <div className="text-center mt-8">
+            <Link
+              href="/servizi"
+              className="inline-flex items-center justify-center bg-primary/10 hover:bg-primary/20 text-primary font-medium py-2 px-4 rounded-md transition-all duration-300 hover:shadow group"
+            >
+              <span>Vedi tutti i servizi</span>
+              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
+
+        {/* Aggiungi stili CSS per le animazioni */}
+        <style jsx>{`
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+          }
+          
+          .group-hover\\:animate-pulse:hover {
+            animation: pulse 2s infinite ease-in-out;
+          }
+          
+          .perspective-500 {
+            perspective: 500px;
+          }
+        `}</style>
       </section>
 
       {/* About Section */}
@@ -527,10 +550,17 @@ export default function Home() {
       </section>
 
       {/* Featured Services */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">I Nostri Servizi Principali</h2>
+      <section className="py-16 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+        {/* Elementi decorativi di sfondo */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12" data-aos="fade-up" data-aos-duration="800">
+            <h2 className="text-3xl font-bold mb-4 relative inline-block">
+              I Nostri Servizi Principali
+              <span className="absolute -bottom-2 left-1/4 right-1/4 h-1 bg-primary rounded-full"></span>
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Offriamo una vasta gamma di servizi per soddisfare tutte le tue esigenze quotidiane. Ecco alcuni dei
               nostri servizi più richiesti.
@@ -538,43 +568,91 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredServices.map((service) => (
-              <div key={service.id} className="bg-white rounded-lg shadow-md overflow-hidden service-card">
-                <div className="h-48 bg-primary/10 flex items-center justify-center relative">
+            {featuredServices.map((service, index) => (
+              <div
+                key={service.id}
+                className="bg-white rounded-lg shadow-md overflow-hidden service-card group transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2"
+                data-aos="fade-up"
+                data-aos-duration="800"
+                data-aos-delay={index * 100}
+              >
+                <div className="h-48 bg-primary/10 flex items-center justify-center relative overflow-hidden">
                   <Image
                     src={service.image || "/placeholder.svg"}
                     alt={service.title}
                     width={400}
                     height={300}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md">{service.icon}</div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
+                    {service.icon}
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <div className="p-6 relative">
+                  <div className="absolute top-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-500"></div>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                    {service.title}
+                  </h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
                   <Link
                     href={`/servizi/${service.id}`}
-                    className="text-primary hover:text-primary/80 font-medium inline-flex items-center transition-colors"
+                    className="text-primary hover:text-primary/80 font-medium inline-flex items-center transition-colors relative overflow-hidden group-hover:font-bold"
                   >
-                    Scopri di più
-                    <ArrowRight size={16} className="ml-1" />
+                    <span className="relative z-10">Scopri di più</span>
+                    <ArrowRight
+                      size={16}
+                      className="ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                   </Link>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
             <Link
               href="/servizi"
-              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-colors inline-flex items-center"
+              className="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-md transition-all duration-300 hover:shadow-lg hover:px-10 inline-flex items-center group"
             >
-              Vedi tutti i servizi
-              <ArrowRight size={18} className="ml-2" />
+              <span>Vedi tutti i servizi</span>
+              <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>
+
+        {/* Aggiungi stili CSS per le animazioni */}
+        <style jsx>{`
+          .service-card {
+            position: relative;
+            z-index: 1;
+            transition: all 0.5s ease;
+          }
+          
+          .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1) 0%, rgba(var(--secondary-rgb), 0.1) 100%);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            border-radius: 0.5rem;
+          }
+          
+          .service-card:hover::before {
+            opacity: 1;
+          }
+          
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+        `}</style>
       </section>
 
       {/* Testimonials */}
@@ -591,41 +669,23 @@ export default function Home() {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-float-slow"></div>
           <div className="absolute top-1/2 left-3/4 w-40 h-40 bg-white/5 rounded-full blur-xl animate-spin-very-slow"></div>
 
-          {/* Particelle animate interattive */}
-          <div className="absolute inset-0 opacity-70">
-            <div className="particles-container absolute inset-0 overflow-hidden" id="particles-js">
-              {Array.from({ length: 40 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="particle absolute rounded-full cursor-pointer transition-all duration-300"
-                  style={{
-                    width: `${Math.random() * 15 + 5}px`,
-                    height: `${Math.random() * 15 + 5}px`,
-                    backgroundColor: `hsla(${Math.random() * 60 + 190}, 100%, 70%, ${Math.random() * 0.3 + 0.2})`,
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                    transform: `scale(${Math.random() * 0.5 + 0.5})`,
-                    animation: `
-                      float-random ${Math.random() * 15 + 10}s infinite ease-in-out,
-                      pulse-opacity ${Math.random() * 4 + 3}s infinite ease-in-out
-                    `,
-                    animationDelay: `${Math.random() * 5}s`,
-                    zIndex: Math.floor(Math.random() * 10),
-                    boxShadow: `0 0 ${Math.random() * 10 + 5}px ${Math.random() * 5 + 2}px hsla(${Math.random() * 60 + 190}, 100%, 70%, 0.3)`,
-                  }}
-                  data-speed={Math.random() * 0.8 + 0.2}
-                  data-direction={Math.random() > 0.5 ? 1 : -1}
-                ></div>
-              ))}
-            </div>
+          {/* Particelle animate */}
+          <div className="particles-container absolute inset-0">
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute bg-white/20 rounded-full"
+                style={{
+                  width: `${Math.random() * 10 + 5}px`,
+                  height: `${Math.random() * 10 + 5}px`,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animation: `float-random ${Math.random() * 10 + 10}s infinite ease-in-out`,
+                  animationDelay: `${Math.random() * 5}s`,
+                }}
+              ></div>
+            ))}
           </div>
-          <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-70"
-            style={{
-              transform: "translateY(0px)",
-              animation: "pulse 8s infinite ease-in-out",
-            }}
-          ></div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -845,134 +905,7 @@ export default function Home() {
           .animate-spin-very-slow {
             animation: spin-very-slow 30s infinite linear;
           }
-
-          @keyframes pulse-opacity {
-            0%, 100% {
-              opacity: 0.3;
-              transform: scale(1);
-            }
-            50% {
-              opacity: 0.7;
-              transform: scale(1.2);
-            }
-          }
-
-          .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: scale(0);
-            animation: ripple 1s ease-out;
-            pointer-events: none;
-          }
-
-          @keyframes ripple {
-            to {
-              transform: scale(15);
-              opacity: 0;
-            }
-          }
-
-          .particle {
-            will-change: transform;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
-          }
-
-          .particle:hover {
-            z-index: 20;
-          }
         `}</style>
-
-        {/* Script per l'interattività delle particelle */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.addEventListener('DOMContentLoaded', function() {
-                const container = document.getElementById('particles-container');
-                if (!container) return;
-                
-                const particles = container.querySelectorAll('.particle');
-                
-                // Effetto parallasse al movimento del mouse
-                container.addEventListener('mousemove', function(e) {
-                  const x = e.clientX / window.innerWidth;
-                  const y = e.clientY / window.innerHeight;
-                  
-                  particles.forEach(particle => {
-                    const speed = parseFloat(particle.getAttribute('data-speed'));
-                    const direction = parseFloat(particle.getAttribute('data-direction'));
-                    const moveX = (x - 0.5) * speed * 50 * direction;
-                    const moveY = (y - 0.5) * speed * 50 * direction;
-                    
-                    particle.style.transform = 'translate3d(' + moveX + 'px, ' + moveY + 'px, 0) scale(' + (speed + 0.5) + ')';
-                  });
-                });
-                
-                // Effetto pulsazione al click
-                container.addEventListener('click', function(e) {
-                  const rect = container.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  
-                  // Crea un elemento di onda
-                  const ripple = document.createElement('div');
-                  ripple.className = 'ripple-effect';
-                  ripple.style.left = x + 'px';
-                  ripple.style.top = y + 'px';
-                  container.appendChild(ripple);
-                  
-                  // Effetto sulle particelle
-                  particles.forEach(particle => {
-                    const particleRect = particle.getBoundingClientRect();
-                    const particleX = particleRect.left + particleRect.width/2 - rect.left;
-                    const particleY = particleRect.top + particleRect.height/2 - rect.top;
-                    
-                    const dx = particleX - x;
-                    const dy = particleY - y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const maxDistance = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
-                    
-                    if (distance < 150) {
-                      const scale = 1 + (1 - distance/150) * 1;
-                      const speed = parseFloat(particle.getAttribute('data-speed'));
-                      const direction = dx > 0 ? 1 : -1;
-                      const moveX = direction * (150 - distance) * 0.3;
-                      const moveY = (dy > 0 ? 1 : -1) * (150 - distance) * 0.3;
-                      
-                      particle.style.transform = 'translate3d(' + moveX + 'px, ' + moveY + 'px, 0) scale(' + scale + ')';
-                      particle.style.boxShadow = '0 0 ' + (20 * scale) + 'px ' + (10 * scale) + 'px hsla(' + (Math.random() * 60 + 190) + ', 100%, 70%, 0.5)';
-                      
-                      setTimeout(() => {
-                        particle.style.transform = '';
-                        particle.style.boxShadow = '';
-                      }, 1000);
-                    }
-                  });
-                  
-                  // Rimuovi l'elemento onda dopo l'animazione
-                  setTimeout(() => {
-                    ripple.remove();
-                  }, 1000);
-                });
-                
-                // Effetto hover sulle particelle
-                particles.forEach(particle => {
-                  particle.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(2)';
-                    this.style.zIndex = '20';
-                    this.style.boxShadow = '0 0 20px 10px hsla(' + (Math.random() * 60 + 190) + ', 100%, 70%, 0.6)';
-                  });
-                  
-                  particle.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                    this.style.zIndex = '';
-                    this.style.boxShadow = '';
-                  });
-                });
-              });
-            `,
-          }}
-        />
       </section>
 
       {/* Fine della sezione CTA */}

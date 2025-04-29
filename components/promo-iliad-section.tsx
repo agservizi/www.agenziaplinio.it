@@ -314,7 +314,19 @@ const PromoIliadSection = () => {
   }
 
   return (
-    <section className="py-16 bg-[#f5f5f7]">
+    <section className="py-16 relative overflow-hidden bg-gradient-to-b from-[#f5f5f7] to-[#e8e8ec]">
+      {/* Elementi decorativi di sfondo */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-[#ff0032] opacity-5 animate-pulse"></div>
+        <div
+          className="absolute top-1/4 right-10 w-60 h-60 rounded-full bg-[#ff0032] opacity-5 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-10 left-1/4 w-40 h-40 rounded-full bg-[#ff0032] opacity-5 animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+      </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Pulsante admin nascosto (visibile solo in modalità admin) */}
         {isAdmin && (
@@ -326,12 +338,12 @@ const PromoIliadSection = () => {
         )}
 
         {/* Promozione Iliad */}
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden relative">
+        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden relative transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-1">
           {/* Controlli dello slider */}
           <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
             <button
               onClick={prevSlide}
-              className="bg-white rounded-full p-2 shadow-md text-[#ff0032] hover:bg-gray-100 -ml-4"
+              className="bg-white rounded-full p-2 shadow-md text-[#ff0032] hover:bg-gray-100 hover:text-white hover:bg-[#ff0032] transition-all duration-300 -ml-4 transform hover:scale-110"
               aria-label="Offerta precedente"
             >
               <ChevronLeft size={24} />
@@ -341,7 +353,7 @@ const PromoIliadSection = () => {
           <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
             <button
               onClick={nextSlide}
-              className="bg-white rounded-full p-2 shadow-md text-[#ff0032] hover:bg-gray-100 -mr-4"
+              className="bg-white rounded-full p-2 shadow-md text-[#ff0032] hover:bg-gray-100 hover:text-white hover:bg-[#ff0032] transition-all duration-300 -mr-4 transform hover:scale-110"
               aria-label="Offerta successiva"
             >
               <ChevronRight size={24} />
@@ -354,7 +366,7 @@ const PromoIliadSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full ${currentSlide === index ? "bg-[#ff0032]" : "bg-gray-300"}`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 transform ${currentSlide === index ? "bg-[#ff0032] scale-125" : "bg-gray-300 hover:bg-[#ff9999] hover:scale-110"}`}
                 aria-label={`Vai all'offerta ${index + 1}`}
               />
             ))}
@@ -363,11 +375,12 @@ const PromoIliadSection = () => {
           {/* Contenuto dello slider */}
           <div className="flex flex-col md:flex-row">
             {/* Colonna sinistra con logo e immagine */}
-            <div className="md:w-1/3 bg-[#ff0032] p-6 flex flex-col items-center justify-center">
+            <div className="md:w-1/3 bg-gradient-to-br from-[#ff0032] to-[#cc0029] p-6 flex flex-col items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('/abstract-pattern.svg')] opacity-10"></div>
               <img
                 src="https://qwyk4zaydta0yrkb.public.blob.vercel-storage.com/Iliad_logo-emmzu7gUgFwdyAdgiVCNUtInfD3i2S.png"
                 alt="Logo Iliad"
-                className="h-16 mb-6"
+                className="h-16 mb-6 transition-all duration-500 hover:scale-110 filter drop-shadow-lg"
               />
               <div className="text-white text-center">
                 <p className="font-bold text-xl mb-2">OFFERTA ESCLUSIVA</p>
@@ -377,25 +390,25 @@ const PromoIliadSection = () => {
                 <p className="font-bold">31 maggio ore 19:00</p>
 
                 {/* Countdown */}
-                <div className="mt-4 bg-white rounded-lg p-3 text-[#ff0032]">
+                <div className="mt-4 bg-white rounded-lg p-3 text-[#ff0032] shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 transform">
                   <p className="text-xs text-center text-gray-600 mb-1">COUNTDOWN</p>
                   <div className="flex justify-center space-x-2">
-                    <div className="text-center">
+                    <div className="text-center bg-gray-50 rounded-md px-2 py-1 transition-all duration-300 hover:bg-[#fff0f0] hover:scale-110 transform">
                       <div className="text-xl font-bold">{timeLeft.days}</div>
                       <div className="text-xs">giorni</div>
                     </div>
                     <div className="text-xl font-bold">:</div>
-                    <div className="text-center">
+                    <div className="text-center bg-gray-50 rounded-md px-2 py-1 transition-all duration-300 hover:bg-[#fff0f0] hover:scale-110 transform">
                       <div className="text-xl font-bold">{timeLeft.hours.toString().padStart(2, "0")}</div>
                       <div className="text-xs">ore</div>
                     </div>
                     <div className="text-xl font-bold">:</div>
-                    <div className="text-center">
+                    <div className="text-center bg-gray-50 rounded-md px-2 py-1 transition-all duration-300 hover:bg-[#fff0f0] hover:scale-110 transform">
                       <div className="text-xl font-bold">{timeLeft.minutes.toString().padStart(2, "0")}</div>
                       <div className="text-xs">min</div>
                     </div>
                     <div className="text-xl font-bold">:</div>
-                    <div className="text-center">
+                    <div className="text-center bg-gray-50 rounded-md px-2 py-1 transition-all duration-300 hover:bg-[#fff0f0] hover:scale-110 transform">
                       <div className="text-xl font-bold">{timeLeft.seconds.toString().padStart(2, "0")}</div>
                       <div className="text-xs">sec</div>
                     </div>
@@ -405,11 +418,12 @@ const PromoIliadSection = () => {
             </div>
 
             {/* Colonna destra con dettagli offerta */}
-            <div className="md:w-2/3 p-6 md:p-8">
-              <h2 className="text-3xl font-bold text-[#ff0032] mb-2 flex items-center">
+            <div className="md:w-2/3 p-6 md:p-8 relative">
+              <div className="absolute top-0 left-0 w-0 h-1 bg-gradient-to-r from-[#ff0032] to-[#ff9999] group-hover:w-full transition-all duration-700"></div>
+              <h2 className="text-3xl font-bold text-[#ff0032] mb-2 flex items-center transition-all duration-300 hover:text-[#cc0029] transform hover:translate-x-1">
                 Offerta Iliad {iliadPlans[currentSlide].name}
                 {iliadPlans[currentSlide].data.includes("5G") && (
-                  <span className="ml-2 text-xs font-bold bg-[#ff0032] text-white px-2 py-1 rounded-md inline-flex items-center">
+                  <span className="ml-2 text-xs font-bold bg-[#ff0032] text-white px-2 py-1 rounded-md inline-flex items-center animate-pulse">
                     5G
                   </span>
                 )}
@@ -425,10 +439,10 @@ const PromoIliadSection = () => {
               <div className="mb-6">
                 {iliadPlans[currentSlide].data.includes("5G") ? (
                   <div className="flex items-center mb-2">
-                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
+                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3 transition-all duration-300 hover:bg-[#cc0029] hover:scale-110 transform">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 transition-transform duration-300 hover:scale-125"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -445,10 +459,10 @@ const PromoIliadSection = () => {
                   </div>
                 ) : (
                   <div className="flex items-center mb-2">
-                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
+                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3 transition-all duration-300 hover:bg-[#cc0029] hover:scale-110 transform">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 transition-transform duration-300 hover:scale-125"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -467,10 +481,10 @@ const PromoIliadSection = () => {
 
                 {iliadPlans[currentSlide].features.map((feature, index) => (
                   <div key={index} className="flex items-center mb-2">
-                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3">
+                    <div className="w-8 h-8 rounded-full bg-[#ff0032] flex items-center justify-center text-white mr-3 transition-all duration-300 hover:bg-[#cc0029] hover:scale-110 transform">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 transition-transform duration-300 hover:scale-125"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -489,7 +503,9 @@ const PromoIliadSection = () => {
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <p className="text-sm text-gray-500">Costo mensile</p>
-                  <p className="text-4xl font-bold text-[#ff0032]">€{iliadPlans[currentSlide].price}</p>
+                  <p className="text-4xl font-bold text-[#ff0032] transition-all duration-300 hover:text-[#cc0029] hover:scale-110 transform inline-block">
+                    €{iliadPlans[currentSlide].price}
+                  </p>
                   <p className="text-sm text-gray-500">al mese per sempre</p>
                 </div>
 
@@ -497,7 +513,7 @@ const PromoIliadSection = () => {
                   <p className="text-sm text-gray-500">Attivazione</p>
                   <p className="text-xl">
                     <span className="line-through text-gray-500 mr-2">€{iliadPlans[currentSlide].activationPrice}</span>
-                    <span className="font-bold text-[#ff0032]">
+                    <span className="font-bold text-[#ff0032] transition-all duration-300 hover:text-[#cc0029] hover:scale-110 transform inline-block">
                       €{iliadPlans[currentSlide].discountedActivationPrice}
                     </span>
                   </p>
@@ -507,7 +523,7 @@ const PromoIliadSection = () => {
               <button
                 onClick={() => handleDownloadVoucher(iliadPlans[currentSlide])}
                 disabled={isDownloading}
-                className="w-full py-3 bg-[#ff0032] text-white font-bold rounded-lg hover:bg-[#d60029] transition-colors relative overflow-hidden"
+                className="w-full py-3 bg-[#ff0032] text-white font-bold rounded-lg hover:bg-[#d60029] transition-all duration-300 relative overflow-hidden hover:shadow-lg transform hover:scale-[1.02] hover:-translate-y-0.5"
               >
                 {isDownloading ? (
                   <span className="flex items-center justify-center">
