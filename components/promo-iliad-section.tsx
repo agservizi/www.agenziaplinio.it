@@ -90,17 +90,17 @@ const PromoIliadSection = () => {
       discountedActivationPrice: "5,00",
     },
     {
-      name: "TOP 250 PLUS",
+      name: "GIGA 200",
       price: "9,99",
-      data: "250 GB in 5G",
-      features: ["Minuti e SMS illimitati", "25GB in Europa", "Minuti illimitati verso 60 destinazioni"],
+      data: "200 GB in 5G",
+      features: ["Minuti e SMS illimitati", "13GB in Europa", "Minuti illimitati verso 60 destinazioni"],
       activationPrice: "9,99",
       discountedActivationPrice: "5,00",
     },
     {
-      name: "TOP 300",
+      name: "GIGA 250",
       price: "11,99",
-      data: "300 GB in 5G",
+      data: "250 GB in 5G",
       features: ["Minuti e SMS illimitati", "16GB dedicati in Europa", "Minuti illimitati verso 60 destinazioni"],
       activationPrice: "9,99",
       discountedActivationPrice: "5,00",
@@ -228,28 +228,12 @@ const PromoIliadSection = () => {
       doc.text("Data di emissione: " + currentDate, 74, 80, { align: "center" })
       doc.text("Valido fino al: 31 maggio 2025, ore 19:00", 74, 85, { align: "center" })
 
-      // Aggiungi nota specifica per TOP 250 PLUS e TOP 300
-      if (plan.name === "TOP 250 PLUS" || plan.name === "TOP 300") {
-        // Aggiungi un rettangolo di sfondo giallo chiaro
-        doc.setFillColor(255, 250, 230)
-        doc.roundedRect(24, 90, 100, 10, 2, 2, "F")
+      // Linea divisoria
+      doc.setDrawColor(220, 220, 220)
+      doc.line(24, 90, 124, 90)
 
-        doc.setTextColor(100, 100, 100)
-        doc.setFontSize(8)
-        doc.setFont("helvetica", "bold")
-        doc.text("Nota: Questa offerta termina il 6 maggio ore 15:00 salvo proroga.", 74, 96, { align: "center" })
-
-        // Sposta la linea divisoria più in basso
-        doc.setDrawColor(220, 220, 220)
-        doc.line(24, 105, 124, 105)
-      } else {
-        // Linea divisoria nella posizione originale
-        doc.setDrawColor(220, 220, 220)
-        doc.line(24, 90, 124, 90)
-      }
-
-      // Calcola l'offset per gli elementi successivi
-      const yOffset = plan.name === "TOP 250 PLUS" || plan.name === "TOP 300" ? 15 : 0
+      // Nessun offset necessario
+      const yOffset = 0
 
       // Dettagli dell'offerta
       doc.setFontSize(11)
@@ -428,13 +412,6 @@ const PromoIliadSection = () => {
                   </span>
                 )}
               </h2>
-
-              {(iliadPlans[currentSlide].name === "TOP 250 PLUS" || iliadPlans[currentSlide].name === "TOP 300") && (
-                <p className="text-sm text-gray-600 italic mb-4 bg-yellow-50 p-2 rounded-md border border-yellow-200">
-                  <span className="font-semibold">Nota:</span> Questa offerta termina il 6 maggio ore 15:00 salvo
-                  proroga.
-                </p>
-              )}
 
               <div className="mb-6">
                 {iliadPlans[currentSlide].data.includes("5G") ? (

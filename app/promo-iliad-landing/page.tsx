@@ -104,16 +104,13 @@ export default function IliadLandingPage() {
               <div className="bg-[#ff0032] text-white text-center py-2 text-sm font-bold">PIÙ POPOLARE</div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-bold text-[#ff0032]">TOP 250 PLUS</h3>
+                  <h3 className="text-xl font-bold text-[#ff0032]">GIGA 200</h3>
                   <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#ff0032] text-white">
                     5G INCLUSO
                   </span>
                 </div>
                 <div className="text-3xl font-bold mb-4">
                   €9,99<span className="text-sm font-normal text-gray-500">/mese</span>
-                </div>
-                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-3 py-2 rounded-md text-sm mb-4">
-                  Offerta attivabile fino al 6 maggio ore 15
                 </div>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start">
@@ -126,7 +123,7 @@ export default function IliadLandingPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>
-                      250 GB in 5G <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                      200 GB in 5G <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -149,7 +146,7 @@ export default function IliadLandingPage() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>25GB in Europa</span>
+                    <span>13GB dedicati in Europa</span>
                   </li>
                 </ul>
                 <div className="bg-gray-100 p-3 rounded-lg text-center mb-4">
@@ -166,16 +163,13 @@ export default function IliadLandingPage() {
             <div className="bg-white rounded-lg shadow-md overflow-hidden border-t-4 border-[#ff0032]">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-bold text-[#ff0032]">TOP 300</h3>
+                  <h3 className="text-xl font-bold text-[#ff0032]">GIGA 250</h3>
                   <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#ff0032] text-white">
                     5G INCLUSO
                   </span>
                 </div>
                 <div className="text-3xl font-bold mb-4">
                   €11,99<span className="text-sm font-normal text-gray-500">/mese</span>
-                </div>
-                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-3 py-2 rounded-md text-sm mb-4">
-                  Offerta attivabile fino al 6 maggio ore 15
                 </div>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start">
@@ -188,7 +182,7 @@ export default function IliadLandingPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>
-                      300 GB in 5G <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
+                      250 GB in 5G <span className="font-bold text-[#ff0032]">PER SEMPRE</span>
                     </span>
                   </li>
                   <li className="flex items-start">

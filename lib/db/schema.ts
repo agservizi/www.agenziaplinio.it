@@ -49,5 +49,18 @@ export async function createSchema() {
     );
   `
 
+  // Create contract_requests table
+  await sql`
+    CREATE TABLE IF NOT EXISTS contract_requests (
+      id SERIAL PRIMARY KEY,
+      type VARCHAR(50) NOT NULL, -- telefonia, luce, gas
+      status VARCHAR(50) DEFAULT 'pending', -- pending, approved, rejected, completed
+      request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      user_email VARCHAR(255) NOT NULL,
+      details JSONB NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `
+
   console.log("Schema created successfully")
 }

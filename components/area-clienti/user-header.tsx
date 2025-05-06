@@ -101,6 +101,14 @@ export function UserHeader({ userData, onLogout, activeTab, setActiveTab }: User
         >
           Servizi
         </button>
+        <button
+          onClick={() => setActiveTab("contracts")}
+          className={`px-6 py-4 font-medium text-sm whitespace-nowrap ${
+            activeTab === "contracts" ? "text-primary border-b-2 border-primary" : "text-gray-600 hover:text-primary"
+          }`}
+        >
+          Contratti
+        </button>
       </div>
 
       {/* Mobile Navigation */}
@@ -117,6 +125,7 @@ export function UserHeader({ userData, onLogout, activeTab, setActiveTab }: User
           <option value="documents">Documenti</option>
           <option value="bills">Fatture</option>
           <option value="services">Servizi</option>
+          <option value="contracts">Contratti</option>
         </select>
       </div>
     </div>

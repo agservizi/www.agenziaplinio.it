@@ -18,6 +18,8 @@ import { BillsSection } from "@/components/area-clienti/bills-section"
 import { ServiceRequestsSection } from "@/components/area-clienti/service-requests-section"
 import { QuickActionsSection } from "@/components/area-clienti/quick-actions-section"
 import { UpcomingAppointment } from "@/components/area-clienti/upcoming-appointment"
+// Aggiungere l'import per i nuovi componenti dei contratti
+import { ContractsSection } from "@/components/area-clienti/contracts-section"
 
 // Interfacce per i tipi di dati
 interface Appointment {
@@ -174,6 +176,8 @@ const sampleUserData: UserData = {
 function CustomerPortalContent() {
   const { userData, isLoggedIn, logout } = useUser()
   const [activeTab, setActiveTab] = useState("dashboard")
+  // Dopo const [activeTab, setActiveTab] = useState("dashboard"), aggiungere:
+  const [activeContractType, setActiveContractType] = useState("telefonia")
   const router = useRouter()
 
   // Utilizziamo il custom hook per recuperare gli appuntamenti
@@ -442,6 +446,59 @@ function CustomerPortalContent() {
                   </div>
                 </div>
                 <ServiceRequestsSection requests={userData.serviceRequests} />
+              </div>
+            )}
+
+            {activeTab === "contracts" && (
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold">Richiedi Contratti</h2>
+                  <div className="flex space-x-2">
+                    <button
+                      className="bg-gray-500 text-white hover:bg-gray-600 px-4 py-2 rounded-md text-sm font-medium flex items-center"
+                      onClick={() => setActiveTab("dashboard")}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 mr-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                        />
+                      </svg>
+                      Torna indietro
+                    </button>
+                    <button
+                      className="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-md text-sm font-medium"
+                      onClick={() => setActiveContractType("telefonia")}
+                    >
+                      Telefonia
+                    </button>
+                    <button
+                      className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium"
+                      onClick={() => setActiveContractType("luce")}
+                    >
+                      Luce
+                    </button>
+                    <button
+                      className="bg-yellow-600 text-white hover:bg-yellow-700 px-4 py-2 rounded-md text-sm font-medium"
+                      onClick={() => setActiveContractType("gas")}
+                    >
+                      Gas
+                    </button>
+                  </div>
+                </div>
+                <ContractsSection
+                  userEmail={userData.email}
+                  activeContractType={activeContractType}
+                  setActiveContractType={setActiveContractType}
+                />
               </div>
             )}
           </div>
