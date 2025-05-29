@@ -55,291 +55,330 @@ export default function PuntoRitiro() {
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-12">
-            <div className="lg:w-2/3">
-              <h2 className="text-3xl font-bold mb-8">I Nostri Servizi di Punto Ritiro</h2>
+      {/* Main Content - Full Page Interactive Layout */}
+      <section className="relative py-16 bg-gray-50 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-secondary/10 to-transparent rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+        </div>
 
-              <div className="space-y-12">
-                <div className="bg-white p-8 rounded-lg shadow-md">
-                  <div className="flex items-start">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Package className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4">Corrieri Disponibili</h3>
-                      <p className="text-gray-600 mb-6">
-                        Siamo punto di ritiro ufficiale per i principali corrieri nazionali e internazionali, offrendo
-                        un servizio comodo e flessibile per il ritiro dei tuoi pacchi.
-                      </p>
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              I Nostri Servizi di Punto Ritiro
+            </h2>
+            <p className="text-lg text-gray-600">
+              Scopri tutti i vantaggi del nostro servizio di punto ritiro pacchi e come utilizzarlo al meglio per
+              ricevere i tuoi acquisti online.
+            </p>
+            <div className="mt-6 w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
+          </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">PuntoPoste</h4>
-                          <p className="text-gray-600 text-sm">
-                            Punto di ritiro ufficiale per i pacchi di Poste Italiane.
-                          </p>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">BRT-Fermopoint</h4>
-                          <p className="text-gray-600 text-sm">Punto di ritiro per i pacchi spediti con BRT.</p>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">GLS Shop</h4>
-                          <p className="text-gray-600 text-sm">Punto di ritiro per i pacchi spediti con GLS.</p>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Fedex Location</h4>
-                          <p className="text-gray-600 text-sm">Punto di ritiro per i pacchi spediti con Fedex/TNT.</p>
-                        </div>
-                      </div>
-
-                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
-                        <h4 className="font-bold mb-2 flex items-center">
-                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
-                          Come funziona
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          Quando effettui un acquisto online, seleziona la nostra agenzia come punto di ritiro.
-                          Riceverai una notifica quando il pacco sarà disponibile per il ritiro. Presentati in agenzia
-                          con un documento d'identità e il codice di ritiro.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white p-8 rounded-lg shadow-md">
-                  <div className="flex items-start">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <MapPin className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4">Vantaggi del Punto Ritiro</h3>
-                      <p className="text-gray-600 mb-6">
-                        Scegliere la nostra agenzia come punto di ritiro offre numerosi vantaggi rispetto alla consegna
-                        a domicilio.
-                      </p>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Orari Flessibili</h4>
-                          <p className="text-gray-600 text-sm">
-                            Ritira i tuoi pacchi negli orari di apertura dell'agenzia, senza dover attendere a casa il
-                            corriere.
-                          </p>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Nessuna Attesa</h4>
-                          <p className="text-gray-600 text-sm">
-                            Evita le attese e i mancati recapiti, ritira quando preferisci.
-                          </p>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Sicurezza</h4>
-                          <p className="text-gray-600 text-sm">
-                            I tuoi pacchi sono custoditi in un luogo sicuro fino al tuo ritiro.
-                          </p>
-                        </div>
-
-                        <div className="bg-gray-50 p-4 rounded-md">
-                          <h4 className="font-bold mb-2">Assistenza</h4>
-                          <p className="text-gray-600 text-sm">
-                            Personale qualificato a tua disposizione per qualsiasi necessità.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white p-8 rounded-lg shadow-md">
-                  <div className="flex items-start">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Clock className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4">Procedura di Ritiro</h3>
-                      <p className="text-gray-600 mb-6">
-                        Ritirare un pacco presso la nostra agenzia è semplice e veloce. Ecco la procedura da seguire:
-                      </p>
-
-                      <ol className="space-y-4 mb-6">
-                        <li className="flex items-start">
-                          <span className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-primary font-bold">
-                            1
-                          </span>
-                          <div>
-                            <h4 className="font-bold mb-1">Ricevi la notifica</h4>
-                            <p className="text-gray-600 text-sm">
-                              Quando il pacco arriva in agenzia, riceverai una notifica via SMS o email dal corriere con
-                              un codice di ritiro.
-                            </p>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <span className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-primary font-bold">
-                            2
-                          </span>
-                          <div>
-                            <h4 className="font-bold mb-1">Vieni in agenzia</h4>
-                            <p className="text-gray-600 text-sm">
-                              Presentati in agenzia negli orari di apertura con un documento d'identità valido e il
-                              codice di ritiro.
-                            </p>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <span className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center mr-3 flex-shrink-0 text-primary font-bold">
-                            3
-                          </span>
-                          <div>
-                            <h4 className="font-bold mb-1">Ritira il pacco</h4>
-                            <p className="text-gray-600 text-sm">
-                              Il nostro personale verificherà la tua identità e ti consegnerà il pacco. Potrai
-                              controllare il contenuto prima di lasciare l'agenzia.
-                            </p>
-                          </div>
-                        </li>
-                      </ol>
-
-                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
-                        <h4 className="font-bold mb-2 flex items-center">
-                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
-                          Cosa serve
-                        </h4>
-                        <p className="text-gray-600 text-sm">
-                          Per ritirare un pacco è necessario presentare un documento d'identità valido (carta
-                          d'identità, patente o passaporto) e il codice di ritiro ricevuto via SMS o email. In caso di
-                          delega, è necessaria una delega scritta e una copia del documento del delegante.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          {/* Corrieri Disponibili */}
+          <div className="mb-24">
+            <div className="flex items-center justify-center mb-10">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <Package className="text-primary" size={32} />
               </div>
+              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Corrieri Disponibili
+              </h3>
+            </div>
 
-              {/* Loghi dei Partner */}
-              <div className="mt-16">
-                <h3 className="text-2xl font-bold mb-6">I Nostri Partner</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <Image
-                    src="/loghi/punto-ritiro/puntoposte.png"
-                    alt="PuntoPoste"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
-                  <Image
-                    src="/loghi/punto-ritiro/brt-fermopoint.png"
-                    alt="BRT Fermopoint"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
-                  <Image
-                    src="/loghi/punto-ritiro/gls-shop.png"
-                    alt="GLS Shop"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
-                  <Image
-                    src="/loghi/punto-ritiro/fedex-location.png"
-                    alt="Fedex Location"
-                    width={200}
-                    height={200}
-                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
-                  />
+            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+              Siamo punto di ritiro ufficiale per i principali corrieri nazionali e internazionali, offrendo un servizio
+              comodo e flessibile per il ritiro dei tuoi pacchi.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  title: "PuntoPoste",
+                  description: "Punto di ritiro ufficiale per i pacchi di Poste Italiane.",
+                  logo: "/loghi/punto-ritiro/puntoposte.png",
+                },
+                {
+                  title: "BRT-Fermopoint",
+                  description: "Punto di ritiro per i pacchi spediti con BRT.",
+                  logo: "/loghi/punto-ritiro/brt-fermopoint.png",
+                },
+                {
+                  title: "GLS Shop",
+                  description: "Punto di ritiro per i pacchi spediti con GLS.",
+                  logo: "/loghi/punto-ritiro/gls-shop.png",
+                },
+                {
+                  title: "Fedex Location",
+                  description: "Punto di ritiro per i pacchi spediti con Fedex/TNT.",
+                  logo: "/loghi/punto-ritiro/fedex-location.png",
+                },
+              ].map((corriere, index) => (
+                <div
+                  key={index}
+                  className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
+                >
+                  <div className="h-32 flex items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+                    <Image
+                      src={corriere.logo || "/placeholder.svg"}
+                      alt={corriere.title}
+                      width={160}
+                      height={80}
+                      className="object-contain max-h-24 transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h4 className="font-bold text-xl mb-2">{corriere.title}</h4>
+                    <p className="text-gray-600">{corriere.description}</p>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
 
-              {/* FAQ */}
-              <div className="mt-16">
-                <FAQSection
-                  title="Domande Frequenti sul Punto Ritiro"
-                  description="Trova le risposte alle domande più comuni sul nostro servizio di punto ritiro pacchi."
-                  faqs={puntoRitiroFAQs}
-                />
+            <div className="mt-12 bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border border-yellow-200 max-w-3xl mx-auto">
+              <h4 className="font-bold mb-3 flex items-center text-lg">
+                <HelpCircle size={20} className="mr-2 text-yellow-500" />
+                Come funziona
+              </h4>
+              <p className="text-gray-700">
+                Quando effettui un acquisto online, seleziona la nostra agenzia come punto di ritiro. Riceverai una
+                notifica quando il pacco sarà disponibile per il ritiro. Presentati in agenzia con un documento
+                d'identità e il codice di ritiro.
+              </p>
+            </div>
+          </div>
+
+          {/* Vantaggi del Punto Ritiro */}
+          <div className="mb-24 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl -z-10"></div>
+
+            <div className="flex items-center justify-center mb-10 pt-10">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <MapPin className="text-primary" size={32} />
+              </div>
+              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Vantaggi del Punto Ritiro
+              </h3>
+            </div>
+
+            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+              Scegliere la nostra agenzia come punto di ritiro offre numerosi vantaggi rispetto alla consegna a
+              domicilio.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 pb-10">
+              {[
+                {
+                  title: "Orari Flessibili",
+                  description:
+                    "Ritira i tuoi pacchi negli orari di apertura dell'agenzia, senza dover attendere a casa il corriere.",
+                  icon: "Clock",
+                },
+                {
+                  title: "Nessuna Attesa",
+                  description: "Evita le attese e i mancati recapiti, ritira quando preferisci.",
+                  icon: "Clock",
+                },
+                {
+                  title: "Sicurezza",
+                  description: "I tuoi pacchi sono custoditi in un luogo sicuro fino al tuo ritiro.",
+                  icon: "Shield",
+                },
+                {
+                  title: "Assistenza",
+                  description: "Personale qualificato a tua disposizione per qualsiasi necessità.",
+                  icon: "HeadphonesIcon",
+                },
+              ].map((vantaggio, index) => (
+                <div
+                  key={index}
+                  className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 transform hover:-translate-y-2"
+                >
+                  <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center mb-4 transform transition-transform group-hover:rotate-6 group-hover:scale-110">
+                    <Clock className="text-white" size={28} />
+                  </div>
+                  <h4 className="font-bold text-xl mb-3">{vantaggio.title}</h4>
+                  <p className="text-gray-600">{vantaggio.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Procedura di Ritiro */}
+          <div className="mb-24">
+            <div className="flex items-center justify-center mb-10">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <Clock className="text-primary" size={32} />
+              </div>
+              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Procedura di Ritiro
+              </h3>
+            </div>
+
+            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+              Ritirare un pacco presso la nostra agenzia è semplice e veloce. Ecco la procedura da seguire:
+            </p>
+
+            <div className="relative max-w-4xl mx-auto">
+              {/* Timeline Line */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/30 via-primary to-primary/30 transform -translate-x-1/2 hidden md:block"></div>
+
+              {/* Steps */}
+              <div className="space-y-12 md:space-y-0">
+                {[
+                  {
+                    title: "Ricevi la notifica",
+                    description:
+                      "Quando il pacco arriva in agenzia, riceverai una notifica via SMS o email dal corriere con un codice di ritiro.",
+                  },
+                  {
+                    title: "Vieni in agenzia",
+                    description:
+                      "Presentati in agenzia negli orari di apertura con un documento d'identità valido e il codice di ritiro.",
+                  },
+                  {
+                    title: "Ritira il pacco",
+                    description:
+                      "Il nostro personale verificherà la tua identità e ti consegnerà il pacco. Potrai controllare il contenuto prima di lasciare l'agenzia.",
+                  },
+                ].map((step, index) => (
+                  <div
+                    key={index}
+                    className={`flex flex-col md:flex-row items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+                  >
+                    <div className="md:w-1/2 p-6">
+                      <div
+                        className={`bg-white rounded-xl shadow-lg p-6 transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl ${index % 2 === 1 ? "md:ml-auto md:mr-8" : "md:mr-auto md:ml-8"}`}
+                      >
+                        <div className="flex items-start">
+                          <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center mr-4 flex-shrink-0 text-white font-bold text-xl">
+                            {index + 1}
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-xl mb-2">{step.title}</h4>
+                            <p className="text-gray-600">{step.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="md:w-1/2 flex justify-center">
+                      <div className="w-10 h-10 bg-white border-4 border-primary rounded-full z-10 flex items-center justify-center hidden md:flex">
+                        <div className="w-3 h-3 bg-primary rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="lg:w-1/3">
-              <div className="bg-gray-50 p-6 rounded-lg sticky top-24">
-                <h3 className="text-xl font-bold mb-4">Informazioni Utili</h3>
+            <div className="mt-16 bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border border-yellow-200 max-w-3xl mx-auto">
+              <h4 className="font-bold mb-3 flex items-center text-lg">
+                <HelpCircle size={20} className="mr-2 text-yellow-500" />
+                Cosa serve
+              </h4>
+              <p className="text-gray-700">
+                Per ritirare un pacco è necessario presentare un documento d'identità valido (carta d'identità, patente
+                o passaporto) e il codice di ritiro ricevuto via SMS o email. In caso di delega, è necessaria una delega
+                scritta e una copia del documento del delegante.
+              </p>
+            </div>
+          </div>
 
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-bold mb-2">Orari del Servizio</h4>
-                    <p className="text-gray-600">
-                      Lun-Ven: 9:00-13:20, 16:00-19:20
-                      <br />
-                      Sab: 9:00-13:00
-                    </p>
-                  </div>
+          {/* Informazioni Utili */}
+          <div className="mb-24 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl p-8">
+            <h3 className="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              Informazioni Utili
+            </h3>
 
-                  <div>
-                    <h4 className="font-bold mb-2">Documenti Necessari</h4>
-                    <p className="text-gray-600">
-                      Documento d'identità valido e codice di ritiro ricevuto via SMS o email.
-                    </p>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                <h4 className="font-bold text-xl mb-4 text-primary">Orari del Servizio</h4>
+                <p className="text-gray-700">
+                  <span className="font-semibold">Lun-Ven:</span> 9:00-13:20, 16:00-19:20
+                  <br />
+                  <span className="font-semibold">Sab:</span> 9:00-13:00
+                </p>
+              </div>
 
-                  <div className="bg-white p-4 rounded-md shadow-sm">
-                    <h4 className="font-bold mb-2 text-primary">Vantaggi del Servizio</h4>
-                    <ul className="text-gray-600 space-y-2">
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                        <span>Orari flessibili</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                        <span>Nessuna attesa a casa</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                        <span>Custodia sicura dei pacchi</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                        <span>Assistenza personalizzata</span>
-                      </li>
-                    </ul>
-                  </div>
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                <h4 className="font-bold text-xl mb-4 text-primary">Documenti Necessari</h4>
+                <p className="text-gray-700">
+                  Documento d'identità valido e codice di ritiro ricevuto via SMS o email.
+                </p>
+              </div>
 
-                  <div className="pt-4 border-t">
-                    <h4 className="font-bold mb-2">Hai bisogno di assistenza?</h4>
-                    <p className="text-gray-600 mb-4">
-                      Contattaci per maggiori informazioni sul nostro servizio di punto ritiro pacchi.
-                    </p>
-                    <div className="space-y-2">
-                      <a
-                        href="https://wa.me/+390811234567?text=Salve%2C%20vorrei%20informazioni%20sul%20servizio%20di%20punto%20ritiro%20pacchi.%20Grazie."
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-[#25D366] hover:bg-[#25D366]/90 text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center flex items-center justify-center"
-                      >
-                        <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
-                        Scrivici su WhatsApp
-                      </a>
-                      <a
-                        href="tel:+390811234567"
-                        className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
-                      >
-                        Chiamaci
-                      </a>
-                    </div>
-                  </div>
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                <h4 className="font-bold text-xl mb-4 text-primary">Contattaci</h4>
+                <div className="space-y-3">
+                  <a
+                    href="https://wa.me/+390811234567?text=Salve%2C%20vorrei%20informazioni%20sul%20servizio%20di%20punto%20ritiro%20pacchi.%20Grazie."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#25D366] hover:bg-[#25D366]/90 text-white font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center flex items-center justify-center"
+                  >
+                    <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
+                    Scrivici su WhatsApp
+                  </a>
+                  <a
+                    href="tel:+390811234567"
+                    className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
+                  >
+                    Chiamaci
+                  </a>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Loghi dei Partner */}
+          <div className="mb-24">
+            <h3 className="text-3xl font-bold text-center mb-10 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              I Nostri Partner
+            </h3>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                {
+                  name: "PuntoPoste",
+                  logo: "/loghi/punto-ritiro/puntoposte.png",
+                },
+                {
+                  name: "BRT Fermopoint",
+                  logo: "/loghi/punto-ritiro/brt-fermopoint.png",
+                },
+                {
+                  name: "GLS Shop",
+                  logo: "/loghi/punto-ritiro/gls-shop.png",
+                },
+                {
+                  name: "Fedex Location",
+                  logo: "/loghi/punto-ritiro/fedex-location.png",
+                },
+              ].map((partner, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-4 flex items-center justify-center h-32 transform hover:scale-105"
+                >
+                  <Image
+                    src={partner.logo || "/placeholder.svg"}
+                    alt={partner.name}
+                    width={200}
+                    height={100}
+                    className="object-contain max-h-24"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="mb-16">
+            <FAQSection
+              title="Domande Frequenti sul Punto Ritiro"
+              description="Trova le risposte alle domande più comuni sul nostro servizio di punto ritiro pacchi."
+              faqs={puntoRitiroFAQs}
+            />
           </div>
         </div>
       </section>
