@@ -57,7 +57,7 @@ function generateVoucherCode() {
 }
 
 // Data di fine della promozione
-const PROMO_END_DATE = new Date("2025-06-30T17:00:00")
+const PROMO_END_DATE = new Date("2025-05-31T19:00:00")
 
 const PromoIliadSection = () => {
   const [isDownloading, setIsDownloading] = useState(false)
@@ -226,7 +226,7 @@ const PromoIliadSection = () => {
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
       doc.text("Data di emissione: " + currentDate, 74, 80, { align: "center" })
-      doc.text("Valido fino al: 30 giugno 2025, ore 17:00", 74, 85, { align: "center" })
+      doc.text("Valido fino al: 31 maggio 2025, ore 19:00", 74, 85, { align: "center" })
 
       // Linea divisoria
       doc.setDrawColor(220, 220, 220)
@@ -371,7 +371,7 @@ const PromoIliadSection = () => {
                 <p className="text-sm">Disponibile presso</p>
                 <p className="font-bold">AG SERVIZI</p>
                 <p className="text-sm mt-4">Scade il</p>
-                <p className="font-bold">30 giugno ore 17:00</p>
+                <p className="font-bold">31 maggio ore 19:00</p>
 
                 {/* Countdown */}
                 <div className="mt-4 bg-white rounded-lg p-3 text-[#ff0032] shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 transform">

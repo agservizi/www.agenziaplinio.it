@@ -14,7 +14,7 @@ export default function DoveSiamo() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Dove Siamo</h1>
           <p className="text-xl max-w-3xl mx-auto">
-            Vieni a trovarci nella nostra sede di Castellammare di Stabia. Siamo facilmente raggiungibili e a tua
+            Vieni a trovarci in agenzia. Siamo facilmente raggiungibili e a tua
             disposizione per qualsiasi esigenza.
           </p>
         </div>
@@ -84,7 +84,7 @@ export default function DoveSiamo() {
                     </div>
                     <p className="text-gray-600 text-sm">
                       Dall'autostrada A3 Napoli-Salerno, uscita Castellammare di Stabia. Seguire le indicazioni per il
-                      centro città, poi per Via Plinio il Vecchio.
+                      centro città, poi per Via Plinio il Vecchio 72.
                     </p>
                   </div>
 
@@ -122,9 +122,8 @@ export default function DoveSiamo() {
                   Nelle vicinanze della nostra sede sono disponibili diverse opzioni di parcheggio:
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-2">
-                  <li>Parcheggio pubblico in Piazza Umberto I (a 3 minuti a piedi)</li>
-                  <li>Parcheggio a pagamento in Via Roma (a 5 minuti a piedi)</li>
-                  <li>Parcheggio gratuito in Via Napoli (a 7 minuti a piedi)</li>
+                  <li>Parcheggio a pagamento in Via Alcide de Gasperi "Parcheggio Ferrovia" (a 3 minuti a piedi)</li>
+                  <li>Parcheggio a pagamento in Via Marconi (a 5 minuti a piedi)</li>
                 </ul>
               </div>
 

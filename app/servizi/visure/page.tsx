@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Search, FileText, Building, HelpCircle } from "lucide-react"
 import FAQSection from "@/components/faq-section"
-import VisureTool from "@/components/visure/visure-tool"
 
 const visureFAQs = [
   {
@@ -57,257 +56,302 @@ export default function Visure() {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-        {/* Background elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 -left-20 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
-        </div>
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row gap-12">
+            <div className="lg:w-2/3">
+              <h2 className="text-3xl font-bold mb-8">I Nostri Servizi di Visure</h2>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-            I Nostri Servizi di Visure
-          </h2>
+              <div className="space-y-12">
+                <div className="bg-white p-8 rounded-lg shadow-md">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <FileText className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-4">Visure Catastali</h3>
+                      <p className="text-gray-600 mb-6">
+                        Le visure catastali sono documenti ufficiali che contengono informazioni su immobili presenti
+                        nel territorio italiano. Offriamo un servizio rapido di richiesta e rilascio di visure catastali
+                        per terreni e fabbricati.
+                      </p>
 
-          {/* Servizi principali in grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {/* Visure Catastali */}
-            <div className="group bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary/20 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <FileText className="text-primary" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Visure Catastali</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Documenti ufficiali con informazioni su immobili presenti nel territorio italiano. Servizio rapido di
-                richiesta e rilascio.
-              </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Visura per Soggetto</h4>
+                          <p className="text-gray-600 text-sm">
+                            Elenco degli immobili intestati a una persona fisica o giuridica.
+                          </p>
+                        </div>
 
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <div className="bg-gray-50 p-3 rounded-md text-sm hover:bg-gray-100 transition-colors">
-                  <span className="font-bold block">Visura per Soggetto</span>
-                  <span className="text-xs text-gray-500">Elenco immobili intestati</span>
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Visura per Immobile</h4>
+                          <p className="text-gray-600 text-sm">
+                            Informazioni su un immobile specifico identificato dai dati catastali.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Planimetrie Catastali</h4>
+                          <p className="text-gray-600 text-sm">
+                            Rappresentazione grafica della disposizione interna di un immobile.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Estratti di Mappa</h4>
+                          <p className="text-gray-600 text-sm">
+                            Rappresentazione grafica della posizione di un immobile sul territorio.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
+                        <h4 className="font-bold mb-2 flex items-center">
+                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
+                          Cosa serve
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Per richiedere una visura catastale è necessario conoscere i dati identificativi dell'immobile
+                          (foglio, particella, subalterno) o i dati anagrafici del proprietario. È richiesto un
+                          documento d'identità valido.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-md text-sm hover:bg-gray-100 transition-colors">
-                  <span className="font-bold block">Visura per Immobile</span>
-                  <span className="text-xs text-gray-500">Dati specifici immobile</span>
+
+                <div className="bg-white p-8 rounded-lg shadow-md">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <Building className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-4">Visure Camerali</h3>
+                      <p className="text-gray-600 mb-6">
+                        Le visure camerali sono documenti ufficiali rilasciati dalla Camera di Commercio che contengono
+                        informazioni sulle imprese iscritte al Registro delle Imprese. Offriamo un servizio di richiesta
+                        e rilascio di visure camerali ordinarie e storiche.
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Visura Camerale Ordinaria</h4>
+                          <p className="text-gray-600 text-sm">
+                            Informazioni aggiornate su un'impresa (dati anagrafici, attività, capitale sociale,
+                            cariche).
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Visura Camerale Storica</h4>
+                          <p className="text-gray-600 text-sm">
+                            Informazioni storiche su un'impresa, con tutte le modifiche avvenute nel tempo.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Bilanci</h4>
+                          <p className="text-gray-600 text-sm">
+                            Documenti contabili depositati da società di capitali presso la Camera di Commercio.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Atti Societari</h4>
+                          <p className="text-gray-600 text-sm">
+                            Statuti, atti costitutivi e altri documenti depositati presso la Camera di Commercio.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
+                        <h4 className="font-bold mb-2 flex items-center">
+                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
+                          Cosa serve
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Per richiedere una visura camerale è necessario conoscere la denominazione dell'impresa o il
+                          codice fiscale/partita IVA. È richiesto un documento d'identità valido.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white p-8 rounded-lg shadow-md">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <Search className="text-primary" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-4">Visure CRIF e Protestati</h3>
+                      <p className="text-gray-600 mb-6">
+                        Offriamo servizi di visure CRIF per conoscere la propria situazione creditizia e visure
+                        protestati per verificare la presenza di protesti a carico di persone fisiche o giuridiche.
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Visura CRIF</h4>
+                          <p className="text-gray-600 text-sm">
+                            Informazioni sulla situazione creditizia di una persona (finanziamenti, pagamenti,
+                            richieste).
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Visura Protestati</h4>
+                          <p className="text-gray-600 text-sm">
+                            Verifica della presenza di protesti a carico di persone fisiche o giuridiche.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Cancellazione Protesti</h4>
+                          <p className="text-gray-600 text-sm">
+                            Assistenza nella procedura di cancellazione di protesti dal Registro Informatico dei
+                            Protesti.
+                          </p>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-md">
+                          <h4 className="font-bold mb-2">Consulenza Creditizia</h4>
+                          <p className="text-gray-600 text-sm">
+                            Analisi della situazione creditizia e consulenza per il miglioramento del proprio profilo.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="bg-yellow-50 p-4 rounded-md border-l-4 border-yellow-400">
+                        <h4 className="font-bold mb-2 flex items-center">
+                          <HelpCircle size={16} className="mr-2 text-yellow-500" />
+                          Cosa serve
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Per richiedere una visura CRIF o protestati è necessario presentare un documento d'identità
+                          valido. Per la visura CRIF è necessario essere il diretto interessato o avere una delega.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-yellow-50 p-3 rounded-md border-l-2 border-yellow-400 text-sm">
-                <span className="font-bold flex items-center">
-                  <HelpCircle size={14} className="mr-1 text-yellow-500" />
-                  Documento d'identità valido richiesto
-                </span>
-              </div>
-            </div>
-
-            {/* Visure Camerali */}
-            <div className="group bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary/20 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Building className="text-primary" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Visure Camerali</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Documenti ufficiali rilasciati dalla Camera di Commercio con informazioni sulle imprese iscritte al
-                Registro.
-              </p>
-
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <div className="bg-gray-50 p-3 rounded-md text-sm hover:bg-gray-100 transition-colors">
-                  <span className="font-bold block">Visura Ordinaria</span>
-                  <span className="text-xs text-gray-500">Dati aggiornati impresa</span>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-md text-sm hover:bg-gray-100 transition-colors">
-                  <span className="font-bold block">Visura Storica</span>
-                  <span className="text-xs text-gray-500">Modifiche nel tempo</span>
-                </div>
-              </div>
-
-              <div className="bg-yellow-50 p-3 rounded-md border-l-2 border-yellow-400 text-sm">
-                <span className="font-bold flex items-center">
-                  <HelpCircle size={14} className="mr-1 text-yellow-500" />
-                  Necessaria denominazione o P.IVA
-                </span>
-              </div>
-            </div>
-
-            {/* Visure CRIF */}
-            <div className="group bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary/20 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Search className="text-primary" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Visure CRIF e Protestati</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Servizi per conoscere la propria situazione creditizia e verificare la presenza di protesti a carico.
-              </p>
-
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                <div className="bg-gray-50 p-3 rounded-md text-sm hover:bg-gray-100 transition-colors">
-                  <span className="font-bold block">Visura CRIF</span>
-                  <span className="text-xs text-gray-500">Situazione creditizia</span>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-md text-sm hover:bg-gray-100 transition-colors">
-                  <span className="font-bold block">Visura Protestati</span>
-                  <span className="text-xs text-gray-500">Verifica protesti</span>
+              {/* Gallery */}
+              <div className="mt-16">
+                <h3 className="text-2xl font-bold mb-6">I Nostri Partner</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <Image
+                    src="/loghi/visure/crif.png"
+                    alt="CRIF"
+                    width={200}
+                    height={200}
+                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
+                  />
+                  <Image
+                    src="/loghi/visure/catasto.png"
+                    alt="Catasto"
+                    width={200}
+                    height={200}
+                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
+                  />
+                  <Image
+                    src="/loghi/visure/camera-commercio.png"
+                    alt="Camera di Commercio"
+                    width={200}
+                    height={200}
+                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
+                  />
+                  <Image
+                    src="/loghi/visure/registro-protesti.png"
+                    alt="Registro Protesti"
+                    width={200}
+                    height={200}
+                    className="rounded-lg object-contain h-24 w-full bg-white p-2"
+                  />
                 </div>
               </div>
 
-              <div className="bg-yellow-50 p-3 rounded-md border-l-2 border-yellow-400 text-sm">
-                <span className="font-bold flex items-center">
-                  <HelpCircle size={14} className="mr-1 text-yellow-500" />
-                  Documento d'identità del diretto interessato
-                </span>
+              {/* FAQ */}
+              <div className="mt-16">
+                <FAQSection
+                  title="Domande Frequenti sulle Visure"
+                  description="Trova le risposte alle domande più comuni sui nostri servizi di visure."
+                  faqs={visureFAQs}
+                />
               </div>
             </div>
-          </div>
 
-          {/* Servizi dettagliati */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-6 text-center">Servizi Dettagliati</h3>
+            <div className="lg:w-1/3">
+              <div className="bg-gray-50 p-6 rounded-lg sticky top-24">
+                <h3 className="text-xl font-bold mb-4">Informazioni Utili</h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Planimetrie Catastali</h4>
-                <p className="text-gray-600 text-sm">
-                  Rappresentazione grafica della disposizione interna di un immobile.
-                </p>
-              </div>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-bold mb-2">Orari del Servizio</h4>
+                    <p className="text-gray-600">
+                      Lun-Ven: 9:00-13:20, 16:00-19:20
+                      <br />
+                      Sab: 9:00-13:00
+                    </p>
+                  </div>
 
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Estratti di Mappa</h4>
-                <p className="text-gray-600 text-sm">
-                  Rappresentazione grafica della posizione di un immobile sul territorio.
-                </p>
-              </div>
+                  <div>
+                    <h4 className="font-bold mb-2">Documenti Necessari</h4>
+                    <p className="text-gray-600">
+                      Documento d'identità valido e informazioni specifiche in base al tipo di visura richiesta.
+                    </p>
+                  </div>
 
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Bilanci</h4>
-                <p className="text-gray-600 text-sm">
-                  Documenti contabili depositati da società di capitali presso la Camera di Commercio.
-                </p>
-              </div>
+                  <div className="bg-white p-4 rounded-md shadow-sm">
+                    <h4 className="font-bold mb-2 text-primary">Vantaggi del Servizio</h4>
+                    <ul className="text-gray-600 space-y-2">
+                      <li className="flex items-start">
+                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
+                        <span>Rilascio immediato</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
+                        <span>Assistenza professionale</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
+                        <span>Consulenza personalizzata</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
+                        <span>Tariffe competitive</span>
+                      </li>
+                    </ul>
+                  </div>
 
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Atti Societari</h4>
-                <p className="text-gray-600 text-sm">
-                  Statuti, atti costitutivi e altri documenti depositati presso la Camera di Commercio.
-                </p>
-              </div>
-
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Cancellazione Protesti</h4>
-                <p className="text-gray-600 text-sm">
-                  Assistenza nella procedura di cancellazione di protesti dal Registro Informatico.
-                </p>
-              </div>
-
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Consulenza Creditizia</h4>
-                <p className="text-gray-600 text-sm">
-                  Analisi della situazione creditizia e consulenza per il miglioramento del proprio profilo.
-                </p>
-              </div>
-
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Visura per Soggetto</h4>
-                <p className="text-gray-600 text-sm">
-                  Elenco degli immobili intestati a una persona fisica o giuridica.
-                </p>
-              </div>
-
-              <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-all border border-gray-100 hover:border-primary/20">
-                <h4 className="font-bold mb-2 text-primary">Visura per Immobile</h4>
-                <p className="text-gray-600 text-sm">
-                  Informazioni su un immobile specifico identificato dai dati catastali.
-                </p>
+                  <div className="pt-4 border-t">
+                    <h4 className="font-bold mb-2">Hai bisogno di assistenza?</h4>
+                    <p className="text-gray-600 mb-4">
+                      Contattaci per maggiori informazioni sui nostri servizi di visure.
+                    </p>
+                    <div className="space-y-2">
+                      <a
+                        href="https://wa.me/+390811234567?text=Salve%2C%20vorrei%20informazioni%20sui%20servizi%20di%20visure%20catastali%20e%20camerali.%20Grazie."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#25D366] hover:bg-[#20BA5C] text-white font-medium py-2 px-4 rounded-md transition-colors inline-flex items-center justify-center w-full"
+                      >
+                        <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={20} height={20} className="mr-2" />
+                        Contattaci su WhatsApp
+                      </a>
+                      <a
+                        href="tel:+390811234567"
+                        className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors inline-block w-full text-center"
+                      >
+                        Chiamaci
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Informazioni utili e contatti */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-bold mb-4">Orari del Servizio</h3>
-              <p className="text-gray-600">
-                <span className="block mb-1">Lun-Ven: 9:00-13:20, 16:00-19:20</span>
-                <span className="block">Sab: 9:00-13:00</span>
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-bold mb-4">Documenti Necessari</h3>
-              <p className="text-gray-600">
-                Documento d'identità valido e informazioni specifiche in base al tipo di visura richiesta.
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-bold mb-4">Vantaggi del Servizio</h3>
-              <ul className="text-gray-600 space-y-1">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                  <span>Rilascio in 24h</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                  <span>Assistenza professionale</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                  <span>Consulenza personalizzata</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-secondary rounded-full mt-2 mr-2"></span>
-                  <span>Tariffe competitive</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Tool Visure */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-6 text-center">Richiedi una Visura Online</h3>
-            <div className="relative">
-              {/* Elementi decorativi */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-10 -left-10 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
-
-              {/* Tool interattivo */}
-              <VisureTool />
-            </div>
-          </div>
-
-          {/* Contatti */}
-          <div className="bg-gradient-to-r from-primary to-secondary p-8 rounded-xl text-white text-center mb-16">
-            <h3 className="text-2xl font-bold mb-4">Hai bisogno di assistenza?</h3>
-            <p className="mb-6">Contattaci per maggiori informazioni sui nostri servizi di visure.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://wa.me/+393773798570?text=Salve%2C%20vorrei%20informazioni%20sui%20servizi%20di%20visure%20catastali%20e%20camerali.%20Grazie."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-primary hover:bg-gray-100 font-medium py-3 px-6 rounded-xl transition-all inline-flex items-center justify-center shadow-md hover:shadow-lg hover:-translate-y-1"
-              >
-                <Image src="/images/whatsapp-icon.png" alt="WhatsApp" width={24} height={24} className="mr-2" />
-                Contattaci su WhatsApp
-              </a>
-              <a
-                href="tel:0810584542"
-                className="bg-primary/20 hover:bg-primary/30 text-white font-medium py-3 px-6 rounded-xl transition-all inline-flex items-center justify-center shadow-md hover:shadow-lg hover:-translate-y-1"
-              >
-                Chiamaci
-              </a>
-            </div>
-          </div>
-
-          {/* FAQ */}
-          <div>
-            <FAQSection
-              title="Domande Frequenti sulle Visure"
-              description="Trova le risposte alle domande più comuni sui nostri servizi di visure."
-              faqs={visureFAQs}
-            />
           </div>
         </div>
       </section>
